@@ -36,20 +36,20 @@ export const PatentsSection: React.FC<PatentsSectionProps> = ({
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#111C30]/90 border border-amber-500/30 shadow-lg">
-            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-            <span className="font-mono text-xs uppercase font-bold tracking-widest text-[#D4AF37]">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-[#111C30]/90 border border-amber-300 dark:border-amber-500/30 shadow-md">
+            <Sparkles className="w-4 h-4 text-amber-700 dark:text-[#D4AF37]" />
+            <span className="font-mono text-xs uppercase font-bold tracking-widest text-amber-800 dark:text-[#D4AF37]">
               INTELLECTUAL PROPERTY &amp; PROPRIETARY INNOVATIONS
             </span>
           </div>
 
-          <h2 className="font-serif-header font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#F8FAFC] light:text-[#0F172A] tracking-tight leading-[1.15]">
-            Patented Cyber Defense <span className="text-gold-pure">Architecture</span>
+          <h2 className="font-serif-header font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-[#F8FAFC] tracking-tight leading-[1.15]">
+            Patented Cyber Defense <span className="text-amber-700 dark:text-[#D4AF37]">Architecture</span>
           </h2>
 
           <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mt-2 mb-3" />
 
-          <p className="font-sans text-sm sm:text-base text-slate-400 light:text-slate-600 leading-relaxed">
+          <p className="font-sans text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
             Beyond standard open-source tools, Hackup Technology builds and deploys proprietary government-recognized patented technologies for autonomous threat interception and deep binary deconstruction.
           </p>
         </div>
@@ -63,7 +63,7 @@ export const PatentsSection: React.FC<PatentsSectionProps> = ({
             return (
               <div
                 key={patent.id}
-                className="relative rounded-3xl bg-[#0B1220]/95 dark:bg-[#0B1220]/95 light:bg-white border border-amber-500/30 hover:border-[#D4AF37] p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-300 group hover:-translate-y-1 overflow-hidden"
+                className="relative rounded-3xl bg-white dark:bg-[#0B1220]/95 border border-slate-200 dark:border-amber-500/30 hover:border-[#D4AF37] p-6 sm:p-8 flex flex-col justify-between shadow-xl dark:shadow-2xl transition-all duration-300 group hover:-translate-y-1 overflow-hidden"
               >
                 {/* Gold Sheen Indicator on Top Edge */}
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-75 group-hover:opacity-100 transition-opacity" />
@@ -71,44 +71,44 @@ export const PatentsSection: React.FC<PatentsSectionProps> = ({
                 <div className="space-y-6">
                   
                   {/* Card Header Row */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800 light:border-slate-200">
+                  <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-[#D4AF37] shadow-inner group-hover:scale-105 transition-transform">
+                      <div className="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-500/15 border border-amber-300 dark:border-amber-500/40 flex items-center justify-center text-amber-800 dark:text-[#D4AF37] shadow-inner group-hover:scale-105 transition-transform">
                         <Icon className="w-6 h-6" />
                       </div>
                       <div>
-                        <span className="font-mono text-[10px] uppercase font-bold text-[#D4AF37] tracking-wider block">
+                        <span className="font-mono text-[10px] uppercase font-bold text-amber-800 dark:text-[#D4AF37] tracking-wider block">
                           PATENT SPECIFICATION • {patent.grantYear}
                         </span>
-                        <span className="font-mono text-xs font-semibold text-slate-300 light:text-slate-700">
+                        <span className="font-mono text-xs font-semibold text-slate-800 dark:text-slate-300">
                           {patent.patentNumber}
                         </span>
                       </div>
                     </div>
 
-                    <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-950/80 light:bg-emerald-100 text-emerald-400 light:text-emerald-800 border border-emerald-500/40">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
+                    <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/40 shadow-sm">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping inline-block" />
                       <span>{patent.filingStatus}</span>
                     </span>
                   </div>
 
                   {/* Patent Title */}
                   <div className="space-y-2">
-                    <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-[#D4AF37] bg-amber-950/40 light:bg-amber-100/80 px-2.5 py-0.5 rounded border border-amber-500/30 inline-block">
+                    <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-amber-800 dark:text-[#D4AF37] bg-amber-100/80 dark:bg-amber-950/40 px-2.5 py-0.5 rounded border border-amber-300 dark:border-amber-500/30 inline-block">
                       {patent.category}
                     </span>
-                    <h3 className="font-serif-header font-bold text-xl sm:text-2xl text-[#F8FAFC] light:text-[#0F172A] leading-snug group-hover:text-[#D4AF37] transition-colors">
+                    <h3 className="font-serif-header font-bold text-xl sm:text-2xl text-slate-900 dark:text-[#F8FAFC] leading-snug group-hover:text-amber-700 dark:group-hover:text-[#D4AF37] transition-colors">
                       {patent.title}
                     </h3>
-                    <p className="font-sans text-xs sm:text-sm text-slate-300 light:text-slate-600 leading-relaxed font-medium">
+                    <p className="font-sans text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                       {patent.abstract}
                     </p>
                   </div>
 
                   {/* Core Technical Innovations Checklist */}
                   <div className="space-y-2.5 pt-2">
-                    <div className="font-mono text-[11px] uppercase font-bold text-slate-400 light:text-slate-600 tracking-wider flex items-center space-x-1.5">
-                      <Zap className="w-3.5 h-3.5 text-[#D4AF37]" />
+                    <div className="font-mono text-[11px] uppercase font-bold text-slate-700 dark:text-slate-400 tracking-wider flex items-center space-x-1.5">
+                      <Zap className="w-3.5 h-3.5 text-amber-600 dark:text-[#D4AF37]" />
                       <span>Key Architectural Claims &amp; Inventions:</span>
                     </div>
 
@@ -116,18 +116,18 @@ export const PatentsSection: React.FC<PatentsSectionProps> = ({
                       {patent.coreInnovations.map((item, cIdx) => (
                         <div
                           key={cIdx}
-                          className="flex items-start space-x-2.5 text-xs text-slate-200 light:text-slate-700 font-sans p-2.5 rounded-xl bg-slate-950/60 light:bg-slate-50 border border-slate-800/80 light:border-slate-200"
+                          className="flex items-start space-x-2.5 text-xs text-slate-800 dark:text-slate-200 font-sans p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80"
                         >
-                          <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">{item}</span>
+                          <CheckCircle2 className="w-4 h-4 text-amber-600 dark:text-[#D4AF37] shrink-0 mt-0.5" />
+                          <span className="leading-relaxed font-medium">{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Enterprise Application Context */}
-                  <div className="p-3.5 rounded-2xl bg-amber-500/10 light:bg-amber-50 border border-amber-500/30 text-xs font-mono text-slate-300 light:text-slate-700">
-                    <span className="text-[#D4AF37] light:text-amber-800 font-bold block mb-1">
+                  <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 text-xs font-mono text-slate-800 dark:text-slate-300">
+                    <span className="text-amber-800 dark:text-[#D4AF37] font-bold block mb-1">
                       Enterprise &amp; Sovereign Deployment:
                     </span>
                     <span>{patent.enterpriseApplication}</span>
@@ -136,13 +136,13 @@ export const PatentsSection: React.FC<PatentsSectionProps> = ({
                 </div>
 
                 {/* Card Footer Actions */}
-                <div className="pt-6 mt-6 border-t border-slate-800 light:border-slate-200 flex flex-col sm:flex-row items-center gap-3">
+                <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center gap-3">
                   <button
                     onClick={() => {
                       if (onExplorePatent) onExplorePatent(patent);
                       else setSelectedPatent(patent);
                     }}
-                    className="w-full sm:w-1/2 py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider bg-[#111C30] hover:bg-[#1A2844] text-[#D4AF37] border border-amber-500/40 transition-all flex items-center justify-center space-x-1.5 cursor-pointer shadow-md"
+                    className="w-full sm:w-1/2 py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider bg-amber-50 hover:bg-amber-100 text-amber-950 border border-amber-300 dark:bg-[#111C30] dark:hover:bg-[#1A2844] dark:text-[#D4AF37] dark:border-amber-500/40 transition-all flex items-center justify-center space-x-1.5 cursor-pointer shadow-md"
                   >
                     <FileText className="w-3.5 h-3.5" />
                     <span>View Patent Claims</span>

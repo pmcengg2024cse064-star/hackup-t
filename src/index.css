@@ -3,6 +3,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant light (&:where(.light, .light *));
+@variant dark (&:where(.dark, .dark *));
+@variant light (&:where(.light, .light *));
 
 @layer base {
   :root {
@@ -419,48 +421,40 @@ html.light [class*="bg-[#070A0F]"] {
   background-color: #FFFFFF !important;
 }
 
-/* Light Mode Home Split-Gate Cards */
-html.light .from-\[\#2E070D\]\/95,
-html.light .from-\[\#4A0A13\],
-html.light .from-\[\#38060E\],
-html.light .from-\[\#450A12\] {
-  background: linear-gradient(180deg, #FFF1F2 0%, #FFE4E6 100%) !important;
-  border-color: rgba(190, 18, 60, 0.35) !important;
+/* Protect all dark banners, image overlays, and dark badges from light-mode dark-text overrides */
+html.light .image-banner-dark,
+html.light .image-banner-dark *,
+html.light .badge-dark,
+html.light .badge-dark *,
+html.light .dark-surface,
+html.light .dark-surface *,
+html.light [data-theme-surface="dark"],
+html.light [data-theme-surface="dark"] * {
+  /* Prevent dark text on dark surfaces in light mode */
 }
 
-html.light .from-\[\#2E070D\]\/95 h2,
-html.light .from-\[\#2E070D\]\/95 h3,
-html.light .from-\[\#4A0A13\] h2,
-html.light .from-\[\#4A0A13\] h3 {
-  color: #5B0E1B !important;
+html.light .image-banner-dark h2,
+html.light .image-banner-dark h3 {
+  color: #FFFFFF !important;
 }
 
-html.light .from-\[\#2E070D\]\/95 p,
-html.light .from-\[\#2E070D\]\/95 span,
-html.light .from-\[\#4A0A13\] p,
-html.light .from-\[\#4A0A13\] span {
-  color: #4C0519 !important;
+html.light .image-banner-dark .text-white,
+html.light .badge-dark .text-white,
+html.light .badge-dark.text-white {
+  color: #FFFFFF !important;
 }
 
-html.light .from-\[\#1E190A\]\/95,
-html.light .from-\[\#141414\],
-html.light .from-\[\#1A1505\] {
-  background: linear-gradient(180deg, #FFFDF5 0%, #FEF3C7 100%) !important;
-  border-color: rgba(212, 175, 55, 0.45) !important;
+html.light .image-banner-dark .text-amber-300,
+html.light .badge-dark .text-amber-300,
+html.light .badge-dark.text-amber-300 {
+  color: #FCD34D !important;
 }
 
-html.light .from-\[\#1E190A\]\/95 h2,
-html.light .from-\[\#1E190A\]\/95 h3,
-html.light .from-\[\#141414\] h2,
-html.light .from-\[\#141414\] h3 {
-  color: #78350F !important;
-}
-
-html.light .from-\[\#1E190A\]\/95 p,
-html.light .from-\[\#1E190A\]\/95 span,
-html.light .from-\[\#141414\] p,
-html.light .from-\[\#141414\] span {
-  color: #451A03 !important;
+html.light .image-banner-dark .text-rose-300,
+html.light .badge-dark .text-rose-200,
+html.light .badge-dark.text-rose-200,
+html.light .badge-dark .text-rose-300 {
+  color: #FECDD3 !important;
 }
 
 /* Specific nested card elements in light mode */
@@ -532,6 +526,10 @@ html.light button[class*="bg-[#450A12]"],
 html.light a[class*="bg-[#450A12]"],
 html.light button[class*="bg-[#881337]"],
 html.light a[class*="bg-[#881337]"],
+html.light button[class*="bg-rose-900"],
+html.light a[class*="bg-rose-900"],
+html.light [class*="bg-rose-900"],
+html.light [class*="bg-rose-900"] *,
 html.light button.bg-slate-950,
 html.light a.bg-slate-950,
 html.light button.bg-black,
@@ -539,12 +537,12 @@ html.light a.bg-black {
   color: #FFFFFF !important;
 }
 
-/* Text overrides in Light Mode: ensure high contrast slate/charcoal */
-html.light [class*="text-[#F8FAFC]"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *),
-html.light [class*="text-[#F1F5F9]"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *),
-html.light [class*="text-slate-100"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *),
-html.light [class*="text-slate-200"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *),
-html.light [class*="text-white"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *):not(.btn-gold-filled *) {
+/* Text overrides in Light Mode: ensure high contrast slate/charcoal on light backgrounds */
+html.light [class*="text-[#F8FAFC]"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not([class*="bg-rose-900"] *):not(.bg-slate-950 *):not(.image-banner-dark *):not(.badge-dark *):not(.dark-surface *),
+html.light [class*="text-[#F1F5F9]"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not([class*="bg-rose-900"] *):not(.bg-slate-950 *):not(.image-banner-dark *):not(.badge-dark *):not(.dark-surface *),
+html.light [class*="text-slate-100"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not([class*="bg-rose-900"] *):not(.bg-slate-950 *):not(.image-banner-dark *):not(.badge-dark *):not(.dark-surface *),
+html.light [class*="text-slate-200"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not([class*="bg-rose-900"] *):not(.bg-slate-950 *):not(.image-banner-dark *):not(.badge-dark *):not(.dark-surface *),
+html.light [class*="text-white"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not([class*="bg-rose-900"] *):not(.bg-slate-950 *):not(.btn-gold-filled *):not(.image-banner-dark *):not(.badge-dark *):not(.dark-surface *) {
   color: #0F172A !important;
 }
 
