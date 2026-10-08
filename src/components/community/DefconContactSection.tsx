@@ -34,7 +34,7 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
   };
 
   return (
-    <section id="community" className="relative py-24 bg-slate-50 dark:bg-[#070A0F]/95 border-t border-slate-200 dark:border-[#C4A77D]/15">
+    <section id="community" className="relative py-24 bg-slate-50 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Title */}
@@ -43,13 +43,13 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
             COLLABORATION &amp; ADVISORY
           </div>
 
-          <h2 className="font-serif-header font-bold text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-[#F1F5F9] tracking-wider">
+          <h2 className="font-serif-header font-bold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-wider">
             ENGAGE WITH HACKUP
           </h2>
 
           <div className="w-16 h-[2px] bg-[#B38728] mx-auto mt-3 mb-4" />
 
-          <p className="font-sans text-sm sm:text-base text-slate-700 dark:text-[#94A3B8] leading-relaxed font-normal">
+          <p className="font-sans text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
             Connect with our advisory consultants for enterprise audits or join the DEFCON Coimbatore cybersecurity research community.
           </p>
         </div>
@@ -58,38 +58,38 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           
           {/* Left Column: DEFCON Coimbatore Community */}
-          <div className="bg-white dark:bg-[#1A0D30] rounded-3xl border border-slate-200 dark:border-slate-800 p-7 sm:p-9 flex flex-col justify-between group shadow-xl">
+          <div className="bg-white rounded-3xl border border-slate-200 p-7 sm:p-9 flex flex-col justify-between group shadow-xl">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-slate-900/90 border border-amber-300 dark:border-[#C4A77D]/30 p-2.5 flex items-center justify-center text-[#B38728] shadow-sm">
+                <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-300 p-2.5 flex items-center justify-center text-[#B38728] shadow-sm">
                   <Shield className="w-6 h-6" />
                 </div>
-                <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#9E721D] dark:text-[#C4A77D] bg-amber-100 dark:bg-slate-950 px-3 py-1 rounded-full border border-amber-300 dark:border-[#C4A77D]/30">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#9E721D] bg-amber-100 px-3 py-1 rounded-full border border-amber-300">
                   OFFICIAL CHAPTER
                 </span>
               </div>
 
-              <h3 className="font-serif-header font-bold text-2xl text-slate-900 dark:text-[#F1F5F9] tracking-wide mb-2">
+              <h3 className="font-serif-header font-bold text-2xl text-slate-900 tracking-wide mb-2">
                 DEFCON Coimbatore Community
               </h3>
 
-              <p className="font-sans text-xs sm:text-sm text-slate-700 dark:text-[#94A3B8] leading-relaxed mb-6 font-normal">
+              <p className="font-sans text-xs sm:text-sm text-slate-700 leading-relaxed mb-6 font-normal">
                 Hackup Technology is the proud host of DEFCON Coimbatore. We organize monthly technical workshops, 0-day vulnerability deep-dives, and live CTF competitions.
               </p>
 
               {/* Elegant Date / Location Icons */}
               <div className="space-y-3 mb-8">
-                <div className="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-[#E2E8F0] font-medium">
+                <div className="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-800 font-medium">
                   <Calendar className="w-4 h-4 text-[#B38728] shrink-0" />
                   <span>Upcoming Meetup: April 18, 2026</span>
                 </div>
 
-                <div className="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-[#E2E8F0] font-medium">
+                <div className="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-800 font-medium">
                   <Clock className="w-4 h-4 text-[#B38728] shrink-0" />
                   <span>Time: Coimbatore - 13:00 PM IST</span>
                 </div>
 
-                <div className="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-[#E2E8F0] font-medium">
+                <div className="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-800 font-medium">
                   <MapPin className="w-4 h-4 text-[#B38728] shrink-0" />
                   <span>Venue: Hackup Cyber Range, Ganapathy, Coimbatore</span>
                 </div>
@@ -100,7 +100,7 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
             <div>
               <button
                 onClick={onGetInvolvedCommunity}
-                className="w-full py-3.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center justify-center space-x-2 cursor-pointer bg-[#FFFBEB] dark:bg-slate-900 text-[#9E721D] dark:text-[#C4A77D] border border-[#B38728]/50 hover:bg-[#FEF3C7] dark:hover:bg-slate-800 transition-all"
+                className="w-full py-3.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center justify-center space-x-2 cursor-pointer bg-[#FFFBEB] text-[#9E721D] border border-[#B38728]/50 hover:bg-[#FEF3C7] transition-all"
               >
                 <span>Get Involved with DEFCON</span>
                 <ArrowRight className="w-4 h-4 text-[#B38728]" />
@@ -109,7 +109,7 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="bg-white dark:bg-[#1A0D30] rounded-3xl border border-slate-200 dark:border-slate-800 p-7 sm:p-9 flex flex-col justify-between shadow-xl">
+          <div className="bg-white rounded-3xl border border-slate-200 p-7 sm:p-9 flex flex-col justify-between shadow-xl">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <span className="font-mono text-xs uppercase font-bold tracking-widest text-[#B38728]">
@@ -120,18 +120,18 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
                 </span>
               </div>
 
-              <h3 className="font-serif-header font-bold text-2xl text-slate-900 dark:text-[#F1F5F9] tracking-wide mb-2">
+              <h3 className="font-serif-header font-bold text-2xl text-slate-900 tracking-wide mb-2">
                 Consult with Our Specialists
               </h3>
 
-              <p className="font-sans text-xs sm:text-sm text-slate-700 dark:text-[#94A3B8] leading-relaxed mb-6 font-normal">
+              <p className="font-sans text-xs sm:text-sm text-slate-700 leading-relaxed mb-6 font-normal">
                 Submit your inquiry below. Our lead security practitioners will reach out to schedule an initial scoping session.
               </p>
 
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-mono text-slate-800 dark:text-[#E2E8F0] mb-1.5 uppercase font-bold tracking-wider">
+                    <label className="block text-xs font-mono text-slate-800 mb-1.5 uppercase font-bold tracking-wider">
                       Name *
                     </label>
                     <input
@@ -140,12 +140,12 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
                       placeholder="e.g. Senthil Kumar"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#B38728] focus:outline-none transition-colors shadow-sm"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:border-[#B38728] focus:outline-none transition-colors shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-slate-800 dark:text-[#E2E8F0] mb-1.5 uppercase font-bold tracking-wider">
+                    <label className="block text-xs font-mono text-slate-800 mb-1.5 uppercase font-bold tracking-wider">
                       Work Email *
                     </label>
                     <input
@@ -154,18 +154,18 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
                       placeholder="name@company.com"
                       value={workEmail}
                       onChange={(e) => setWorkEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#B38728] focus:outline-none transition-colors shadow-sm"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-xs text-slate-900 placeholder-slate-400 focus:border-[#B38728] focus:outline-none transition-colors shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-slate-800 dark:text-[#E2E8F0] mb-1.5 uppercase font-bold tracking-wider">
+                    <label className="block text-xs font-mono text-slate-800 mb-1.5 uppercase font-bold tracking-wider">
                       Area of Interest *
                     </label>
                     <select
                       value={interest}
                       onChange={(e) => setInterest(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-xs font-mono text-slate-900 dark:text-white font-semibold focus:border-[#B38728] focus:outline-none transition-colors shadow-sm"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-xs font-mono text-slate-900 font-semibold focus:border-[#B38728] focus:outline-none transition-colors shadow-sm"
                     >
                       <option value="Enterprise Security Audit (VAPT)">Enterprise Security Audit (VAPT)</option>
                       <option value="Cloud Security & DevSecOps Audit">Cloud Security &amp; DevSecOps Audit</option>
@@ -188,14 +188,14 @@ export const DefconContactSection: React.FC<DefconContactSectionProps> = ({
                 </form>
               ) : (
                 <div className="text-center py-8 space-y-3 animate-fadeIn">
-                  <div className="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-[#C4A77D]/20 border border-[#B38728] text-[#B38728] mx-auto flex items-center justify-center shadow-sm">
+                  <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-[#B38728] text-[#B38728] mx-auto flex items-center justify-center shadow-sm">
                     <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h4 className="font-serif-header font-bold text-xl text-slate-900 dark:text-[#F1F5F9]">
+                  <h4 className="font-serif-header font-bold text-xl text-slate-900">
                     Inquiry Received
                   </h4>
-                  <p className="font-sans text-xs sm:text-sm text-slate-700 dark:text-[#94A3B8] leading-relaxed">
-                    Thank you, <strong className="text-slate-900 dark:text-white">{name}</strong>. A confirmation has been sent to <span className="text-[#9E721D] dark:text-[#C4A77D] font-mono font-bold">{workEmail}</span>. Our Coimbatore advisory team will contact you shortly.
+                  <p className="font-sans text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    Thank you, <strong className="text-slate-900">{name}</strong>. A confirmation has been sent to <span className="text-[#9E721D] font-mono font-bold">{workEmail}</span>. Our Coimbatore advisory team will contact you shortly.
                   </p>
                 </div>
               )}

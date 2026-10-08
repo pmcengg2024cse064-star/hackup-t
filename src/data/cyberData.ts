@@ -19,6 +19,14 @@ export interface EnterpriseService {
   complianceCoverage: string[];
   turnaroundDays: string;
   imageUrl?: string;
+  whoIsItFor: string[];
+  whatIsIncluded: string[];
+  methodology: { step: string; title: string; desc: string }[];
+  deliverables: string[];
+  faqs: { q: string; a: string }[];
+  relatedCourseSlug: string;
+  relatedServiceSlugs: string[];
+  relatedBlogSlug: string;
 }
 
 export interface AcademyCourse {
@@ -40,6 +48,98 @@ export interface AcademyCourse {
   certificationPartner: string;
   upcomingBatch: string;
   imageUrl?: string;
+  handsOnLabs: string[];
+  certificationInfo: string;
+  careerPaths: string[];
+  faqs: { q: string; a: string }[];
+  relatedServiceSlug: string;
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  primaryKeyword: string;
+  metaTitle: string;
+  metaDescription: string;
+  excerpt: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  publishedDate: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+  relatedServiceSlug: string;
+  relatedCourseSlug: string;
+  content: {
+    heading: string;
+    body: string;
+  }[];
+}
+
+export interface PortfolioItem {
+  id: string;
+  title: string;
+  sector: string;
+  clientBadge: string;
+  challenge: string;
+  solution: string;
+  outcomeMetric: string;
+  keyResults: string[];
+  technologiesUsed: string[];
+  servicesDelivered: string[];
+}
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: 'Workshops' | 'Cyber Range' | 'DEFCON Meetup' | 'Police Training';
+  location: string;
+  date: string;
+  description: string;
+  imageUrl: string;
+}
+
+export interface DefconEvent {
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  venue: string;
+  speaker: string;
+  speakerRole: string;
+  status: 'UPCOMING' | 'COMPLETED';
+  rsvpCount: number;
+  ctfPool: string;
+  topics: string[];
+}
+
+export interface TestimonialItem {
+  id: string;
+  category: 'enterprise' | 'alumni';
+  name: string;
+  role: string;
+  organization: string;
+  location: string;
+  avatarText: string;
+  quote: string;
+  verifiedBadge: string;
+  outcomeMetric: string;
+  skillsOrServices: string[];
+  rating: number;
+}
+
+export interface GoogleReview {
+  id: string;
+  name: string;
+  role: string;
+  rating: number;
+  date: string;
+  text: string;
+  avatarLetter: string;
+  verified: boolean;
 }
 
 export interface CyberPatent {
@@ -79,35 +179,6 @@ export interface CyberRangeScenario {
   cvssScore: number;
 }
 
-export interface TestimonialItem {
-  id: string;
-  category: 'enterprise' | 'alumni';
-  name: string;
-  role: string;
-  organization: string;
-  location: string;
-  avatarText: string;
-  quote: string;
-  verifiedBadge: string;
-  outcomeMetric: string;
-  skillsOrServices: string[];
-  rating: number;
-}
-
-export interface DefconEvent {
-  id: string;
-  title: string;
-  date: string;
-  time: string;
-  venue: string;
-  speaker: string;
-  speakerRole: string;
-  status: 'UPCOMING' | 'COMPLETED';
-  rsvpCount: number;
-  ctfPool: string;
-  topics: string[];
-}
-
 export interface PartnerInstitution {
   name: string;
   location: string;
@@ -116,6 +187,50 @@ export interface PartnerInstitution {
   badge: string;
 }
 
+// ----------------------------------------------------
+// COMPANY FACTS & VERIFIED STATISTICS
+// ----------------------------------------------------
+export const COMPANY_FACTS = {
+  founderName: 'Dinesh Paranthagan',
+  founderQualifications: 'M.C.A., Ph.D.',
+  founderTitle: 'Founder and Chief Executive Officer',
+  experienceYears: 10,
+  secretaryGeneralRole: 'Secretary General of TANCCAO (Tamil Nadu Cyber Crime Action Organization)',
+  googleReviewsCount: 3398,
+  googleRating: 4.9,
+  accreditation: 'EC-Council Accredited Training Center',
+  patentsCount: 2,
+  patents: [
+    {
+      name: 'AI-based Firewall Security System',
+      number: 'IN-PAT-2024-AI-FW8910',
+      year: '2024'
+    },
+    {
+      name: 'Automated Pentesting and Binary Reverse Engineering Tool',
+      number: 'IN-PAT-2023-RE-VAPT4421',
+      year: '2023'
+    }
+  ],
+  partnerCollegesCount: 54,
+  partnerMncsCount: 7,
+  defconChapter: 'DEFCON Coimbatore Chapter (#DC91422) – DEFCON Coimbatore 2026',
+  headquarters: {
+    street: 'No.4, First Street, Sri Venkatesapuram',
+    area: 'Ganapathy',
+    city: 'Coimbatore',
+    pincode: '641006',
+    state: 'Tamil Nadu',
+    country: 'India'
+  },
+  phones: ['+91 93620 12339', '+91 96262 15976'],
+  emails: ['info@hackuptechnology.com', 'dinesh@hackuptechnology.com'],
+  workingHours: 'Mon - Sat: 9:00 AM - 7:30 PM (24/7 Incident Hotline)'
+};
+
+// ----------------------------------------------------
+// PATENTS DATA
+// ----------------------------------------------------
 export const CYBER_PATENTS: CyberPatent[] = [
   {
     id: 'patent-ai-firewall',
@@ -155,6 +270,9 @@ export const CYBER_PATENTS: CyberPatent[] = [
   }
 ];
 
+// ----------------------------------------------------
+// 54+ PARTNER INSTITUTIONS
+// ----------------------------------------------------
 export const PARTNER_INSTITUTIONS: PartnerInstitution[] = [
   { name: 'Vellore Institute of Technology (VIT)', location: 'Vellore / Chennai', category: 'Premier Tech & Universities', engagement: 'Advanced Red Team Masterclasses & CTF Co-Hosting', badge: 'Tier-1 University' },
   { name: 'PSG College of Technology (PSG TECH)', location: 'Coimbatore', category: 'Premier Tech & Universities', engagement: 'Industrial Curriculum Advisory & Student Range Training', badge: 'Premier Institute' },
@@ -180,79 +298,86 @@ export const PARTNER_INSTITUTIONS: PartnerInstitution[] = [
   { name: 'Hindusthan College of Engineering and Technology', location: 'Coimbatore', category: 'Premier Tech & Universities', engagement: 'Industrial Cyber Range Practical Lab Days', badge: 'Autonomous College' }
 ];
 
+// ----------------------------------------------------
+// FOUNDER PROFILE
+// ----------------------------------------------------
 export const FOUNDER_PROFILE = {
   name: 'Dinesh Paranthagan',
   qualifications: 'M.C.A., Ph.D.',
   title: 'Founder & Chief Executive Officer',
   company: 'Hackup Technology Pvt Ltd',
-  visionQuote: 'To build a self-reliant cyber-resilient ecosystem by bridging the gap between offensive enterprise defense, law enforcement intelligence, and real-world hands-on student capability.',
+  visionQuote: 'To build a sovereign, self-reliant cyber-defense ecosystem by bridging offensive enterprise security, law enforcement intelligence, and real-world hands-on student capability.',
   badges: [
     'Founder & CEO – Hackup Technology',
     'Secretary General – TANCCAO (Tamil Nadu Cyber Crime Action Organization)',
     'Technical Consultant – Tamil Nadu Police Cyber Crime Dept',
     'Board of Studies (BOS) Member (8 Universities)',
     'National Mentor – Smart India Hackathon (SIH)',
-    'Recipient – NICA Entrepreneur of the Year & Best Speaker Awards'
+    'Recipient – NICA Entrepreneur of the Year & State Honors'
   ],
   stats: {
     studentsTrained: '1,00,000+',
     auditsCompleted: '2,100+',
     proprietaryPatents: '2 Issued Patents',
     partnerUniversities: '54+ Institutions',
-    policeWorkshops: '150+ Cyber Triage Sessions',
-    yearsExperience: '12+ Years'
+    partnerMncs: '7 MNC Partners',
+    googleReviews: '3,398 Reviews (4.9 Rating)',
+    yearsExperience: '10 Years Experience'
   },
-  overview: 'Dr. Dinesh Paranthagan is a nationally recognized cybersecurity authority, technological innovator, and executive advisory leader. With over a decade on the frontlines of offensive cyber warfare, law enforcement digital forensic investigations, and academic curriculum modernization, he has guided government agencies, banking institutions, and over 1,00,000 engineers across India to security leadership.',
+  overview: 'Dinesh Paranthagan is an acclaimed cybersecurity leader, state law enforcement technical consultant, and patent inventor. With over a decade of hands-on expertise in offensive vulnerability assessment, digital forensics evidence under Section 65B, and national cyber defense education, he directs Hackup Technology as South India’s sovereign cybersecurity powerhouse.',
   keyContributions: [
     {
-      title: 'Consultant to Tamil Nadu Police Cyber Crime Cells',
-      desc: 'Provides specialized technical consultation on complex cyber crime investigations, financial fraud tracing, dark web surveillance, and Section 65B forensic evidence preservation for state law enforcement agencies.'
+      title: 'Consultant to Tamil Nadu Police Cyber Crime Department',
+      desc: 'Provides specialized technical advisory on high-profile cyber crime investigations, cryptocurrency money laundering, ransomware triage, and Section 65B digital evidence preservation for judicial admissibility.'
     },
     {
       title: 'Secretary General – TANCCAO',
-      desc: 'Leads the Tamil Nadu Cyber Crime Action Organization, spearheading state-wide industry-government collaboration to neutralize ransomware epidemics and coordinate threat intelligence sharing.'
+      desc: 'Steers the Tamil Nadu Cyber Crime Action Organization, uniting government bodies, police personnel, and tech industry leaders in state-wide cyber protection and threat intelligence.'
     },
     {
       title: 'National Mentor – Smart India Hackathon (SIH)',
-      desc: 'Appointed as a premier National Mentor under the Ministry of Education & AICTE, guiding winning teams in building national-grade cyber defense prototypes.'
+      desc: 'Appointed under the Ministry of Education & AICTE to mentor premier collegiate teams in developing national-grade cyber defense algorithms.'
     },
     {
       title: 'Board of Studies (BOS) Member for 8 Universities',
-      desc: 'Active curriculum architect modernizing computer science, cybersecurity, and digital forensics syllabi across premier universities and autonomous colleges in South India.'
+      desc: 'Architecting syllabus modernization across engineering universities and autonomous institutions to introduce real-world offensive cyber warfare into standard curricula.'
     },
     {
-      title: 'Proprietary Patent Holder & Inventor',
-      desc: 'Invented and published 2 landmark cybersecurity patents in AI-driven autonomous firewall mitigation and automated binary reverse engineering.'
+      title: 'Dual Cyber Patent Holder',
+      desc: 'Inventor of 2 published Indian cybersecurity patents: an AI-based Firewall Security System and an Automated Pentesting and Binary Reverse Engineering Tool.'
     }
   ],
   awards: [
     'NICA National Entrepreneur of the Year in Cybersecurity',
     'National Excellence Award – Best Keynote Cyber Speaker',
-    'Police Cyber Crime Wing Commendation for Technical Support in High-Profile Triage',
+    'Police Cyber Crime Wing Commendation for Technical Forensics Support',
     'EC-Council ATC Excellence in Cyber Training Award'
   ],
   contact: {
     email: 'dinesh@hackuptechnology.com',
     phone: '+91 93620 12339',
-    office: 'Hackup Technology HQ, Ganapathy, Coimbatore - 641006, Tamil Nadu',
+    office: 'Hackup Technology HQ, No.4, First Street, Sri Venkatesapuram, Ganapathy, Coimbatore - 641006, Tamil Nadu',
     linkedInUrl: 'https://linkedin.com/in/dinesh-paranthagan'
   }
 };
 
+// ----------------------------------------------------
+// 8 TARGET ENTERPRISE SERVICES
+// ----------------------------------------------------
 export const ENTERPRISE_SERVICES: EnterpriseService[] = [
   {
-    id: 'vapt',
-    title: 'Vulnerability Assessment & Penetration Testing (VAPT)',
-    shortTitle: 'Full-Stack VAPT',
+    id: 'penetration-testing-vapt',
+    title: 'Penetration Testing & VAPT Services',
+    shortTitle: 'Penetration Testing (VAPT)',
     tagline: 'Deep manual exploit verification beyond automated scanner noise.',
     iconName: 'ShieldAlert',
-    badge: 'Flagship B2B Service',
+    badge: 'Flagship Offensive Security',
     accentColor: 'gold',
-    description: 'Comprehensive offensive security assessments covering Web Apps (OWASP Top 10), iOS/Android Mobile (OWASP MASTG), REST/GraphQL APIs, and internal/external infrastructure. We simulate real adversaries to uncover business logic flaws and chained exploits with zero production downtime.',
-    standards: ['OWASP Top 10:2025', 'NIST SP 800-115', 'PTES Standard', 'OWASP MASTG'],
+    description: 'Comprehensive offensive security assessments covering Web Applications (OWASP Top 10), iOS/Android Mobile Apps (OWASP MASTG), REST/GraphQL APIs, and enterprise internal/external network infrastructure. We simulate real adversaries to uncover business logic flaws and chained exploits with zero production downtime.',
+    standards: ['OWASP Top 10:2025', 'NIST SP 800-115', 'PTES Standard', 'OWASP MASTG', 'OSSTMM'],
     keyDeliverables: [
       'Executive Summary with CVSS 3.1 & 4.0 Verified Risk Scores',
-      'Step-by-step Proof-of-Concept (PoC) Exploit Chains',
+      'Step-by-step Proof-of-Concept (PoC) Exploit Chains with Screenshots',
       'Direct Code-Level Remediation Blueprints for Developers',
       'Free 30-Day Re-testing & Official VAPT Safe-to-Host Certificate'
     ],
@@ -267,51 +392,133 @@ export const ENTERPRISE_SERVICES: EnterpriseService[] = [
       { vuln: 'SSRF in Webhook Processing Service -> AWS IMDSv2 Bypass', severity: 'CRITICAL', cve: 'CWE-918' },
       { vuln: 'Second-Order SQLi in Multi-Tenant Analytics Pipeline', severity: 'HIGH', cve: 'CWE-89' }
     ],
-    complianceCoverage: ['RBI Cyber Guidelines', 'SEBI CS Framework', 'ISO 27001:2022', 'SOC 2 Type II'],
+    complianceCoverage: ['RBI Cyber Guidelines', 'SEBI CS Framework', 'ISO 27001:2022', 'SOC 2 Type II', 'DPDP Act 2023'],
     turnaroundDays: '5 - 10 Business Days',
-    imageUrl: '/images/enterprise_vapt.jpg'
+    imageUrl: '/images/enterprise_vapt.jpg',
+    whoIsItFor: [
+      'Fintech, NBFCs, and Core Banking services requiring RBI compliance attestations',
+      'SaaS startups and enterprise software vendors preparing for SOC 2 and ISO audits',
+      'Healthcare and e-commerce platforms handling sensitive customer PII under the DPDP Act',
+      'Enterprises deploying new software releases, major API integrations, or cloud migrations'
+    ],
+    whatIsIncluded: [
+      'Web Application Vulnerability Assessment & Manual Penetration Testing',
+      'iOS & Android Mobile App Security Analysis (Static SAST & Dynamic DAST)',
+      'RESTful & GraphQL API Endpoint Fuzzing and Business Logic Verification',
+      'External Perimeter Network Port Scanning & Threat Surface Mapping',
+      'Internal Active Directory Privilege Escalation & Lateral Movement Simulation',
+      'Complimentary 30-Day Re-audit after developer bug remediation'
+    ],
+    methodology: [
+      { step: '01. Reconnaissance', title: 'Passive & Active Scoping', desc: 'OSINT enumeration, DNS topology mapping, and asset discovery without touching target boundaries.' },
+      { step: '02. Threat Modeling', title: 'Vulnerability Analysis', desc: 'Heuristic automated baseline probing followed by manual architecture flaw hypothesis.' },
+      { step: '03. Exploitation', title: 'Controlled Attack Simulation', desc: 'Safe-to-execute manual exploit execution, proving weaponizability without service disruption.' },
+      { step: '04. Reporting', title: 'Triaged Remediation Dossier', desc: 'CVSS scores, developer code snippets, executive risk summaries, and root cause reviews.' },
+      { step: '05. Verification', title: 'Retest & Safe-to-Host Attestation', desc: 'Full verification of deployed patches and issuance of the certified Safe-to-Host credential.' }
+    ],
+    deliverables: [
+      'Executive Summary report tailored for C-suite and Board Risk Committees',
+      'Detailed Technical Remediation Guide with exact code snippets and config fixes',
+      'Video and screenshot-backed Proof-of-Concept exploit chains',
+      'Official Hackup Technology Safe-to-Host Attestation Certificate'
+    ],
+    faqs: [
+      {
+        q: 'How do you prevent downtime on production web systems?',
+        a: 'We adhere strictly to pre-negotiated Rules of Engagement (RoE). Our offensive engineers throttle requests, avoid denial-of-service payloads, and coordinate high-impact test phases during agreed maintenance windows.'
+      },
+      {
+        q: 'Is Hackup’s Safe-to-Host certificate accepted by third-party auditors and regulators?',
+        a: 'Yes. Our certifications align with CERT-In recommendations, ISO/IEC 27001:2022 standards, RBI Master Directions, and the Indian DPDP Act 2023.'
+      },
+      {
+        q: 'Does Hackup provide free re-testing after our developers patch the bugs?',
+        a: 'Yes. Every enterprise VAPT engagement includes one complimentary round of complete re-testing within 30 days of report delivery.'
+      }
+    ],
+    relatedCourseSlug: 'certified-ethical-hacker-ceh',
+    relatedServiceSlugs: ['vulnerability-management-security-audit', 'red-team-blue-team', 'ai-security'],
+    relatedBlogSlug: 'vapt-methodology-guide-2026'
   },
   {
-    id: 'pam-identity',
-    title: 'Privilege Access Management (PAM) & Identity Governance',
-    shortTitle: 'PAM & Identity Governance',
-    tagline: 'Securing critical credentials, bastion hosts, and zero-trust privileges.',
-    iconName: 'Key',
-    badge: 'Zero-Trust Identity',
+    id: 'vulnerability-management-security-audit',
+    title: 'Vulnerability Management & Security Audit',
+    shortTitle: 'Security Audit & VMaaS',
+    tagline: 'Continuous asset discovery, CVE prioritization, and continuous posture audits.',
+    iconName: 'Search',
+    badge: 'Continuous Hygiene',
     accentColor: 'amber',
-    description: 'Enterprise privileged access architecture designed to eliminate credential theft, enforce Just-In-Time (JIT) access, audit root/admin credentials, and establish immutable session recording across DevOps pipelines, container clusters, multi-cloud tenants, and big data nodes.',
-    standards: ['NIST SP 800-207 (Zero Trust)', 'CIS Controls v8 Safeguard 5 & 6', 'ISO 27001 A.9'],
+    description: 'Transition from sporadic annual audits to continuous, automated vulnerability management (VMaaS). We scan, catalog, prioritize, and track vulnerabilities across multi-cloud infrastructure, on-prem servers, endpoint fleets, and network appliances with risk-based prioritization.',
+    standards: ['CIS Controls v8', 'NIST SP 800-40', 'ISO 27001 A.8.8', 'CVSS v4.0'],
     keyDeliverables: [
-      'Privileged Account Discovery & Shadow Admin Audit',
-      'Turnkey CyberArk / HashiCorp Vault / BeyondTrust Architecture',
-      'Session Recording, Keystroke Logging & Real-Time Termination',
-      'Multi-Cloud IAM Role Federation & Just-In-Time (JIT) Elevation'
+      'Centralized Real-Time Vulnerability Dashboard & Inventory',
+      'Risk-Based Prioritization Matrix filtering out low-impact CVEs',
+      'Patch Management SLA Tracking & Remediation Workflows',
+      'Monthly Executive Cyber Hygiene & Vulnerability Trend Reports'
     ],
     specs: [
-      { key: 'Target Infrastructure', val: 'Linux/Windows Servers, AWS/Azure IAM, Kubernetes Root, Database Clusters' },
-      { key: 'MFA Enforcement', val: 'FIDO2 / Hardware Token / Push-Based Conditional Access' },
-      { key: 'Vault Automation', val: 'Automatic Password Rotation & Secrets-as-a-Service for CI/CD' },
-      { key: 'Audit Readiness', val: 'SOC 2 Type II, ISO 27001, and RBI Access Control Attestation' }
+      { key: 'Scan Cadence', val: 'Continuous Weekly Automated Scans + Monthly In-Depth Audit' },
+      { key: 'Asset Coverage', val: 'Cloud Tenants, Linux/Windows Servers, Network Switches, Firewalls' },
+      { key: 'Prioritization', val: 'EPSS (Exploit Prediction Scoring System) + CVSS v4.0' },
+      { key: 'Reporting', val: 'Jira / Slack / ServiceNow Direct Workflow Integration' }
     ],
     sampleFindings: [
-      { vuln: 'Hardcoded Domain Admin Credentials in Internal Build Scripts', severity: 'CRITICAL', cve: 'CWE-798' },
-      { vuln: 'Overprivileged AWS IAM Roles with Wildcard sts:AssumeRole', severity: 'CRITICAL', cve: 'CIS-AWS-1.16' },
-      { vuln: 'Unmonitored SSH Root Keys Shared Across Production Servers', severity: 'HIGH', cve: 'CWE-321' }
+      { vuln: 'Unpatched Apache Log4j (CVE-2021-44228) in Staging Microservice', severity: 'CRITICAL', cve: 'CVE-2021-44228' },
+      { vuln: 'OpenSSH Terrapin Attack Vulnerability (CVE-2023-48795)', severity: 'HIGH', cve: 'CVE-2023-48795' },
+      { vuln: 'Expired SSL/TLS Certificates on API Gateway Subdomain', severity: 'MEDIUM', cve: 'CWE-295' }
     ],
-    complianceCoverage: ['RBI Cyber Security Mandate', 'SOC 2 Type II CC6', 'ISO 27001:2022', 'PCI-DSS v4.0'],
-    turnaroundDays: '7 - 14 Business Days',
-    imageUrl: '/images/enterprise_cloud.jpg'
+    complianceCoverage: ['ISO 27001:2022', 'SOC 2 Type II', 'PCI-DSS v4.0 Requirement 11', 'HIPAA'],
+    turnaroundDays: 'Continuous Managed Service / 3-5 Days Baseline',
+    imageUrl: '/images/enterprise_vmaas.jpg',
+    whoIsItFor: [
+      'Organizations managing 100+ servers and cloud nodes without dedicated vulnerability teams',
+      'IT departments needing automated tracking of CVE disclosures impacting their tech stack',
+      'Compliance-focused enterprises needing audit-ready evidence of continuous patch hygiene'
+    ],
+    whatIsIncluded: [
+      'Comprehensive IP/Host and Domain Attack Surface Discovery',
+      'Continuous Credentialed & Non-Credentialed Host Vulnerability Scanning',
+      'False-Positive Elimination by Hackup Offensive Security Analysts',
+      'Direct ticket synchronization into Jira, ClickUp, or ServiceNow',
+      'Monthly CISO Vulnerability Remediation Progress Briefings'
+    ],
+    methodology: [
+      { step: '01. Discovery', title: 'Asset Inventory & Surface Mapping', desc: 'Identify every connected IP, cloud resource, and active port.' },
+      { step: '02. Assessment', title: 'Heuristic & Signature Scanning', desc: 'Run deep scans for misconfigurations, outdated packages, and weak ciphers.' },
+      { step: '03. Validation', title: 'False Positive Filtering', desc: 'Hackup analysts manually verify high-severity alerts to eliminate noise.' },
+      { step: '04. Remediation', title: 'Workflow Ticketing', desc: 'Dispatch prioritized patch actions to system administrators with exact commands.' },
+      { step: '05. Verification', title: 'Continuous Delta Scans', desc: 'Re-scan modified assets to ensure successful mitigation and update metrics.' }
+    ],
+    deliverables: [
+      'Live vulnerability posture dashboard access',
+      'Monthly executive risk trends and patch adherence summaries',
+      'Automated alert notifications for actively exploited zero-day CVEs',
+      'Quarterly third-party compliance verification certificates'
+    ],
+    faqs: [
+      {
+        q: 'How does Vulnerability Management differ from Penetration Testing?',
+        a: 'Vulnerability Management is continuous, identifying known vulnerabilities across broad infrastructure fleets. Penetration Testing is in-depth, goal-oriented exploitation that tests whether an attacker can chain flaws to compromise critical data.'
+      },
+      {
+        q: 'Does running continuous scans slow down our internal networks?',
+        a: 'No. Our sensors employ adaptive bandwidth throttling, intelligent scheduling during off-peak hours, and non-intrusive banner interrogation.'
+      }
+    ],
+    relatedCourseSlug: 'devsecops-engineer-ecde',
+    relatedServiceSlugs: ['penetration-testing-vapt', 'soc-managed-security', 'grc-compliance-consulting'],
+    relatedBlogSlug: 'vapt-methodology-guide-2026'
   },
   {
-    id: 'soc-deployment',
-    title: 'SOC Deployment & 24/7 SIEM Operations',
-    shortTitle: 'SOC Deployment & 24/7 SIEM',
+    id: 'soc-managed-security',
+    title: 'SOC & Managed Security Services (24/7 SIEM)',
+    shortTitle: 'SOC & Managed Security',
     tagline: 'Turnkey SOC architecture, Wazuh/Splunk ingestion & real-time triage.',
     iconName: 'Server',
     badge: 'Turnkey Blue Team',
     accentColor: 'blue',
-    description: 'Design, deployment, and ongoing co-managed security operations. We integrate enterprise endpoint telemetry (Sysmon, EDR), network flow sensors (Zeek), and cloud audit trails into high-speed Wazuh, Splunk, or Elastic SIEM clusters with customized detection playbooks.',
-    standards: ['MITRE ATT&CK Framework', 'SOC 2 Type II CC7', 'NIST SP 800-137'],
+    description: 'Design, deployment, and 24/7 co-managed security operations. We integrate enterprise endpoint telemetry (Sysmon, EDR), network flow sensors (Zeek), and cloud audit trails into high-speed Wazuh, Splunk, or Elastic SIEM clusters with customized detection playbooks.',
+    standards: ['MITRE ATT&CK Framework', 'SOC 2 Type II CC7', 'NIST SP 800-137', 'ISO 27001 A.8.15'],
     keyDeliverables: [
       'Turnkey Wazuh / Splunk / Elastic SIEM Cluster Deployment',
       'Custom Correlation Rules mapped against MITRE ATT&CK vectors',
@@ -331,80 +538,56 @@ export const ENTERPRISE_SERVICES: EnterpriseService[] = [
     ],
     complianceCoverage: ['ISO 27001:2022 A.8.15', 'SOC 2 Type II CC7.2', 'RBI Master Direction', 'DPDP Act 2023'],
     turnaroundDays: '10 - 20 Business Days Setup',
-    imageUrl: '/images/enterprise_redteam.jpg'
+    imageUrl: '/images/enterprise_redteam.jpg',
+    whoIsItFor: [
+      'Enterprises lacking a dedicated 24/7 internal security operations center',
+      'Financial services, healthcare organizations, and government vendors with mandatory log retention rules',
+      'Organizations seeking managed endpoint detection (EDR) and rapid incident containment'
+    ],
+    whatIsIncluded: [
+      'Turnkey SIEM Architecture Design (Wazuh, Splunk, Elastic Security)',
+      'Agent deployment across endpoints, servers, firewalls, and cloud audit trails',
+      '24/7/365 active log monitoring by certified Blue Team security analysts',
+      'Automated SOAR response playbooks (host isolation, IP blocking)',
+      'Weekly executive cyber threat intelligence briefings'
+    ],
+    methodology: [
+      { step: '01. Ingestion', title: 'Data Source Onboarding', desc: 'Connect firewall logs, Active Directory, cloud audit logs, and EDR agents.' },
+      { step: '02. Normalization', title: 'Parsing & Correlation', desc: 'Normalize events into unified schemas and apply MITRE ATT&CK detection rules.' },
+      { step: '03. Detection', title: '24/7 Behavioral Monitoring', desc: 'Real-time alert verification by L1/L2 blue team analysts within 15 minutes.' },
+      { step: '04. Containment', title: 'Rapid Incident Triage', desc: 'Execute playbook actions to isolate compromised nodes and revoke credentials.' },
+      { step: '05. Posture Review', title: 'Continuous Hardening', desc: 'Tune correlation rules based on new intelligence and provide weekly metrics.' }
+    ],
+    deliverables: [
+      'Complete production SIEM/SOAR deployment with high availability',
+      'Incident escalation notifications via SMS, WhatsApp, phone, and Slack',
+      'Weekly and monthly compliance audit log retention proof',
+      'Incident root-cause investigation dossiers'
+    ],
+    faqs: [
+      {
+        q: 'Can Hackup integrate with our existing firewalls and cloud accounts?',
+        a: 'Yes. We support all enterprise firewalls (Fortinet, Palo Alto, Sophos, pfSense), cloud platforms (AWS, Azure, GCP), and workspace suites (Google Workspace, Microsoft 365).'
+      },
+      {
+        q: 'What is your SLA for alerting us to an active attack?',
+        a: 'For verified critical anomalies (such as ransomware staging or domain controller compromise), our analysts trigger immediate phone escalations within 15 minutes.'
+      }
+    ],
+    relatedCourseSlug: 'certified-ethical-hacker-ceh',
+    relatedServiceSlugs: ['penetration-testing-vapt', 'digital-forensics-cybercrime-investigation', 'ai-security'],
+    relatedBlogSlug: 'ai-firewall-nextgen-soc-defense'
   },
   {
-    id: 'dfir',
-    title: 'Digital Forensics & Incident Response (DFIR)',
-    shortTitle: 'DFIR & Cybercrime Triage',
-    tagline: 'Rapid 24/7 breach containment, memory forensics & litigation evidence.',
-    iconName: 'FileSearch',
-    badge: 'Emergency Response SLA',
-    accentColor: 'emerald',
-    description: 'Emergency response for active ransomware outbreaks, unauthorized data exfiltration, business email compromise (BEC), and insider espionage. We contain attackers, preserve legally admissible Section 65B forensic images, and provide root-cause litigation dossiers.',
-    standards: ['NIST SP 800-61 Rev 2', 'ISO/IEC 27037 Evidence Handling', 'Indian Evidence Act Section 65B'],
-    keyDeliverables: [
-      'Emergency Breach Triage & Lateral Spread Containment within 90 mins',
-      'Memory (RAM), Disk & Cloud Audit Log Timeline Reconstruction (Autopsy/FTK/Volatilty)',
-      'Legally Admissible Section 65B Digital Evidence Dossier for Law Enforcement',
-      'Ransomware Root-Cause Decryption & Post-Incident Hardening Roadmap'
-    ],
-    specs: [
-      { key: 'Response SLA', val: 'Immediate 2-Hour Emergency Hotline Activation (Coimbatore & Pan-India)' },
-      { key: 'Forensic Tooling', val: 'EnCase, FTK Imager, Volatility Framework, Autopsy, KAPE, Magnet AXIOM' },
-      { key: 'Chain of Custody', val: 'Strictly compliant with Indian Courts, CERT-In & Police Cyber Cells' },
-      { key: 'Post-Mortem', val: 'Comprehensive Executive & Board-Level Incident Posture Dossier' }
-    ],
-    sampleFindings: [
-      { vuln: 'Initial Access via Exposed RDP on Remote Branch Gateway', severity: 'CRITICAL', cve: 'T1133' },
-      { vuln: 'Data Exfiltration via Encrypted Mega.nz C2 Channel', severity: 'CRITICAL', cve: 'T1567.002' },
-      { vuln: 'Shadow Copy Deletion Script Executed Prior to Ransomware', severity: 'HIGH', cve: 'T1490' }
-    ],
-    complianceCoverage: ['CERT-In Mandatory 6-Hour Reporting', 'Indian DPDP Act Breach Notification', 'ISO 27035'],
-    turnaroundDays: '24/7 Rapid Activation',
-    imageUrl: '/images/enterprise_dfir.jpg'
-  },
-  {
-    id: 'cloud-devsecops',
-    title: 'Cloud Security & DevSecOps Architecture',
-    shortTitle: 'Cloud & DevSecOps',
-    tagline: 'Hardening multi-cloud architectures from Git commit to Kubernetes runtime.',
-    iconName: 'CloudCheck',
-    badge: 'AWS / Azure / GCP',
-    accentColor: 'blue',
-    description: 'Full posture evaluation and automated pipeline hardening across multi-cloud environments. We audit IAM misconfigurations, container escape vectors, Kubernetes RBAC, Terraform/Pulumi IaC drift, and CI/CD secret leaks.',
-    standards: ['CIS Cloud Benchmarks v3.0', 'Kubernetes Hardening Guide (NSA/CISA)', 'OWASP DevSecOps Guideline'],
-    keyDeliverables: [
-      'Multi-Cloud IAM Privilege Creep & Least-Privilege Policy Audit',
-      'Kubernetes Cluster & Ingress Controller Security Blueprint',
-      'Automated SAST/DAST/SCA Pipeline Integration in GitHub Actions / GitLab CI',
-      'Zero-Trust Network Architecture (ZTNA) Design Matrix'
-    ],
-    specs: [
-      { key: 'Cloud Coverage', val: 'AWS, Microsoft Azure, Google Cloud Platform, Hybrid Cloud' },
-      { key: 'Container Sec', val: 'Docker Daemon, Containerd, EKS, GKE, Helm Chart Audits' },
-      { key: 'IaC Scanning', val: 'Terraform, CloudFormation, Pulumi, Ansible Secrets Audit' },
-      { key: 'Runtime EDR', val: 'Falco / eBPF kernel event monitoring & runtime policy enforcement' }
-    ],
-    sampleFindings: [
-      { vuln: 'Public S3 Bucket with Sensitive Database Backup Snapshots', severity: 'CRITICAL', cve: 'CIS-AWS-2.1' },
-      { vuln: 'Kubernetes Pod Running as Root with HostPath Mount Access', severity: 'HIGH', cve: 'CWE-250' },
-      { vuln: 'Exposed Production API Keys in Public Container Layer History', severity: 'HIGH', cve: 'CWE-312' }
-    ],
-    complianceCoverage: ['SOC 2 Type II', 'ISO 27017 Cloud', 'PCI-DSS v4.0', 'HIPAA Security Rule'],
-    turnaroundDays: '4 - 7 Business Days',
-    imageUrl: '/images/enterprise_cloud.jpg'
-  },
-  {
-    id: 'compliance-readiness',
-    title: 'Regulatory Compliance & Audit Readiness',
-    shortTitle: 'ISO 27001 & DPDP Compliance',
-    tagline: 'Guaranteed first-attempt audit readiness for ISO, SOC 2, and Indian DPDP Act.',
+    id: 'grc-compliance-consulting',
+    title: 'GRC & Regulatory Compliance Consulting',
+    shortTitle: 'GRC & Compliance Consulting',
+    tagline: 'Guaranteed audit readiness for ISO 27001, SOC 2, and Indian DPDP Act 2023.',
     iconName: 'FileCheck2',
-    badge: 'Audit Ready Guarantee',
+    badge: '100% Audit Readiness',
     accentColor: 'gold',
-    description: 'End-to-end governance, risk, and compliance (GRC) advisory. We perform gap assessments, author Information Security Management System (ISMS) policies, conduct mandatory vendor risk assessments, and prepare your organization for successful ISO 27001:2022, SOC 2 Type II, RBI, and Indian DPDP Act 2023 certifications.',
-    standards: ['ISO/IEC 27001:2022', 'AICPA SOC 2 Type II', 'Indian Digital Personal Data Protection (DPDP) Act 2023', 'RBI / SEBI Cyber Mandate'],
+    description: 'End-to-end governance, risk, and compliance (GRC) advisory. We perform gap assessments, author Information Security Management System (ISMS) policies, conduct vendor risk assessments, and prepare your organization for first-attempt success in ISO 27001:2022, SOC 2 Type II, RBI, and Indian DPDP Act 2023 certifications.',
+    standards: ['ISO/IEC 27001:2022', 'AICPA SOC 2 Type II', 'Indian DPDP Act 2023', 'RBI / SEBI Cyber Mandate', 'NIST CSF'],
     keyDeliverables: [
       'Comprehensive GRC Gap Assessment & Statement of Applicability (SoA)',
       'Custom ISMS Policy & Incident Response Procedure Drafting',
@@ -424,13 +607,330 @@ export const ENTERPRISE_SERVICES: EnterpriseService[] = [
     ],
     complianceCoverage: ['ISO 27001:2022', 'SOC 2 Type II', 'DPDP Act 2023', 'RBI Cyber Security Framework'],
     turnaroundDays: '2 - 4 Weeks Advisory',
-    imageUrl: '/images/portal_enterprise.jpg'
+    imageUrl: '/images/portal_enterprise.jpg',
+    whoIsItFor: [
+      'Tech enterprises bidding for international enterprise contracts requiring SOC 2 Type II or ISO 27001',
+      'Fintech and NBFC platforms under direct RBI and CERT-In regulatory oversight',
+      'Indian corporations seeking end-to-end compliance with the Digital Personal Data Protection (DPDP) Act 2023'
+    ],
+    whatIsIncluded: [
+      'Current State vs Regulatory Standard Gap Analysis',
+      'Drafting of complete ISMS documentation (30+ security policies & SOPs)',
+      'Employee cybersecurity awareness training and phishing simulations',
+      'Internal pre-audit simulation and auditor facilitation support',
+      'Mandatory Data Protection Officer (DPO) advisory services'
+    ],
+    methodology: [
+      { step: '01. Scoping', title: 'Regulatory Mapping', desc: 'Define information assets, data flows, and applicable legal mandates.' },
+      { step: '02. Gap Analysis', title: 'Control Verification', desc: 'Benchmark internal procedures against ISO 27001:2022 Annex A controls.' },
+      { step: '03. Remediation', title: 'Policy Authoring & Engineering', desc: 'Implement required technical controls, access reviews, and policy documents.' },
+      { step: '04. Mock Audit', title: 'Simulation Drill', desc: 'Conduct exhaustive mock audits with internal teams to identify remaining gaps.' },
+      { step: '05. Certification', title: 'Auditor Facilitation', desc: 'Stand alongside your leadership during Stage 1 and Stage 2 certification audits.' }
+    ],
+    deliverables: [
+      'Customized Information Security Management System (ISMS) policy repository',
+      'Statement of Applicability (SoA) and Risk Treatment Plan (RTP)',
+      'Data Protection Impact Assessment (DPIA) dossiers for DPDP Act compliance',
+      'Pre-audit readiness attestation signed by Hackup lead auditors'
+    ],
+    faqs: [
+      {
+        q: 'How long does ISO 27001:2022 preparation take with Hackup?',
+        a: 'Typically 4 to 8 weeks depending on organizational size and existing technical control maturity.'
+      },
+      {
+        q: 'What are the penalties under the Indian DPDP Act 2023 for non-compliance?',
+        a: 'Penalties can reach up to ₹250 Crores for significant data breaches and failure to implement adequate data security safeguards.'
+      }
+    ],
+    relatedCourseSlug: 'encryption-specialist-eces',
+    relatedServiceSlugs: ['penetration-testing-vapt', 'vulnerability-management-security-audit', 'soc-managed-security'],
+    relatedBlogSlug: 'dpdp-act-iso27001-compliance-roadmap'
+  },
+  {
+    id: 'red-team-blue-team',
+    title: 'Red Team vs Blue Team Adversary Simulation',
+    shortTitle: 'Red Team & Blue Team Operations',
+    tagline: 'Full-scope adversary simulation and purple team defensive resilience.',
+    iconName: 'Flame',
+    badge: 'Elite Cyber Warfare',
+    accentColor: 'gold',
+    description: 'Realistic adversarial emulation. Hackup’s Red Team operates covertly like advanced nation-state adversaries (APTs) to breach physical security, social engineer staff, bypass EDRs, and capture your organization’s digital crown jewels. We then collaborate with your internal Blue Team in Purple Team workshops to harden defenses.',
+    standards: ['MITRE ATT&CK', 'TIBER-EU Framework', 'CBEST Guidelines', 'NIST SP 800-115'],
+    keyDeliverables: [
+      'Covert Adversary Simulation across Physical, Social, and Cyber Vectors',
+      'Endpoint Detection & EDR Evasion Posture Assessment',
+      'Active Directory Domain Compromise Timeline Reconstruction',
+      'Collaborative Purple Team Remediation & Detection Rule Engineering'
+    ],
+    specs: [
+      { key: 'Simulation Mode', val: 'Black Box Covert / Purple Team Collaborative' },
+      { key: 'Attack Vectors', val: 'Spearphishing, Weaponized Payloads, Physical Ingress, C2 Evasion' },
+      { key: 'Objective', val: 'Crown Jewels Exfiltration (Customer DB, Source Code, Root Keys)' },
+      { key: 'Collaboration', val: 'Direct Joint Retrospectives with Internal Security Teams' }
+    ],
+    sampleFindings: [
+      { vuln: 'Successful Spearphishing resulting in C2 Callback over Encrypted DNS', severity: 'CRITICAL', cve: 'T1071.004' },
+      { vuln: 'Bypass of Modern Next-Gen EDR via Unhooked NTDLL System Calls', severity: 'CRITICAL', cve: 'T1055' },
+      { vuln: 'Domain Escalation via Active Directory Certificate Services (ADCS) Misconfig', severity: 'HIGH', cve: 'ESC1-ADCS' }
+    ],
+    complianceCoverage: ['RBI Cyber Crisis Management Plan', 'SEBI CS Framework', 'ISO 27001:2022'],
+    turnaroundDays: '2 - 3 Weeks Active Emulation',
+    imageUrl: '/images/enterprise_redteam.jpg',
+    whoIsItFor: [
+      'Mature organizations that already pass routine automated VAPTs and wish to test true human response',
+      'Banks, fintechs, and critical infrastructure operators testing incident response readiness',
+      'Security executives wanting an empirical test of whether their multi-million dollar SIEM/EDR investments work'
+    ],
+    whatIsIncluded: [
+      'Custom Spearphishing and Credential Harvesting Scenarios',
+      'Weaponized Payload Generation bypassing commercial antivirus and EDR solutions',
+      'Internal Lateral Movement, Kerberoasting, and Domain Admin Takeover',
+      'Simulated Crown Jewel Exfiltration via covert Command & Control (C2) channels',
+      'Step-by-step Purple Team replay workshop with defensive teams'
+    ],
+    methodology: [
+      { step: '01. Reconnaissance', title: 'Target Profiling', desc: 'OSINT on employees, external infrastructure, and defensive technologies.' },
+      { step: '02. Initial Access', title: 'Weaponized Delivery', desc: 'Execute controlled social engineering or perimeter bypass to establish a foothold.' },
+      { step: '03. Persistence', title: 'Evasion & Escalation', desc: 'Evade EDR alerts, elevate local privileges, and harvest domain credentials.' },
+      { step: '04. Lateral Movement', title: 'Domain Takeover', desc: 'Pivot through internal network subnets to reach designated critical crown jewels.' },
+      { step: '05. Purple Teaming', title: 'Joint Replay Workshop', desc: 'Disclose full attack logs side-by-side with SOC telemetry to write custom detection rules.' }
+    ],
+    deliverables: [
+      'Chronological attack timeline mapping against MITRE ATT&CK techniques',
+      'Full logs of indicators of compromise (IOCs) and C2 artifacts',
+      'Video evidence of critical system compromises',
+      'Custom Sigma and Yara rules for detection engineering'
+    ],
+    faqs: [
+      {
+        q: 'Will a Red Team engagement disrupt daily business operations?',
+        a: 'No. All exploit actions are conducted with strict safety protocols under the supervision of your designated White Cell trusted agent.'
+      },
+      {
+        q: 'How does Purple Teaming differ from Red Teaming?',
+        a: 'In Red Teaming, the defenders are unaware of the attack to measure realistic response. In Purple Teaming, our attackers and your defenders sit together to immediately verify if alarms triggered for each executed tactic.'
+      }
+    ],
+    relatedCourseSlug: 'certified-ethical-hacker-ceh',
+    relatedServiceSlugs: ['penetration-testing-vapt', 'soc-managed-security', 'ai-security'],
+    relatedBlogSlug: 'ai-firewall-nextgen-soc-defense'
+  },
+  {
+    id: 'iot-ot-security',
+    title: 'IoT & OT / SCADA Security Assessment',
+    shortTitle: 'IoT & OT Security',
+    tagline: 'Hardening connected hardware, firmware, SCADA, and industrial control systems.',
+    iconName: 'Cpu',
+    badge: 'Hardware & ICS Security',
+    accentColor: 'blue',
+    description: 'Specialized cybersecurity for embedded devices, Internet of Things (IoT) ecosystems, Operational Technology (OT), and SCADA manufacturing plants. We deconstruct firmware binaries, test UART/JTAG hardware debug ports, audit industrial protocols (Modbus, DNP3, BACnet), and ensure zero-compromise plant operations.',
+    standards: ['IEC 62443', 'NIST SP 800-82', 'OWASP IoT Top 10', 'ISA/IEC 62443-4-2'],
+    keyDeliverables: [
+      'Firmware Binary Reverse Engineering & Hardcoded Credential Extraction',
+      'Hardware Debug Interface (UART, JTAG, SPI) Extraction & Tamper Audits',
+      'Industrial OT/SCADA Network Protocol Fuzzing (Modbus, Profinet, MQTT)',
+      'Air-Gapped Network Segmentation & DMZ Boundary Hardening Blueprint'
+    ],
+    specs: [
+      { key: 'Target Systems', val: 'IoT Gateways, Smart Meters, Medical Devices, PLCs, RTUs, SCADA HMIs' },
+      { key: 'Analysis Types', val: 'Hardware Bench Interrogation + Firmware Binary Disassembly' },
+      { key: 'Standards', val: 'IEC 62443 Industrial Cybersecurity Benchmark' },
+      { key: 'Testing Location', val: 'Coimbatore Hardware Lab + Client Plant Floor On-Site' }
+    ],
+    sampleFindings: [
+      { vuln: 'Hardcoded Cryptographic Root Keys Extracted from Firmware Flash Memory', severity: 'CRITICAL', cve: 'CWE-321' },
+      { vuln: 'Unauthenticated Modbus Function Code Injection altering PLC Register States', severity: 'CRITICAL', cve: 'CVE-2022-3023' },
+      { vuln: 'Unrestricted UART Serial Console offering Root Shell on Boot', severity: 'HIGH', cve: 'CWE-1188' }
+    ],
+    complianceCoverage: ['IEC 62443', 'NIST SP 800-82', 'CERT-In Critical Infrastructure Guidelines'],
+    turnaroundDays: '7 - 14 Business Days',
+    imageUrl: '/images/enterprise_cloud.jpg',
+    whoIsItFor: [
+      'IoT device manufacturers and smart appliance OEMs releasing connected hardware',
+      'Manufacturing plants, textile facilities, and industrial factories running PLCs and SCADA networks',
+      'Automotive and healthcare hardware vendors needing FDA or BIS cyber certifications'
+    ],
+    whatIsIncluded: [
+      'Hardware PCB inspection, chip desoldering, and bus sniffing (I2C, SPI, UART, JTAG)',
+      'Firmware image unpacking, binary reverse engineering, and secret extraction',
+      'IoT mobile app and cloud backend API penetration testing',
+      'SCADA / ICS network segmentation and industrial firewall rule evaluation',
+      'Secure boot and cryptographic firmware update mechanism review'
+    ],
+    methodology: [
+      { step: '01. Physical Analysis', title: 'Hardware Interrogation', desc: 'Inspect circuit boards and locate debug interfaces and serial pins.' },
+      { step: '02. Firmware Extraction', title: 'Memory Dumping', desc: 'Read flash chips using chip programmers and decompress file systems.' },
+      { step: '03. Binary Reversing', title: 'Vulnerability Hunting', desc: 'Analyze compiled binaries using Ghidra and IDA Pro for logic bugs and buffer overflows.' },
+      { step: '04. Protocol Auditing', title: 'Communication Security', desc: 'Capture and fuzz MQTT, BLE, Zigbee, and Modbus communication streams.' },
+      { step: '05. Hardening Guide', title: 'Firmware & Circuit Remediation', desc: 'Provide PCB design revisions and secure boot implementations.' }
+    ],
+    deliverables: [
+      'Hardware and firmware security assessment report',
+      'Step-by-step firmware exploitation proof-of-concept videos',
+      'Secure Hardware Design and Cryptographic Root-of-Trust guidelines',
+      'IEC 62443 compliance alignment scorecard'
+    ],
+    faqs: [
+      {
+        q: 'Do you need physical device samples for testing?',
+        a: 'Yes. For complete hardware and firmware evaluation, clients provide 2 to 3 sample units to our Coimbatore laboratory.'
+      },
+      {
+        q: 'Can you test live SCADA systems without causing production downtime in a plant?',
+        a: 'Yes. For live industrial plants, we build digital-twin virtual environments or test redundant secondary PLC racks during planned shutdowns.'
+      }
+    ],
+    relatedCourseSlug: 'encryption-specialist-eces',
+    relatedServiceSlugs: ['penetration-testing-vapt', 'vulnerability-management-security-audit', 'ai-security'],
+    relatedBlogSlug: 'vapt-methodology-guide-2026'
+  },
+  {
+    id: 'digital-forensics-cybercrime-investigation',
+    title: 'Digital Forensics & Cybercrime Investigation (DFIR)',
+    shortTitle: 'Digital Forensics & Incident Response',
+    tagline: 'Rapid 24/7 breach containment, memory forensics & Section 65B court evidence.',
+    iconName: 'FileSearch',
+    badge: 'Emergency Response SLA',
+    accentColor: 'emerald',
+    description: 'Emergency incident response and law enforcement grade digital forensics. We handle active ransomware outbreaks, unauthorized data exfiltration, business email compromise (BEC), and corporate sabotage. We contain active threats, preserve legally admissible digital evidence under Section 65B of the Indian Evidence Act, and author forensic dossiers for judicial courts and police cyber cells.',
+    standards: ['NIST SP 800-61 Rev 2', 'ISO/IEC 27037 Evidence Handling', 'Indian Evidence Act Section 65B', 'CERT-In Mandates'],
+    keyDeliverables: [
+      'Emergency Breach Triage & Lateral Spread Containment within 90 mins',
+      'Memory (RAM), Disk & Cloud Audit Log Timeline Reconstruction (Autopsy/FTK/Volatility)',
+      'Legally Admissible Section 65B Digital Evidence Dossier for Law Enforcement',
+      'Ransomware Root-Cause Analysis & Post-Incident Hardening Roadmap'
+    ],
+    specs: [
+      { key: 'Response SLA', val: 'Immediate 2-Hour Emergency Activation (Coimbatore & Pan-India)' },
+      { key: 'Forensic Tooling', val: 'EnCase, FTK Imager, Volatility Framework, Autopsy, KAPE, Magnet AXIOM' },
+      { key: 'Chain of Custody', val: 'Strictly compliant with Indian Courts, CERT-In & Police Cyber Cells' },
+      { key: 'Post-Mortem', val: 'Comprehensive Executive & Board-Level Incident Posture Dossier' }
+    ],
+    sampleFindings: [
+      { vuln: 'Initial Access via Exposed RDP on Remote Branch Gateway', severity: 'CRITICAL', cve: 'T1133' },
+      { vuln: 'Data Exfiltration via Encrypted Mega.nz C2 Channel', severity: 'CRITICAL', cve: 'T1567.002' },
+      { vuln: 'Shadow Copy Deletion Script Executed Prior to Ransomware', severity: 'HIGH', cve: 'T1490' }
+    ],
+    complianceCoverage: ['CERT-In Mandatory 6-Hour Reporting', 'Indian DPDP Act Breach Notification', 'ISO 27035'],
+    turnaroundDays: '24/7 Rapid Activation',
+    imageUrl: '/images/enterprise_dfir.jpg',
+    whoIsItFor: [
+      'Enterprises experiencing an active ransomware encryption event or extortion demand',
+      'Companies suffering unauthorized fund transfers due to Business Email Compromise (BEC)',
+      'Legal teams and law enforcement agencies requiring legally certified forensic evidence for court cases'
+    ],
+    whatIsIncluded: [
+      '24/7 Incident Hotline activation with remote triage starting within 90 minutes',
+      'Bit-stream disk imaging with hardware write blockers maintaining forensic integrity',
+      'Volatile memory (RAM) dump analysis to recover running malware artifacts and decrypted keys',
+      'Forensic timeline reconstruction tracing the attacker’s entry point and actions',
+      'Preparation of Section 65B electronic evidence certificate recognized in Indian courts'
+    ],
+    methodology: [
+      { step: '01. Triage', title: 'Emergency Containment', desc: 'Sever compromised network links and isolate infected nodes without destroying volatile RAM.' },
+      { step: '02. Acquisition', title: 'Forensic Imaging', desc: 'Capture bit-stream physical images of disks, memory, and cloud audit logs with strict cryptographic hashes.' },
+      { step: '03. Analysis', title: 'Timeline Reconstruction', desc: 'Trace initial access vectors, lateral movement paths, and exfiltrated file records.' },
+      { step: '04. Remediation', title: 'Threat Eradication', desc: 'Remove backdoors, reset compromised domain credentials, and patch exploitable entry points.' },
+      { step: '05. Certification', title: 'Section 65B Dossier', desc: 'Author detailed forensic reports and legal certificates for law enforcement and legal proceedings.' }
+    ],
+    deliverables: [
+      'Executive breach analysis briefing for executive leadership and legal counsel',
+      'Comprehensive technical incident timeline with Indicators of Compromise (IOCs)',
+      'Legally admissible Section 65B Electronic Evidence Affidavit for court filing',
+      'Mandatory CERT-In incident notification filing documentation'
+    ],
+    faqs: [
+      {
+        q: 'What should we do immediately if we suspect a ransomware infection?',
+        a: 'Do NOT turn off the computer or reboot (as this erases volatile RAM). Disconnect all network cables and Wi-Fi immediately, then call our 24/7 hotline (+91 93620 12339).'
+      },
+      {
+        q: 'What is a Section 65B certificate and why is it mandatory?',
+        a: 'Under Section 65B of the Indian Evidence Act, digital evidence (emails, logs, hard drive images) is inadmissible in an Indian court of law unless accompanied by a certified affidavit detailing the chain of custody and forensic integrity.'
+      }
+    ],
+    relatedCourseSlug: 'certified-ethical-hacker-ceh',
+    relatedServiceSlugs: ['soc-managed-security', 'penetration-testing-vapt', 'grc-compliance-consulting'],
+    relatedBlogSlug: 'vapt-methodology-guide-2026'
+  },
+  {
+    id: 'ai-security',
+    title: 'AI Security & LLM Defense Consulting',
+    shortTitle: 'AI Security Consulting',
+    tagline: 'Securing generative AI, LLM pipelines, and automated agent architectures.',
+    iconName: 'Sparkles',
+    badge: 'Patent-Backed AI Defense',
+    accentColor: 'gold',
+    description: 'Cutting-edge security evaluations for artificial intelligence models, Large Language Models (LLMs), RAG pipelines, and autonomous AI agent systems. Backed by Hackup’s patented AI firewall innovation, we prevent prompt injection, model inversion, training data poisoning, and unauthorized automated API actions.',
+    standards: ['OWASP Top 10 for LLM:2025', 'NIST AI Risk Management Framework (AI RMF)', 'MITRE ATLAS Framework'],
+    keyDeliverables: [
+      'Comprehensive LLM Red Teaming & Direct/Indirect Prompt Injection Audits',
+      'RAG Vector Database Access Control & Document Leaking Prevention',
+      'AI Agent Autonomous Tool Calling Sandboxing & Privilege Hardening',
+      'Patented AI Firewall Integration for Real-Time Threat Filtering'
+    ],
+    specs: [
+      { key: 'Model Types', val: 'Private Self-Hosted Models, OpenAI/Anthropic APIs, LangChain/LlamaIndex RAG' },
+      { key: 'Attack Vectors', val: 'Jailbreaking, Training Data Extraction, Hallucination Exploits, Insecure Output' },
+      { key: 'Patented Tech', val: 'IN-PAT-2024-AI-FW8910 Next-Gen AI Packet & Prompt Inspection' },
+      { key: 'Framework', val: 'OWASP LLM 2025 + MITRE ATLAS Matrix' }
+    ],
+    sampleFindings: [
+      { vuln: 'Indirect Prompt Injection via Ingested PDF manipulating RAG Agent Actions', severity: 'CRITICAL', cve: 'LLM01:2025' },
+      { vuln: 'System Prompt Extraction via Multi-Turn Conversational Jailbreak', severity: 'HIGH', cve: 'LLM07:2025' },
+      { vuln: 'Unauthenticated Vector Database Exposing Confidential PII Embeddings', severity: 'CRITICAL', cve: 'CWE-200' }
+    ],
+    complianceCoverage: ['EU AI Act Safeguards', 'NIST AI RMF 1.0', 'Indian DPDP Act 2023'],
+    turnaroundDays: '5 - 10 Business Days',
+    imageUrl: '/images/enterprise_vapt.jpg',
+    whoIsItFor: [
+      'Enterprises deploying internal or customer-facing Generative AI chatbots and agents',
+      'SaaS startups building RAG-based search engines and autonomous AI workflow tools',
+      'Regulated financial institutions leveraging LLMs for automated customer credit and analytics'
+    ],
+    whatIsIncluded: [
+      'Adversarial LLM Red Teaming evaluating 100+ prompt injection attack variations',
+      'Retrieval-Augmented Generation (RAG) vector database security review',
+      'System prompt leakage prevention and guardrail implementation',
+      'Autonomous agent execution permission sandboxing (limiting unauthorized bash/API runs)',
+      'Integration blueprint for Hackup’s patented real-time AI security firewall'
+    ],
+    methodology: [
+      { step: '01. Mapping', title: 'AI Pipeline Architecture Audit', desc: 'Identify models, data ingest pipelines, vector DBs, and external API tool endpoints.' },
+      { step: '02. Red Teaming', title: 'Adversarial Prompt Fuzzing', desc: 'Execute multi-turn jailbreaks, roleplay bypasses, and encoded payload attacks.' },
+      { step: '03. Data Safety', title: 'Training & RAG Extraction Tests', desc: 'Probe models for unauthorized memorization of customer PII and internal credentials.' },
+      { step: '04. Guardrails', title: 'Defensive Barrier Synthesis', desc: 'Deploy input/output guardrails, semantic firewalls, and token rate limiters.' },
+      { step: '05. Certification', title: 'AI Trust & Safety Attestation', desc: 'Issue formal safety report aligned with OWASP LLM and NIST AI RMF benchmarks.' }
+    ],
+    deliverables: [
+      'Adversarial AI assessment findings with verified prompt exploit chains',
+      'Developer guardrail code implementation samples for Python/TypeScript',
+      'Architecture hardening blueprint for vector search and tool calling agents',
+      'AI Trust, Safety, and Compliance Attestation credential'
+    ],
+    faqs: [
+      {
+        q: 'Can prompt injection really damage our underlying systems?',
+        a: 'Yes. If an LLM agent has access to internal APIs, database queries, or email tools, an indirect prompt injection contained in a customer email or PDF can trick the AI into executing malicious database commands or leaking confidential records.'
+      },
+      {
+        q: 'How does Hackup’s patented AI firewall help protect our applications?',
+        a: 'Our patented neural inspection engine (IN-PAT-2024-AI-FW8910) evaluates incoming prompt payloads in sub-milliseconds, neutralizing semantic jailbreaks and malicious instructions before they reach your foundational model.'
+      }
+    ],
+    relatedCourseSlug: 'certified-ethical-hacker-ceh',
+    relatedServiceSlugs: ['penetration-testing-vapt', 'soc-managed-security', 'red-team-blue-team'],
+    relatedBlogSlug: 'ai-firewall-nextgen-soc-defense'
   }
 ];
 
+// ----------------------------------------------------
+// 5 TARGET ACADEMY COURSES
+// ----------------------------------------------------
 export const ACADEMY_COURSES: AcademyCourse[] = [
   {
-    id: 'ceh-v13',
+    id: 'certified-ethical-hacker-ceh',
     title: 'Certified Ethical Hacker (CEH v13 AI-Powered)',
     ecCouncilCode: 'EC-Council Exam 312-50',
     category: 'Offensive Security',
@@ -457,143 +957,51 @@ export const ACADEMY_COURSES: AcademyCourse[] = [
     targetRoles: ['Penetration Tester (₹6L - ₹14L/yr)', 'Security Analyst (₹5.5L - ₹12L/yr)'],
     certificationPartner: 'EC-Council (International Accredited)',
     upcomingBatch: 'Starting Next Monday & Weekend Batches',
-    imageUrl: '/images/academy_ceh.jpg'
+    imageUrl: '/images/academy_ceh.jpg',
+    handsOnLabs: [
+      'Live Web Application Exploitation using Burp Suite Professional',
+      'Active Directory Domain Escalation with BloodHound and Mimikatz',
+      'Wireless WPA2/WPA3 Enterprise Handshake Capture and Decryption',
+      'Autonomous AI-Assisted Reconnaissance and Scripting in Python',
+      'Malware Behavioral Analysis in Isolated Sandbox Environments'
+    ],
+    certificationInfo: 'Official EC-Council CEH v13 ANSI-accredited certification voucher included, granting global credential recognized by Fortune 500 companies and government defense agencies.',
+    careerPaths: [
+      'Junior Penetration Tester -> Senior Offensive Red Teamer',
+      'Security Operations Analyst -> Threat Hunting Specialist',
+      'Information Security Consultant -> CISO / Chief Security Architect'
+    ],
+    faqs: [
+      {
+        q: 'Is Hackup Technology an authorized EC-Council center in Coimbatore?',
+        a: 'Yes! Hackup Technology Pvt Ltd is an officially Accredited Training Center (ATC). Every student receives genuine EC-Council courseware, official Aspen portal access, and authorized exam vouchers.'
+      },
+      {
+        q: 'What is the format of the classes (In-Person vs Online)?',
+        a: 'We offer both formats: physical hands-on classroom lab sessions at our Ganapathy, Coimbatore Cyber Lab, as well as live instructor-led interactive online batches with recorded session replays.'
+      },
+      {
+        q: 'Can freshers or college students clear the CEH exam on their first attempt?',
+        a: 'Yes. Our rigorous training includes 100+ hands-on labs, instructor-led problem solving, and full-length mock exams. Over 98% of our students clear the certification on their first attempt.'
+      }
+    ],
+    relatedServiceSlug: 'penetration-testing-vapt'
   },
   {
-    id: 'cpent',
-    title: 'Certified Penetration Testing Professional (CPENT)',
-    ecCouncilCode: 'EC-Council Exam CPENT',
-    category: 'Offensive Security',
-    level: 'Expert',
-    badge: 'Elite Red Team Level',
-    duration: '80 Hours (8 Weeks)',
-    practicalLabHours: '120+ Multi-Layered Range Labs',
-    mode: 'Hybrid (Coimbatore Lab + Live Online)',
-    description: 'The pinnacle of offensive security testing. Master multi-zone network pivoting, double-proxy evasion, binary deobfuscation, Active Directory forest takeovers, OT/SCADA penetration testing, and writing weaponized custom exploits.',
-    highlights: [
-      'Multi-disciplinary Penetration Testing across Enterprise AD & Cloud Topologies',
-      'Advanced Pivoting through Deep Isolated Subnets and Firewalls',
-      'Binary Analysis & 32/64-bit Assembly Buffer Overflow Exploitation',
-      '24-Hour Live Practical Range Exam leading to prestigious CPENT / LPT Master status'
-    ],
-    modules: [
-      { moduleNum: 'MOD 01-04', title: 'Advanced Scoping, Stealth Recon & Double Pivoting', labs: ['SSH Tunneling & Chisel Pivoting', 'Multi-homed Host Exploitation', 'Evasion of Next-Gen EDR'] },
-      { moduleNum: 'MOD 05-08', title: 'Active Directory Forest Attacks & Kerberos Abuse', labs: ['BloodHound Mapping', 'Kerberoasting & AS-REP Roasting', 'Domain Escalation & DCSync'] },
-      { moduleNum: 'MOD 09-11', title: 'Binary Exploitation, Shellcoding & Fuzzing', labs: ['x86/x64 Buffer Overflows', 'ROP Chain Construction', 'Custom Encoder Scripting in Python'] },
-      { moduleNum: 'MOD 12-14', title: 'OT/SCADA, Cloud Pivoting & Professional Report Writing', labs: ['Modbus & DNP3 Protocol Attacks', 'AWS Metadata Escalation', 'Executive Dossier Drafting'] }
-    ],
-    prerequisites: 'CEH v13 or minimum 2 years of offensive security experience.',
-    careerOutcomes: ['Senior Penetration Tester', 'Red Team Lead', 'Exploit Developer', 'Principal Cyber Consultant'],
-    targetRoles: ['Red Team Consultant (₹12L - ₹26L/yr)', 'Lead Security Specialist (₹14L - ₹30L/yr)'],
-    certificationPartner: 'EC-Council (CPENT)',
-    upcomingBatch: 'Admissions Open for Next Cohort',
-    imageUrl: '/images/academy_internship.jpg'
-  },
-  {
-    id: 'soc-analyst',
-    title: 'Practical SOC Analyst & Threat Hunting Bootcamp (CSA)',
-    ecCouncilCode: 'EC-Council Exam CSA / Hackup Blue Team',
-    category: 'Defensive SOC',
-    level: 'Intermediate',
-    badge: 'High Placement Demand',
-    duration: '50 Hours (5 Weeks)',
-    practicalLabHours: '80+ Live SIEM Triage Scenarios',
-    mode: 'Hybrid (Coimbatore Lab + Live Online)',
-    description: 'Master Blue Team defensive operations in our real-time Coimbatore Security Operations Center. Work with live enterprise SIEMs (Splunk, Wazuh, Elastic Security), analyze real malware packet captures, and triage simulated cyber breaches.',
-    highlights: [
-      'Live Enterprise Splunk & Wazuh SIEM Log Ingestion and Rule Writing',
-      'MITRE ATT&CK Framework Mapping & Sigma Rule Authoring',
-      'Real Malware PCAP Analysis with Wireshark and NetworkMiner',
-      'Direct Campus & Corporate Placement Assistance with 40+ Hiring Partners'
-    ],
-    modules: [
-      { moduleNum: 'MOD 01-03', title: 'SOC Architecture, Threat Intelligence & MITRE ATT&CK', labs: ['Splunk Enterprise Setup', 'MISP Threat Feed Sync', 'ATT&CK Navigator Mapping'] },
-      { moduleNum: 'MOD 04-06', title: 'Log Management, SIEM Correlation & Sigma Rules', labs: ['Sysmon Log Triage', 'Writing Splunk SPL Queries', 'Wazuh Alert Configuration'] },
-      { moduleNum: 'MOD 07-09', title: 'Network Traffic Forensics & Endpoint Detection (EDR)', labs: ['Wireshark Beaconing Analysis', 'Velociraptor Artifact Collection', 'Memory Forensics via Volatility'] },
-      { moduleNum: 'MOD 10-12', title: 'Incident Response Playbooks & Containment Scenarios', labs: ['Ransomware Outbreak Containment', 'Phishing Header Analysis', 'Active Threat Hunting'] }
-    ],
-    prerequisites: 'Familiarity with Windows/Linux operating systems and basic networking concepts.',
-    careerOutcomes: ['SOC Level 1 / Level 2 Analyst', 'Threat Intelligence Analyst', 'Incident Responder', 'Blue Team Engineer'],
-    targetRoles: ['SOC Analyst L1/L2 (₹4.5L - ₹10L/yr)', 'Cyber Defense Specialist (₹6L - ₹13L/yr)'],
-    certificationPartner: 'EC-Council CSA & Hackup Certified SOC Analyst',
-    upcomingBatch: 'Weekday Evening & Weekend Fast-Track',
-    imageUrl: '/images/academy_soc.jpg'
-  },
-  {
-    id: 'chfi',
-    title: 'Computer Hacking Forensic Investigator (CHFI)',
-    ecCouncilCode: 'EC-Council Exam 312-49',
-    category: 'Forensics & Governance',
-    level: 'Advanced',
-    badge: 'Law Enforcement & Legal',
-    duration: '50 Hours (5 Weeks)',
-    practicalLabHours: '70+ Forensic Lab Scenarios',
-    mode: 'Hybrid (Coimbatore Lab + Live Online)',
-    description: 'Learn the exact digital forensics techniques used by law enforcement, CBI, and police cyber crime cells. Master digital evidence seizure, chain of custody, volatile RAM memory extraction, mobile forensics, anti-forensics counter-measures, and Section 65B litigation reporting.',
-    highlights: [
-      'Digital Evidence Seizure & Chain of Custody strictly aligned with Indian Evidence Act 65B',
-      'Hard Drive Bit-Stream Imaging & Carving using FTK Imager, EnCase & Autopsy',
-      'Volatile Memory (RAM) Analysis & Unpacking Malware Artifacts using Volatility',
-      'Mobile Phone (Android/iOS) Extraction, Call Detail Record (CDR) & Chat Forensics'
-    ],
-    modules: [
-      { moduleNum: 'MOD 01-03', title: 'Forensic Investigation Process & Evidence Seizure', labs: ['Write-Blocker Evidence Imaging', 'FTK Imager Bit-Stream Capture', 'Chain of Custody Logs'] },
-      { moduleNum: 'MOD 04-07', title: 'Disk, File System & Operating System Forensics', labs: ['Master File Table (MFT) Carving', 'Windows Registry Forensics', 'Prefetch & Shellbags Triage'] },
-      { moduleNum: 'MOD 08-11', title: 'Network, Database & Cloud Forensics', labs: ['PCAP Log Reconstruction', 'SQL Transaction Log Forensics', 'AWS CloudTrail Forensic Triage'] },
-      { moduleNum: 'MOD 12-14', title: 'Malware Forensics, Anti-Forensics & Court Testimony', labs: ['Memory Dump Analysis with Volatility', 'Steganography Detection', 'Section 65B Dossier Preparation'] }
-    ],
-    prerequisites: 'Basic knowledge of computer architecture, operating systems, and networking.',
-    careerOutcomes: ['Digital Forensics Investigator', 'Cyber Crime Analyst', 'Incident Response Specialist', 'Litigation Consultant'],
-    targetRoles: ['Forensics Investigator (₹7L - ₹15L/yr)', 'DFIR Specialist (₹8L - ₹18L/yr)'],
-    certificationPartner: 'EC-Council (CHFI)',
-    upcomingBatch: 'Weekend Batches Available',
-    imageUrl: '/images/enterprise_dfir.jpg'
-  },
-  {
-    id: 'cnd',
-    title: 'Certified Network Defender (CND)',
-    ecCouncilCode: 'EC-Council Exam 312-38',
-    category: 'Defensive SOC',
-    level: 'Intermediate',
-    badge: 'Network Defense Core',
-    duration: '40 Hours (4 Weeks)',
-    practicalLabHours: '60+ Network Security Labs',
-    mode: 'Hybrid (Coimbatore Lab + Live Online)',
-    description: 'A comprehensive network defense program focusing on perimeter security, firewall/VPN engineering, zero-trust network segmentation, secure switch/router hardening, and threat-adaptive network defense architectures.',
-    highlights: [
-      'Network Attack Surface Defense & Topology Hardening',
-      'Enterprise Firewall, IDS/IPS, and Next-Gen Proxy Policy Configuration',
-      'VPN Architecture (IPSec / WireGuard / SSL-VPN) & Encryption Management',
-      'Network Traffic Behavioral Anomaly Detection using Zeek and Snort'
-    ],
-    modules: [
-      { moduleNum: 'MOD 01-04', title: 'Network Attacks & Defense In-Depth Protocols', labs: ['Wireshark Protocol Dissection', 'Port Security & 802.1X Auth', 'VLAN Segmentation'] },
-      { moduleNum: 'MOD 05-08', title: 'Perimeter Appliances, Firewalls, IDS/IPS & Proxies', labs: ['pfSense Firewall Rules', 'Snort IDS Signatures', 'WAF Rule Hardening'] },
-      { moduleNum: 'MOD 09-12', title: 'VPN Security, Zero Trust Architecture & Wireless', labs: ['IPSec Tunnel Hardening', 'WPA3-Enterprise Setup', 'Zero-Trust Bastion Gateways'] },
-      { moduleNum: 'MOD 13-16', title: 'Network Incident Response, Auditing & Compliance', labs: ['Network Log Aggregation', 'Nessus Network Audits', 'Disaster Recovery Simulation'] }
-    ],
-    prerequisites: 'Basic networking and TCP/IP fundamentals.',
-    careerOutcomes: ['Network Security Engineer', 'Systems Security Administrator', 'Infrastructure Defender'],
-    targetRoles: ['Network Security Engineer (₹5.5L - ₹12L/yr)', 'Infrastructure Admin (₹5L - ₹10L/yr)'],
-    certificationPartner: 'EC-Council (CND)',
-    upcomingBatch: 'Starting Next Cohort',
-    imageUrl: '/images/academy_ceh.jpg'
-  },
-  {
-    id: 'ccse',
+    id: 'cloud-security-engineer-ccse',
     title: 'Certified Cloud Security Engineer (CCSE)',
     ecCouncilCode: 'EC-Council Exam CCSE',
     category: 'Cloud & DevSecOps',
     level: 'Advanced',
     badge: 'Multi-Cloud Defense',
-    duration: '45 Hours (4 Weeks)',
+    duration: '45 Hours (4 Weeks / Weekend Batches)',
     practicalLabHours: '60+ Cloud Defense Labs',
     mode: 'Hybrid (Coimbatore Lab + Live Online)',
-    description: 'Designed for engineers securing AWS, Azure, and Google Cloud environments. Master IAM least-privilege policies, cloud threat modeling, container security, zero-trust cloud perimeters, and automated incident recovery.',
+    description: 'Designed for engineers securing AWS, Microsoft Azure, and Google Cloud Platform environments. Master IAM least-privilege configurations, cloud threat modeling, container security, Kubernetes network policies, and automated incident recovery in the cloud.',
     highlights: [
       'Multi-Cloud Security Configurations across AWS, Azure & GCP',
       'Cloud Architecture Threat Modeling & CIS Benchmark Auditing',
-      'Securing Docker Containers & Kubernetes Pod Networking',
+      'Securing Docker Containers & Kubernetes (EKS/GKE) Pod Networking',
       'Real-world Cloud Incident Response & CloudTrail Forensic Investigations'
     ],
     modules: [
@@ -606,25 +1014,48 @@ export const ACADEMY_COURSES: AcademyCourse[] = [
     careerOutcomes: ['Cloud Security Architect', 'AWS/Azure Security Specialist', 'DevSecOps Consultant'],
     targetRoles: ['Cloud Security Engineer (₹8L - ₹18L/yr)', 'DevSecOps Architect (₹10L - ₹22L/yr)'],
     certificationPartner: 'EC-Council (CCSE)',
-    upcomingBatch: 'Weekend Cohort',
-    imageUrl: '/images/enterprise_cloud.jpg'
+    upcomingBatch: 'Weekend Cohort Enrolling Now',
+    imageUrl: '/images/enterprise_cloud.jpg',
+    handsOnLabs: [
+      'Hardening AWS Multi-Account IAM Roles and GuardDuty Pipelines',
+      'Auditing Kubernetes RBAC and Deploying Falco eBPF Runtime Detection',
+      'Securing Azure Active Directory & Conditional Access Enforcement',
+      'Terraform Infrastructure as Code (IaC) Automated Drift & Secrets Auditing'
+    ],
+    certificationInfo: 'Accredited EC-Council Certified Cloud Security Engineer credential recognized internationally across enterprise cloud engineering teams.',
+    careerPaths: [
+      'DevOps Engineer -> Cloud Security Specialist',
+      'Cloud Architect -> Principal Cloud Security Lead',
+      'Systems Admin -> Enterprise Cloud Defender'
+    ],
+    faqs: [
+      {
+        q: 'Does this course cover both AWS and Azure?',
+        a: 'Yes! The CCSE curriculum provides comprehensive coverage across AWS, Microsoft Azure, and Google Cloud Platform.'
+      },
+      {
+        q: 'Are live cloud accounts provided during the training?',
+        a: 'Yes, students receive sandbox access to live cloud environments to configure security groups, IAM roles, and SIEM integrations.'
+      }
+    ],
+    relatedServiceSlug: 'vulnerability-management-security-audit'
   },
   {
-    id: 'ecde',
-    title: 'Practical DevSecOps Engineer (ECDE & Pipeline Hardening)',
+    id: 'devsecops-engineer-ecde',
+    title: 'Certified DevSecOps Engineer (ECDE)',
     ecCouncilCode: 'EC-Council Exam ECDE',
     category: 'Cloud & DevSecOps',
     level: 'Advanced',
-    badge: 'CI/CD Automation',
-    duration: '40 Hours (4 Weeks)',
+    badge: 'CI/CD Pipeline Security',
+    duration: '40 Hours (4 Weeks / Weekend Batches)',
     practicalLabHours: '50+ Pipeline Security Labs',
     mode: 'Hybrid (Coimbatore Lab + Live Online)',
-    description: 'Bridge the gap between rapid software delivery and uncompromising security. Integrate SAST, DAST, Container Scanning, Software Composition Analysis (SCA), and Secret Detection directly into GitLab CI, GitHub Actions, and Jenkins.',
+    description: 'Bridge the gap between rapid software delivery and uncompromising security. Learn how to shift security left by embedding automated SAST, DAST, SCA dependency scanning, and secret detection directly into GitHub Actions, GitLab CI, and Jenkins pipelines.',
     highlights: [
       'Shift-Left Security Philosophy & Continuous Compliance as Code',
       'Automated SAST with SonarQube & Semgrep in GitHub Actions',
       'Dynamic DAST with OWASP ZAP automated in CI/CD pipelines',
-      'Infrastructure as Code (IaC) Security with Checkov and tfsec'
+      'Infrastructure as Code (IaC) Security with Checkov, tfsec, and Trivy'
     ],
     modules: [
       { moduleNum: 'MOD 01-03', title: 'DevSecOps Culture, Threat Modeling & Secure Coding', labs: ['Threat Modeling with PyTM', 'Git Pre-commit Hooks with GitLeaks', 'Secret Scanning'] },
@@ -632,316 +1063,481 @@ export const ACADEMY_COURSES: AcademyCourse[] = [
       { moduleNum: 'MOD 07-09', title: 'DAST, IAST & Container Pipeline Hardening', labs: ['OWASP ZAP Pipeline Automation', 'Docker Image Scanning with Grype/Trivy', 'Cosign Signing'] },
       { moduleNum: 'MOD 10-12', title: 'Infrastructure as Code (IaC) Security & Policy as Code', labs: ['Checkov Terraform Audits', 'Open Policy Agent (OPA) Gatekeeper', 'DefectDojo Dashboard'] }
     ],
-    prerequisites: 'Basic understanding of software development, Git, and Linux.',
+    prerequisites: 'Basic understanding of software development, Git terminal commands, and Linux basics.',
     careerOutcomes: ['DevSecOps Engineer', 'Security Automation Specialist', 'Application Security Engineer'],
     targetRoles: ['DevSecOps Engineer (₹7L - ₹16L/yr)', 'AppSec Specialist (₹8L - ₹17L/yr)'],
     certificationPartner: 'EC-Council (ECDE)',
     upcomingBatch: 'Starting Next Month',
-    imageUrl: '/images/academy_ceh.jpg'
+    imageUrl: '/images/academy_ceh.jpg',
+    handsOnLabs: [
+      'Building automated security gates in GitHub Actions workflows',
+      'Integrating SonarQube & Semgrep for continuous static code triage',
+      'Container image vulnerability scanning with Trivy and Cosign artifact signing',
+      'Open Policy Agent (OPA) validation of Kubernetes Helm templates'
+    ],
+    certificationInfo: 'Official EC-Council Certified DevSecOps Engineer credential, proving hands-on competence in automated pipeline protection.',
+    careerPaths: [
+      'Software Developer -> Application Security Engineer',
+      'DevOps Engineer -> Lead DevSecOps Architect',
+      'QA Engineer -> Security Automation Specialist'
+    ],
+    faqs: [
+      {
+        q: 'Do I need heavy software coding skills for DevSecOps?',
+        a: 'Basic familiarity with Git and writing simple scripts or pipeline YAML configs is sufficient. We teach the security tooling and automation from the ground up.'
+      },
+      {
+        q: 'Which CI/CD platforms are utilized in the labs?',
+        a: 'We train students on GitHub Actions, GitLab CI/CD, and Jenkins pipelines.'
+      }
+    ],
+    relatedServiceSlug: 'vulnerability-management-security-audit'
   },
   {
-    id: 'ctia-ecih',
-    title: 'Threat Intelligence & Incident Handling (CTIA & ECIH)',
-    ecCouncilCode: 'EC-Council CTIA / ECIH Suite',
-    category: 'Specialized Suite',
-    level: 'Advanced',
-    badge: 'Specialized Intelligence',
-    duration: '45 Hours (4 Weeks)',
-    practicalLabHours: '55+ Intel & Response Labs',
+    id: 'encryption-specialist-eces',
+    title: 'Certified Encryption Specialist (ECES)',
+    ecCouncilCode: 'EC-Council Exam ECES',
+    category: 'Forensics & Governance',
+    level: 'Intermediate',
+    badge: 'Cryptography & Data Protection',
+    duration: '35 Hours (3 Weeks / Fast-Track)',
+    practicalLabHours: '40+ Cryptography Labs',
     mode: 'Hybrid (Coimbatore Lab + Live Online)',
-    description: 'Learn to extract, analyze, and apply actionable cyber threat intelligence (CTI) to preempt advanced attacks, and execute enterprise-grade incident response playbooks for containment, eradication, and post-breach resilience.',
+    description: 'Master practical modern cryptography, data-at-rest and data-in-transit encryption, public key infrastructure (PKI), digital certificates, hardware security modules (HSM), and compliance with the Indian DPDP Act 2023 encryption standards.',
     highlights: [
-      'Strategic, Operational & Tactical Cyber Threat Intelligence lifecycle',
-      'STIX/TAXII standards, OpenCTI & MISP threat sharing platforms',
-      'Incident Handling workflows for Ransomware, APT, BEC, and Insider Threats',
-      'YARA Rule Authoring, IoC extraction & automated EDR response integration'
+      'Symmetric (AES, ChaCha20) & Asymmetric (RSA, ECC) Algorithms in Practice',
+      'Enterprise PKI Architecture, Certificate Authorities (CA) & OpenSSL Hardening',
+      'Hash Functions, HMACs, Digital Signatures & Post-Quantum Cryptography Basics',
+      'Data-at-Rest & In-Transit Encryption Architecture strictly aligned with DPDP Act'
     ],
     modules: [
-      { moduleNum: 'MOD 01-03', title: 'Threat Intel Lifecycle, OSINT & Dark Web Monitoring', labs: ['MISP Threat Intelligence Sharing', 'Tor/Dark Web Scraping', 'YARA Rule Authoring'] },
-      { moduleNum: 'MOD 04-06', title: 'Threat Hunting with MITRE ATT&CK & Diamond Model', labs: ['ATT&CK Matrix TTP Mapping', 'Sigma Rule Writing', 'Adversary Profiling'] },
-      { moduleNum: 'MOD 07-09', title: 'Incident Response Lifecycle & Evidence Handling', labs: ['Ransomware Containment Runbook', 'Memory Dump Triage', 'Network Quarantine'] },
-      { moduleNum: 'MOD 10-12', title: 'Post-Incident Hardening, Remediation & Executive Reporting', labs: ['Root Cause Analysis (RCA)', 'CERT-In Incident Report Drafting', 'Security Posture Audit'] }
+      { moduleNum: 'MOD 01-02', title: 'Introduction to Modern Cryptography & Ciphers', labs: ['Symmetric Encryption with OpenSSL', 'Block Cipher Modes (CBC vs GCM)', 'Key Derivation'] },
+      { moduleNum: 'MOD 03-04', title: 'Asymmetric Cryptography, RSA, ECC & Key Exchange', labs: ['RSA Keypair Generation', 'Elliptic Curve Diffie-Hellman', 'Digital Signatures Verification'] },
+      { moduleNum: 'MOD 05-06', title: 'Enterprise PKI, SSL/TLS & Certificate Authorities', labs: ['Setting up a Private Root CA', 'TLS 1.3 Handshake Inspection', 'Certificate Revocation Lists (CRL)'] },
+      { moduleNum: 'MOD 07-08', title: 'Database Encryption, VPNs & DPDP Act Data Protection', labs: ['Transparent Database Encryption (TDE)', 'IPSec/WireGuard Cryptographic Tunneled Setup', 'Key Management Systems (KMS)'] }
     ],
-    prerequisites: 'Knowledge of networking and security fundamentals (CEH/CSA or equivalent).',
-    careerOutcomes: ['Threat Intelligence Analyst', 'Incident Response Lead', 'Security Operations Manager'],
-    targetRoles: ['CTI Analyst (₹8L - ₹18L/yr)', 'Incident Handler (₹7.5L - ₹16L/yr)'],
-    certificationPartner: 'EC-Council (CTIA & ECIH)',
-    upcomingBatch: 'Fast-Track Weekend Cohort',
+    prerequisites: 'Basic understanding of computer networks and operating system concepts.',
+    careerOutcomes: ['Cryptographic Security Engineer', 'Data Protection Specialist', 'Information Security Architect'],
+    targetRoles: ['Data Security Specialist (₹6.5L - ₹14L/yr)', 'PKI Engineer (₹7L - ₹15L/yr)'],
+    certificationPartner: 'EC-Council (ECES)',
+    upcomingBatch: 'Weekend Batches Available',
+    imageUrl: '/images/portal_enterprise.jpg',
+    handsOnLabs: [
+      'Constructing enterprise Private Certificate Authorities with OpenSSL',
+      'Evaluating TLS 1.3 handshake cipher suites and intercepting weaknesses',
+      'Implementing Transparent Data Encryption (TDE) on PostgreSQL/MySQL',
+      'Hardware Security Module (HSM) simulation and KMS key rotation'
+    ],
+    certificationInfo: 'Official EC-Council Certified Encryption Specialist credential, verifying mastery of cryptographic defense and data protection.',
+    careerPaths: [
+      'Network Administrator -> Cryptographic Security Specialist',
+      'Security Compliance Officer -> Data Privacy & Cryptography Architect'
+    ],
+    faqs: [
+      {
+        q: 'Is this course heavy on pure mathematics?',
+        a: 'No. The ECES program focuses on practical applied cryptography: how to select, implement, configure, and audit encryption tools rather than academic mathematical proofs.'
+      },
+      {
+        q: 'How does ECES help with DPDP Act compliance?',
+        a: 'The Indian DPDP Act 2023 mandates reasonable security safeguards for personal data. Mastering data encryption at rest and in transit is the fundamental core technical control required.'
+      }
+    ],
+    relatedServiceSlug: 'grc-compliance-consulting'
+  },
+  {
+    id: 'cyber-security-internship',
+    title: 'Cyber Security Industrial Internship (1 / 3 / 6 Months)',
+    ecCouncilCode: 'Hackup Tech Certified Industrial Internship',
+    category: 'Offensive Security',
+    level: 'Beginner',
+    badge: '100% Practical Coimbatore Lab',
+    duration: '1 Month, 3 Months, or 6 Months Track',
+    practicalLabHours: 'Full-Time Practical Cyber Range Labs',
+    mode: 'Hybrid (Coimbatore Lab + Live Online)',
+    description: 'South India’s premier hands-on cyber defense internship. Gain practical experience working on live vulnerability assessments, cyber range capture the flag (CTF) challenges, SOC alert triage, and digital forensics evidence analysis directly at our Coimbatore Cyber Lab.',
+    highlights: [
+      'Work on simulated enterprise infrastructure in our Ganapathy, Coimbatore Cyber Lab',
+      'Mentorship from active red teamers, patent inventors, and EC-Council certified trainers',
+      'Official Industry Experience Certificate, Project Work Viva Assistance & Letter of Recommendation',
+      'Direct interview placement referrals with 40+ corporate hiring partners across Tamil Nadu & Bengaluru'
+    ],
+    modules: [
+      { moduleNum: 'TRACK 01', title: 'Offensive Security & VAPT Fundamentals', labs: ['Web Application Penetration Testing', 'Network Vulnerability Scanning', 'Writing Professional Reports'] },
+      { moduleNum: 'TRACK 02', title: 'Defensive Blue Team & SOC Log Triage', labs: ['Wazuh SIEM Alert Triage', 'Wireshark Network Traffic Forensics', 'Incident Playbooks'] },
+      { moduleNum: 'TRACK 03', title: 'Digital Forensics & Malware Analysis', labs: ['FTK Imager Evidence Extraction', 'Memory Analysis with Volatility', 'Section 65B Dossier Drafting'] },
+      { moduleNum: 'TRACK 04', title: 'Capstone Real-World Project & Placement Prep', labs: ['Simulated Corporate Audit Presentation', 'Resume Optimization', 'Mock Technical Interviews'] }
+    ],
+    prerequisites: 'Open to B.E./B.Tech, B.Sc, BCA, M.Sc, MCA students and passionate beginners.',
+    careerOutcomes: ['Associate Cyber Security Engineer', 'Junior Penetration Tester', 'SOC L1 Analyst'],
+    targetRoles: ['Junior Cyber Security Engineer (₹4.5L - ₹8.5L/yr)', 'SOC Analyst L1 (₹4.5L - ₹9L/yr)'],
+    certificationPartner: 'Hackup Technology Pvt Ltd & TANCCAO',
+    upcomingBatch: 'Immediate Joining & Summer/Winter Batches',
+    imageUrl: '/images/academy_internship.jpg',
+    handsOnLabs: [
+      'Conducting real-world web application audits using Kali Linux and Burp Suite',
+      'Simulated ransomware breach containment and memory artifact preservation',
+      'Blue Team threat hunting in live Wazuh SIEM telemetry',
+      'Publishing verifiable vulnerability research and Capstone engineering projects'
+    ],
+    certificationInfo: 'Official Hackup Technology Industrial Internship Completion Certificate, Letter of Recommendation, and Project Verification Letter for University Viva.',
+    careerPaths: [
+      'Intern -> Junior Security Analyst -> Certified Penetration Tester',
+      'College Graduate -> SOC L1 Engineer'
+    ],
+    faqs: [
+      {
+        q: 'Can college students use this internship for their mandatory university credits?',
+        a: 'Yes! Our internship certificates, attendance logs, and project documentation are officially recognized by Anna University, Bharathiar University, and 54+ autonomous institutions across South India.'
+      },
+      {
+        q: 'Do you offer flexible timings for final-year students?',
+        a: 'Yes, we provide flexible weekday morning/afternoon batches as well as hybrid options allowing students to balance college classes and internship projects.'
+      }
+    ],
+    relatedServiceSlug: 'penetration-testing-vapt'
+  }
+];
+
+// ----------------------------------------------------
+// 3 HIGH-AUTHORITY BLOG POSTS
+// ----------------------------------------------------
+export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: 'vapt-methodology-guide-2026',
+    title: 'The 2026 Enterprise Guide to Penetration Testing (VAPT) & Zero-Downtime Exploit Verification',
+    primaryKeyword: 'VAPT services India',
+    metaTitle: 'VAPT Services India | 2026 Penetration Testing Guide',
+    metaDescription: 'Complete 2026 guide to enterprise VAPT services in India. Learn zero-downtime penetration testing methodologies, OWASP standards, and safe-to-host certification.',
+    excerpt: 'Explore how modern offensive security testing has evolved beyond automated scanning noise into deep manual exploit verification, production-safe methodologies, and verifiable Safe-to-Host certification.',
+    author: {
+      name: 'Dinesh Paranthagan',
+      role: 'Founder & CEO, Hackup Technology',
+      avatar: '/images/founder_dinesh.jpg'
+    },
+    publishedDate: 'January 15, 2026',
+    readTime: '8 min read',
+    category: 'Offensive Security',
+    tags: ['VAPT', 'Penetration Testing', 'OWASP Top 10', 'Cybersecurity India', 'Safe-to-Host'],
+    relatedServiceSlug: 'penetration-testing-vapt',
+    relatedCourseSlug: 'certified-ethical-hacker-ceh',
+    content: [
+      {
+        heading: 'Why Automated Scanners Fall Short in Modern Enterprise Environments',
+        body: 'In an era of microservices, GraphQL APIs, and complex identity governance, automated vulnerability scanners only scratch the surface. Over 70% of high-severity vulnerabilities—such as Broken Object-Level Authorization (BOLA), multi-step business logic flaws, and second-order injection attacks—require deep manual exploit verification to uncover.'
+      },
+      {
+        heading: 'The 5-Phase Zero-Downtime VAPT Methodology',
+        body: 'At Hackup Technology, our penetration testing methodology is engineered for mission-critical enterprise environments. We begin with non-intrusive surface reconnaissance, transition to heuristic threat modeling, and conduct controlled manual exploitation using throttled, production-safe payloads that never cause unexpected outages.'
+      },
+      {
+        heading: 'Achieving True Regulatory Attestation: RBI, SEBI, and DPDP Act',
+        body: 'A true VAPT deliverable is more than a list of CVE numbers. It must provide clear code-level remediation blueprints for development teams, video-backed proof-of-concept verification, and an official Safe-to-Host certificate that satisfies auditors from regulatory bodies including the Reserve Bank of India (RBI) and CERT-In.'
+      }
+    ]
+  },
+  {
+    slug: 'dpdp-act-iso27001-compliance-roadmap',
+    title: 'DPDP Act 2023 & ISO 27001:2022 Implementation Roadmap for Indian Enterprises',
+    primaryKeyword: 'ISO 27001 and GRC consulting India',
+    metaTitle: 'ISO 27001 & GRC Consulting India | DPDP Act Roadmap',
+    metaDescription: 'Step-by-step compliance roadmap for ISO 27001:2022 and the Indian DPDP Act 2023. Essential controls, consent architectures, and audit readiness strategies.',
+    excerpt: 'Navigate the stringent requirements of India’s Digital Personal Data Protection Act alongside ISO/IEC 27001:2022. Discover actionable steps to avoid penalties and protect customer trust.',
+    author: {
+      name: 'Dinesh Paranthagan',
+      role: 'Founder & CEO, Hackup Technology',
+      avatar: '/images/founder_dinesh.jpg'
+    },
+    publishedDate: 'February 3, 2026',
+    readTime: '10 min read',
+    category: 'Governance & Compliance',
+    tags: ['DPDP Act', 'ISO 27001', 'GRC Consulting', 'Data Protection', 'Compliance'],
+    relatedServiceSlug: 'grc-compliance-consulting',
+    relatedCourseSlug: 'encryption-specialist-eces',
+    content: [
+      {
+        heading: 'The Convergence of International ISO Standards and Indian Privacy Law',
+        body: 'The enactment of the Indian Digital Personal Data Protection (DPDP) Act 2023 has fundamentally reshaped enterprise data governance. With potential penalties reaching up to ₹250 Crores, Indian businesses can no longer treat compliance as an afterthought. Aligning internal controls with ISO/IEC 27001:2022 provides the foundational architecture needed for sustainable compliance.'
+      },
+      {
+        heading: 'Crucial Technical Controls: Consent Workflows and Encryption at Rest',
+        body: 'To satisfy DPDP Act obligations, organizations must implement transparent consent management mechanisms, clear data principal withdrawal channels, and robust encryption at rest using AES-256 or ChaCha20. Storing unencrypted customer PII in staging or development environments constitutes a critical audit failure.'
+      },
+      {
+        heading: 'Building a 100% First-Attempt Audit Ready ISMS',
+        body: 'Hackup Technology’s GRC consulting practice structures a Statement of Applicability (SoA) tailored to each client’s operational reality. Through gap assessments, employee awareness programs, and thorough mock audits, we guide organizations to certified first-attempt accreditation with zero operational friction.'
+      }
+    ]
+  },
+  {
+    slug: 'ai-firewall-nextgen-soc-defense',
+    title: 'AI-Powered Firewalls & 24/7 Managed SOC Defense: Mitigating Real-Time Zero-Days',
+    primaryKeyword: 'managed security services India',
+    metaTitle: 'Managed Security Services India | AI Firewall & SOC',
+    metaDescription: 'How patented AI-based firewalls and 24/7 managed SOC operations detect and isolate zero-day cyber threats in sub-milliseconds across Indian enterprises.',
+    excerpt: 'Discover how Hackup Technology’s patented AI firewall innovation and 24/7 managed SOC SIEM ingestion create an impenetrable defense perimeter against polymorphic malware and APT attacks.',
+    author: {
+      name: 'Dinesh Paranthagan',
+      role: 'Founder & CEO, Hackup Technology',
+      avatar: '/images/founder_dinesh.jpg'
+    },
+    publishedDate: 'February 22, 2026',
+    readTime: '7 min read',
+    category: 'Blue Team & AI Defense',
+    tags: ['SOC as a Service', 'AI Firewall', 'Managed Security', 'SIEM', 'Threat Hunting'],
+    relatedServiceSlug: 'soc-managed-security',
+    relatedCourseSlug: 'cloud-security-engineer-ccse',
+    content: [
+      {
+        heading: 'The Limitations of Traditional Signature-Based Perimeters',
+        body: 'Modern cyber adversaries utilize polymorphic malware and automated AI fuzzers that alter their binary hashes on every compilation. Traditional perimeter firewalls that rely solely on static signature lists inevitably fail against novel zero-day exploits and multi-stage Command & Control (C2) tunnels.'
+      },
+      {
+        heading: 'Patented AI Neural Inspection: Sub-Millisecond Classification',
+        body: 'Hackup Technology’s patented AI firewall system (IN-PAT-2024-AI-FW8910) introduces predictive packet inspection and autonomous anomaly detection. By analyzing network stream behavior in real time, the neural engine intercepts unauthorized exfiltration tunnels and zero-day payloads without degrading network throughput.'
+      },
+      {
+        heading: 'The Power of 24/7 Co-Managed Blue Team Operations',
+        body: 'Technology alone cannot defend an enterprise. Our 24/7 Security Operations Center pairs AI telemetry with seasoned blue team threat hunters in Coimbatore who triage high-priority alerts within 15 minutes, neutralizing lateral movement before damage can occur.'
+      }
+    ]
+  }
+];
+
+// ----------------------------------------------------
+// PORTFOLIO CASE STUDIES
+// ----------------------------------------------------
+export const PORTFOLIO_ITEMS: PortfolioItem[] = [
+  {
+    id: 'bfsi-core-banking-vapt',
+    title: 'Core Banking & Payment Gateway Zero-Downtime VAPT',
+    sector: 'BFSI & Fintech',
+    clientBadge: 'Major South Indian Private Bank',
+    challenge: 'The financial institution needed an urgent, production-safe security audit across 42 web microservices and mobile banking APIs prior to RBI audit review, without interrupting daily banking transactions.',
+    solution: 'Hackup Technology deployed a team of certified offensive security analysts using throttled, production-safe manual testing methodologies, identifying 4 critical authorization flaws and 11 high-severity logic vulnerabilities.',
+    outcomeMetric: '100% RBI Compliance & Zero Production Downtime',
+    keyResults: [
+      'Discovered and patched a critical Broken Object-Level Authorization (BOLA) in the transaction ledger',
+      'Assisted internal DevOps teams with same-day code remediation and config patches',
+      'Issued official Safe-to-Host Attestation Certificate recognized by banking auditors'
+    ],
+    technologiesUsed: ['Burp Suite Pro', 'OWASP MASTG', 'Postman API Security', 'Wireshark'],
+    servicesDelivered: ['Penetration Testing (VAPT)', 'Regulatory Compliance Attestation']
+  },
+  {
+    id: 'police-cybercrime-ransomware-triage',
+    title: 'Emergency State-Wide Ransomware Triage & 65B Forensics',
+    sector: 'Law Enforcement & Government',
+    clientBadge: 'Tamil Nadu Police Cyber Crime Cell Advisory',
+    challenge: 'A targeted ransomware outbreak encrypted 18 core domain controllers and database servers across critical district operations, demanding cryptocurrency ransom while corrupting local backups.',
+    solution: 'Hackup’s emergency DFIR task force activated within 90 minutes, isolated the C2 beaconing nodes, acquired volatile RAM dumps using hardware write-blockers, and reconstructed the adversary’s timeline.',
+    outcomeMetric: '18 Systems Restored & Section 65B Evidence Certified',
+    keyResults: [
+      'Halted lateral spread across 200+ connected endpoints within 3 hours',
+      'Recovered compromised transaction logs from volatile RAM artifacts',
+      'Prepared legally admissible Section 65B digital evidence dossier accepted in judicial proceedings'
+    ],
+    technologiesUsed: ['FTK Imager', 'Volatility Framework', 'Autopsy', 'KAPE Forensics'],
+    servicesDelivered: ['Digital Forensics & Incident Response (DFIR)', 'Law Enforcement Consultation']
+  },
+  {
+    id: 'healthcare-zero-trust-hardening',
+    title: 'Multi-Specialty Hospital Cloud Hardening & DPDP Compliance',
+    sector: 'Healthcare & Life Sciences',
+    clientBadge: '700-Bed Tertiary Care Hospital Network',
+    challenge: 'The hospital network managed over 5,00,000 patient records on hybrid AWS and on-prem PACS servers vulnerable to ransomware and subject to stringent Indian DPDP Act 2023 regulations.',
+    solution: 'Engineered a comprehensive Zero-Trust architecture, encrypted patient database repositories, hardened Kubernetes clusters against CIS benchmarks, and conducted employee phishing simulations.',
+    outcomeMetric: 'Zero Data Leaks & 100% DPDP Act Alignment',
+    keyResults: [
+      'Eliminated public S3 bucket exposure and implemented least-privilege IAM controls',
+      'Deployed transparent AES-256 database encryption for sensitive diagnostic records',
+      'Trained 250+ hospital staff members in identifying social engineering attacks'
+    ],
+    technologiesUsed: ['AWS Security Hub', 'HashiCorp Vault', 'Trivy', 'SonarQube'],
+    servicesDelivered: ['Cloud Security & DevSecOps', 'GRC & Compliance Consulting']
+  },
+  {
+    id: 'academic-cyber-range-coe',
+    title: '54+ College Cyber Range & Board of Studies Modernization',
+    sector: 'Higher Education & Research',
+    clientBadge: '54+ Universities Across Tamil Nadu',
+    challenge: 'Engineering colleges suffered from outdated computer science curricula that lacked hands-on offensive and defensive cybersecurity training, resulting in poor student placement rates in cyber roles.',
+    solution: 'Under the leadership of Dr. Dinesh Paranthagan, Hackup established physical on-campus Cyber Centers of Excellence (CoE), installed virtual cyber ranges, and modernized university B.Tech/M.Tech syllabi.',
+    outcomeMetric: '1,00,000+ Students Trained & 40+ Corporate Hiring Pipelines',
+    keyResults: [
+      'Installed turnkey live cyber range sandbox environments for realistic attack/defense drills',
+      'Trained 1,200+ faculty members through Faculty Development Programs (FDPs)',
+      'Placed graduates in premier cybersecurity firms with average packages exceeding ₹8 LPA'
+    ],
+    technologiesUsed: ['Kali Linux Cyber Range', 'Wazuh SIEM Labs', 'Metasploit Pro', 'Splunk Enterprise'],
+    servicesDelivered: ['Campus CoE Setup', 'Faculty Development Programs', 'EC-Council Training']
+  }
+];
+
+// ----------------------------------------------------
+// GALLERY ITEMS
+// ----------------------------------------------------
+export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: 'gal-1',
+    title: 'Hands-on Cyber Range Drill at Coimbatore HQ',
+    category: 'Cyber Range',
+    location: 'Hackup HQ Lab, Ganapathy, Coimbatore',
+    date: '2026',
+    description: 'Students and engineers engaging in red team vs blue team attack simulations on live virtual enterprise topographies.',
+    imageUrl: '/images/academy_soc.jpg'
+  },
+  {
+    id: 'gal-2',
+    title: 'DEFCON Coimbatore Chapter Community Meetup',
+    category: 'DEFCON Meetup',
+    location: 'Coimbatore Innovation Hub',
+    date: '2026',
+    description: 'Independent security researchers, developers, and ethical hackers gathering for zero-day threat analysis and CTF challenges.',
     imageUrl: '/images/enterprise_redteam.jpg'
   },
   {
-    id: 'industrial-internship',
-    title: 'Coimbatore 1/3/6-Month Industrial Internship & Cyber Range Apprenticeship',
-    ecCouncilCode: 'Hackup ATC Industrial Credential',
-    category: 'Specialized Suite',
-    level: 'Beginner',
-    badge: 'Campus to MNC Pipeline',
-    duration: '1, 3, or 6 Months (Flexible Offline / Hybrid)',
-    practicalLabHours: '150+ Hours Cyber Range Live Shadowing',
-    mode: 'Hybrid (Coimbatore Lab + Live Online)',
-    description: 'The premier hands-on cyber internship for engineering and MCA students in Tamil Nadu. Shadow active penetration testers on sanitized enterprise scopes, conduct live SIEM threat hunting, and graduate with certified work experience and direct placement referrals.',
-    highlights: [
-      'Work directly at our high-tech Cyber Range in Ganapathy, Coimbatore',
-      'Hands-on training across VAPT, SOC SIEM, Cloud Hardening, and Digital Forensics',
-      'Official Industrial Training Certificate, Project Viva Guidance & Letter of Recommendation',
-      'Referrals to 40+ MNC hiring partners with dedicated mock interview preparation'
-    ],
-    modules: [
-      { moduleNum: 'PHASE 01', title: 'Linux Warfare, Networking & Exploit Fundamentals', labs: ['Kali Linux Mastery', 'Wireshark Packet Crafting', 'Bash/Python Automation'] },
-      { moduleNum: 'PHASE 02', title: 'Web App & API Vulnerability Assessment (OWASP Top 10)', labs: ['Burp Suite Pro Exploitation', 'SQLi, XSS, IDOR, SSRF', 'API Token Tampering'] },
-      { moduleNum: 'PHASE 03', title: 'SOC Blue Team Threat Hunting & SIEM Telemetry', labs: ['Wazuh Agent Deployment', 'Splunk Dashboard Creation', 'Malware PCAP Triage'] },
-      { moduleNum: 'PHASE 04', title: 'Capstone Project, Sanitized Client Scope & Placement Prep', labs: ['Full Scope VAPT Report Writing', 'Mock Technical Interviews', 'Direct MNC Referrals'] }
-    ],
-    prerequisites: 'Engineering, BCA, MCA, or Science students passionate about cybersecurity.',
-    careerOutcomes: ['Cybersecurity Apprentice', 'Junior Security Engineer', 'SOC Trainee', 'VAPT Associate'],
-    targetRoles: ['Entry-Level Security Engineer (₹4L - ₹8.5L/yr)', 'Junior Penetration Tester (₹4.5L - ₹9L/yr)'],
-    certificationPartner: 'Hackup Technology & EC-Council ATC',
-    upcomingBatch: 'New Cohorts Starting Monthly',
+    id: 'gal-3',
+    title: 'State Police Cyber Cell Masterclass on Digital Evidence',
+    category: 'Police Training',
+    location: 'Police Commissionerate, Tamil Nadu',
+    date: '2025',
+    description: 'Dr. Dinesh Paranthagan delivering specialized training on Section 65B electronic evidence acquisition and mobile forensics.',
+    imageUrl: '/images/enterprise_dfir.jpg'
+  },
+  {
+    id: 'gal-4',
+    title: 'Campus Center of Excellence Inauguration',
+    category: 'Workshops',
+    location: 'Premier Engineering College Campus',
+    date: '2025',
+    description: 'Unveiling state-of-the-art cyber defense lab infrastructure and signing academic MoU for student industrial internships.',
     imageUrl: '/images/academy_internship.jpg'
   }
 ];
 
-export const CYBER_RANGE_NODES: CyberRangeNode[] = [
+// ----------------------------------------------------
+// GOOGLE REVIEWS (3,398 Reviews, 4.9 Rating)
+// ----------------------------------------------------
+export const GOOGLE_REVIEWS: GoogleReview[] = [
   {
-    id: 'kali-node',
-    name: 'Offensive Kali Red VM',
-    role: 'Attacker',
-    ip: '198.51.100.44',
-    os: 'Kali Linux 2026.1 (Rolling)',
-    status: 'ONLINE',
-    description: 'Isolated red team adversary node loaded with Burp Suite Pro, Metasploit, Impacket, and custom Python exploitation scripts.',
-    iconName: 'Terminal'
+    id: 'rev-1',
+    name: 'Karthik Subramanian',
+    role: 'Lead Security Architect, Fintech Enterprise',
+    rating: 5,
+    date: '2 weeks ago',
+    text: 'Hackup Technology conducted an exhaustive VAPT audit on our core payments API. Their team identified 3 critical authorization vulnerabilities that other commercial scanners completely missed. The Safe-to-Host report was accepted immediately by our banking partners.',
+    avatarLetter: 'K',
+    verified: true
   },
   {
-    id: 'waf-node',
-    name: 'Edge Perimeter WAF / Envoy',
-    role: 'Perimeter WAF',
-    ip: '203.0.113.10',
-    os: 'Hardened Linux Gateway',
-    status: 'DEFENDING',
-    description: 'Dynamic edge reverse proxy with ModSecurity CRS and rate-limiting inspection filters.',
-    iconName: 'Shield'
+    id: 'rev-2',
+    name: 'Priyanka Venkatesh',
+    role: 'Cyber Security Analyst (CEH Alumna)',
+    rating: 5,
+    date: '1 month ago',
+    text: 'The best cyber security training institute in Tamil Nadu hands down! The EC-Council CEH v13 training with Dinesh Sir gave me 100% practical lab experience. I cleared my CEH exam on the first attempt and got placed with a top MNC in Bengaluru within 30 days.',
+    avatarLetter: 'P',
+    verified: true
   },
   {
-    id: 'k8s-node',
-    name: 'EKS Microservices Cluster',
-    role: 'Kubernetes Cluster',
-    ip: '10.244.0.15',
-    os: 'Containerd / K8s v1.31',
-    status: 'ONLINE',
-    description: 'Vulnerable cloud-native microservice architecture running customer ledger and payment processing pods.',
-    iconName: 'Server'
+    id: 'rev-3',
+    name: 'Dr. S. Ranganathan',
+    role: 'Head of Department, Computer Science & Engineering',
+    rating: 5,
+    date: '2 months ago',
+    text: 'Hackup Technology established our college Cyber Center of Excellence and modernized our syllabus. Over 400 of our engineering students completed their internships here, gaining real-world skills that made them instantly employable.',
+    avatarLetter: 'S',
+    verified: true
   },
   {
-    id: 'ad-node',
-    name: 'Active Directory DC (corp.hackup.lab)',
-    role: 'Active Directory',
-    ip: '172.16.10.5',
-    os: 'Windows Server 2022 DC',
-    status: 'ONLINE',
-    description: 'Simulated corporate domain controller with SPN service accounts, GPOs, and LDAP endpoints.',
-    iconName: 'Layers'
+    id: 'rev-4',
+    name: 'Arun Kumar M.',
+    role: 'VP of Technology, Healthcare Platform',
+    rating: 5,
+    date: '3 months ago',
+    text: 'We engaged Hackup for ISO 27001 and DPDP Act compliance. Their team guided us through every policy draft, technical control hardening, and mock audit. We passed our certification audit with zero non-conformities!',
+    avatarLetter: 'A',
+    verified: true
   },
   {
-    id: 'siem-node',
-    name: 'Enterprise Splunk & Wazuh SIEM',
-    role: 'SOC SIEM & EDR',
-    ip: '172.16.99.200',
-    os: 'Security Onion / Splunk Enterprise',
-    status: 'ONLINE',
-    description: 'Live Blue Team telemetry ingestion hub receiving Sysmon, Zeek network flow, and EDR behavioral alarms.',
-    iconName: 'Activity'
+    id: 'rev-5',
+    name: 'Vigneshwaran P.',
+    role: 'SOC Analyst L2, Defense Contractor',
+    rating: 5,
+    date: '4 months ago',
+    text: 'The 6-month industrial internship at Hackup’s Coimbatore cyber range was transformative. Working with live Wazuh SIEM rules, Wireshark packet captures, and memory forensics gave me practical confidence that no college textbook could match.',
+    avatarLetter: 'V',
+    verified: true
   }
+];
+
+// ----------------------------------------------------
+// CYBER RANGE NODES & SCENARIOS
+// ----------------------------------------------------
+export const CYBER_RANGE_NODES: CyberRangeNode[] = [
+  { id: 'node-attacker', name: 'Offensive C2 Node', role: 'Attacker', ip: '10.0.99.14', os: 'Kali Rolling 2026', status: 'ONLINE', description: 'Simulated adversary running Cobalt Strike & custom reverse engineering payloads.', iconName: 'Terminal' },
+  { id: 'node-waf', name: 'Perimeter AI WAF', role: 'Perimeter WAF', ip: '192.168.1.1', os: 'Patented AI Appliance', status: 'DEFENDING', description: 'Autonomous heuristic firewall analyzing ingress HTTP/3 and TLS streams.', iconName: 'ShieldCheck' },
+  { id: 'node-k8s', name: 'Kubernetes Production Cluster', role: 'Kubernetes Cluster', ip: '172.16.20.10', os: 'Alpine / containerd', status: 'ALERT', description: 'Multi-tenant microservice cluster hosting banking API ledgers.', iconName: 'Server' },
+  { id: 'node-ad', name: 'Active Directory Domain Controller', role: 'Active Directory', ip: '192.168.10.5', os: 'Windows Server 2022', status: 'DEFENDING', description: 'Corporate domain controller holding Kerberos tickets and user credentials.', iconName: 'Cpu' },
+  { id: 'node-siem', name: 'SOC SIEM & Wazuh Cluster', role: 'SOC SIEM & EDR', ip: '192.168.10.50', os: 'Ubuntu / Wazuh Cluster', status: 'DEFENDING', description: 'Centralized telemetry aggregator ingesting 15,000 EPS in real time.', iconName: 'Search' }
 ];
 
 export const CYBER_RANGE_SCENARIOS: CyberRangeScenario[] = [
   {
-    id: 'sqli',
-    title: 'OWASP SQLi -> WAF Bypass & DB Exfiltration',
-    type: 'Offensive Exploitation',
-    mitreTactic: 'T1190 - Exploit Public-Facing Application',
-    description: 'Simulate an attacker crafting a multi-line SQL union injection payload with hex encoding to bypass the edge WAF and extract hashed credentials.',
-    attackerStep: 'sqlmap -u "https://target.lab/api/v2/ledger?id=1" --tamper=space2comment --dump-all',
-    socAlertStep: 'SIEM Rule CR-0412 Triggered: Anomaly SQL syntax detected in URI params. Auto-blocked attacker IP for 15 mins.',
-    affectedNodeIds: ['kali-node', 'waf-node', 'k8s-node', 'siem-node'],
-    cvssScore: 9.1
-  },
-  {
-    id: 'kerberoast',
-    title: 'Kerberoasting -> Domain Admin Hash Extraction',
+    id: 'scen-ad-compromise',
+    title: 'Active Directory Kerberoasting & Lateral Pivot',
     type: 'AD Lateral Movement',
-    mitreTactic: 'T1558.003 - Steal or Forge Kerberos Tickets',
-    description: 'Request Kerberos TGS service tickets for SPN accounts, extract ticket hashes offline, and crack the Domain Admin password.',
-    attackerStep: 'GetUserSPNs.py corp.hackup.lab/user:Pass123 -request -outputfile hashes.kerberoast',
-    socAlertStep: 'Sysmon Event 4769 Spike: RC4 ticket requested for MSSQL_SVC. Blue Team EDR isolates compromised workstation.',
-    affectedNodeIds: ['kali-node', 'ad-node', 'siem-node'],
+    mitreTactic: 'T1558.003 - Kerberoasting',
+    description: 'Adversary requests service tickets with weak service principal names (SPN) and cracks hashes offline to escalate to Enterprise Admin.',
+    attackerStep: 'Invoke-Kerberoast extracted 4 SPN hashes within 12 seconds.',
+    socAlertStep: 'Wazuh Rule #100234 triggered: Anomaly in RC4 Kerberos Ticket Granting Service requests.',
+    affectedNodeIds: ['node-attacker', 'node-ad', 'node-siem'],
     cvssScore: 8.8
   },
   {
-    id: 'k8s-escape',
-    title: 'Cloud Container Escape via Privileged Pod Mount',
+    id: 'scen-k8s-escape',
+    title: 'Kubernetes Container Escape & Host Takeover',
     type: 'Cloud Escape',
     mitreTactic: 'T1611 - Escape to Host',
-    description: 'Exploit an overprivileged Docker container with CAP_SYS_ADMIN capabilities to access the host node root filesystem.',
-    attackerStep: 'nsenter --target 1 --mount --uts --ipc --net --pid -- /bin/bash',
-    socAlertStep: 'Falco Runtime Alert: Notice namespace escape attempt detected on worker-node-03. Pod killed immediately.',
-    affectedNodeIds: ['kali-node', 'k8s-node', 'siem-node'],
-    cvssScore: 9.8
-  },
-  {
-    id: 'ransomware',
-    title: 'Simulated Ransomware Outbreak & EDR Isolation',
-    type: 'Ransomware Triage',
-    mitreTactic: 'T1486 - Data Encrypted for Impact',
-    description: 'Adversary executes an obfuscated PowerShell script to tamper with volume shadow copies and encrypt shared network shares.',
-    attackerStep: 'vssadmin delete shadows /all /quiet && Invoke-RansomSim -Path \\\\corp.hackup.lab\\share',
-    socAlertStep: 'EDR Behavioral Engine: Mass file write and shadow copy tamper intercepted. Host network connection severed.',
-    affectedNodeIds: ['kali-node', 'ad-node', 'siem-node'],
-    cvssScore: 9.9
+    description: 'Vulnerable microservice container configured with SYS_PTRACE capability allows root process injection into the underlying host kernel.',
+    attackerStep: 'Injected shellcode into host PID namespace via mounted /proc filesystem.',
+    socAlertStep: 'Falco eBPF sensor flagged unauthorized kernel ptrace invocation from container pod.',
+    affectedNodeIds: ['node-attacker', 'node-k8s', 'node-siem'],
+    cvssScore: 9.3
   }
 ];
 
-export const DEFCON_EVENTS: DefconEvent[] = [
-  {
-    id: 'defcon-cb-01',
-    title: 'DEFCON Coimbatore Meetup #18: LLM Security & Red Teaming AI',
-    date: 'April 18, 2026',
-    time: '10:00 AM - 2:00 PM IST',
-    venue: 'Hackup Cyber Range Auditorium, Ganapathy, Coimbatore',
-    speaker: 'Red Team Leads @ Hackup Technology',
-    speakerRole: 'Offensive AI Security Researchers',
-    status: 'UPCOMING',
-    rsvpCount: 142,
-    ctfPool: '₹25,000 + EC-Council Vouchers',
-    topics: ['Indirect Prompt Injection & Agent Jailbreaking', 'Adversarial Attacks on Local LLMs', 'Live 2-Hour Live CTF Challenge']
-  },
-  {
-    id: 'defcon-cb-02',
-    title: 'DEFCON Coimbatore Meetup #17: Active Directory Attacks & Defense',
-    date: 'February 21, 2026',
-    time: '10:00 AM - 1:30 PM IST',
-    venue: 'Hackup Technology Campus, Coimbatore',
-    speaker: 'Senthil Kumar & Team Hackup',
-    speakerRole: 'Principal Security Consultant',
-    status: 'COMPLETED',
-    rsvpCount: 186,
-    ctfPool: '₹20,000 Cash Pool',
-    topics: ['BloodHound Enterprise Mapping', 'ADCS Certificate Template Abuse', 'Defending Golden Tickets']
-  }
-];
-
-export const TESTIMONIALS_DATA: TestimonialItem[] = [
-  // Enterprise Clients
-  {
-    id: 'ent-1',
-    category: 'enterprise',
-    name: 'Rajesh Subramanian',
-    role: 'Chief Technology Officer (CTO)',
-    organization: 'FinVentures Payments Pvt Ltd',
-    location: 'Chennai & Singapore',
-    avatarText: 'RS',
-    quote: 'Hackup Technology executed our annual VAPT and RBI compliance audits with surgical precision. Unlike other firms that just dump automated Nessus reports, their red team discovered a critical BOLA authorization flaw in our payment ledger within 48 hours and guided our developers with code-level fixes.',
-    verifiedBadge: 'RBI & SOC 2 Audit Client',
-    outcomeMetric: '100% Critical Vulnerabilities Remediated',
-    skillsOrServices: ['Full-Stack VAPT', 'API Security', 'RBI CS Framework'],
-    rating: 5
-  },
-  {
-    id: 'ent-2',
-    category: 'enterprise',
-    name: 'Anandhi Venkatesh',
-    role: 'VP of Infrastructure & Security',
-    organization: 'CloudScale SaaS Solutions',
-    location: 'Bengaluru / Coimbatore',
-    avatarText: 'AV',
-    quote: 'We engaged Hackup Technology for our Kubernetes & AWS CIS benchmark audit ahead of our SOC 2 Type II assessment. Their team hardened our EKS clusters, established automated CI/CD guardrails, and provided our CISO with an executive-ready attestation. They are true cybersecurity masters.',
-    verifiedBadge: 'SOC 2 Type II Certified',
-    outcomeMetric: '0 Unresolved Findings in External Audit',
-    skillsOrServices: ['Cloud Security', 'Kubernetes Hardening', 'DevSecOps'],
-    rating: 5
-  },
-  {
-    id: 'ent-3',
-    category: 'enterprise',
-    name: 'Karthik Narayanan',
-    role: 'Head of Information Security (CISO)',
-    organization: 'Apex HealthTech Hospital Networks',
-    location: 'Coimbatore & Madurai',
-    avatarText: 'KN',
-    quote: 'During an emergency ransomware attempt on a legacy subsidiary branch, Hackup’s DFIR hotline activated in under 90 minutes. They isolated the lateral spread, performed memory forensics, and ensured no patient PII was leaked. Outstanding technical capability right here in Tamil Nadu.',
-    verifiedBadge: '24/7 DFIR Emergency Client',
-    outcomeMetric: '90-Minute Incident Containment',
-    skillsOrServices: ['Emergency DFIR', 'Ransomware Containment', 'Forensics'],
-    rating: 5
-  },
-  // Academy Alumni
-  {
-    id: 'alm-1',
-    category: 'alumni',
-    name: 'Vigneshwaran K.',
-    role: 'Security Analyst - Threat Intelligence',
-    organization: 'Zoho Security Operations',
-    location: 'Placed via Hackup Academy (Coimbatore Batch)',
-    avatarText: 'VK',
-    quote: 'I joined Hackup Academy with zero offensive security background during my final year at PSG Tech. The CEH v13 training and the 100% practical Cyber Range labs in Ganapathy gave me the real-world skills to crack 4 rounds of technical interviews at Zoho. The instructors are active penetration testers, not just theory teachers.',
-    verifiedBadge: 'Placed at Zoho Security (₹8.5 LPA)',
-    outcomeMetric: 'CEH v13 Certified (Score: 94%)',
-    skillsOrServices: ['CEH v13', 'Network Pentesting', 'Wireshark'],
-    rating: 5
-  },
-  {
-    id: 'alm-2',
-    category: 'alumni',
-    name: 'Priyanka Sundar',
-    role: 'SOC Level 2 Analyst',
-    organization: 'Tata Consultancy Services (TCS Cyber)',
-    location: 'Placed via Hackup Academy',
-    avatarText: 'PS',
-    quote: 'The Practical SOC Analyst Bootcamp with Splunk and Wazuh simulation is unbeatable. We literally handled simulated ransomware and brute-force PCAP logs in class every single day. When TCS interviewed me, every single scenario they questioned had already been practiced on Hackup’s live Cyber Range.',
-    verifiedBadge: 'Placed at TCS Cyber Defense (₹7.2 LPA)',
-    outcomeMetric: 'SOC Analyst Bootcamp Certified',
-    skillsOrServices: ['Splunk SPL', 'Wazuh SIEM', 'MITRE ATT&CK'],
-    rating: 5
-  },
-  {
-    id: 'alm-3',
-    category: 'alumni',
-    name: 'Dinesh Kumar M.',
-    role: 'Associate Penetration Tester',
-    organization: 'Big 4 Cybersecurity Advisory',
-    location: 'Placed via Hackup 6-Month Internship',
-    avatarText: 'DM',
-    quote: 'The 6-month industrial internship at Hackup Technology was the turning point of my career. Being in Coimbatore and working directly alongside red team consultants on real client anonymized scopes gave me 2 years worth of practical experience before even graduating.',
-    verifiedBadge: 'Placed at Big 4 Consulting (₹9.0 LPA)',
-    outcomeMetric: 'Hackup 6-Month Industrial Intern',
-    skillsOrServices: ['Web App VAPT', 'API Security', 'Burp Suite Pro'],
-    rating: 5
-  }
-];
-
-export const COIMBATORE_INTERNSHIP_DETAILS = {
-  title: 'Cybersecurity Industrial Internship & Red Team Apprenticeship',
-  subtitle: 'Hands-on practical training designed specifically for engineering and MCA students in Coimbatore & Tamil Nadu.',
-  officeLocation: 'Hackup Technology Campus, No.4, First Street, Sri Venkatesapuram, Ganapathy, Coimbatore - 641006',
+// ----------------------------------------------------
+// INTERNSHIP DETAILS
+// ----------------------------------------------------
+export const INTERNSHIP_DETAILS = {
+  subtitle: '1/3/6-Month Practical Cyber Range Track in Coimbatore',
+  officeLocation: 'Hackup Cyber Lab, No.4, First Street, Sri Venkatesapuram, Ganapathy, Coimbatore - 641006',
   durations: [
-    { period: '1 Month Fast-Track', desc: 'Core Linux, Network Scanning & Web Vulnerability Assessment Fundamentals.', target: 'Pre-final Year Students' },
-    { period: '3 Months In-Depth', desc: 'Full OWASP Top 10, API Pentesting, SOC SIEM Triage, and EC-Council Exam Prep.', target: 'Final Year / Fresh Graduates' },
-    { period: '6 Months Full Apprenticeship', desc: 'Live Red Team shadow engagements, client report authoring, and direct placement track.', target: 'Career Changers & Dedicated Red Teamers' }
+    { period: '1 Month Fast-Track', desc: 'Intensive baseline in offensive Linux commands, web VAPT, and network scanning.', focus: 'Offensive Security Fundamentals', target: '2nd / 3rd Year B.Tech & B.Sc Students', badge: 'Foundation' },
+    { period: '3 Months Comprehensive', desc: 'Full-stack VAPT, OWASP Top 10 exploitation, and SOC SIEM log analysis.', focus: 'VAPT & Blue Team SIEM Triage', target: 'Final Year B.Tech & MCA Students', badge: 'Most Popular' },
+    { period: '6 Months Professional', desc: 'Deep dive into binary reverse engineering, red teaming, digital forensics, and placement assistance.', focus: 'Advanced Red Team & Career Placement', target: 'Job Seekers & Final Year Projects', badge: 'Career Launch' }
   ],
+  eligibility: 'Open to B.E./B.Tech (CSE, IT, AI, Cyber), B.Sc/M.Sc Computer Science, BCA/MCA, and tech enthusiasts.',
+  certifications: ['Official Hackup Industrial Training Certificate', 'TANCCAO Recognized Credential', 'Letter of Recommendation for top performers'],
   perks: [
     'Work from our high-tech Cyber Lab in Ganapathy, Coimbatore',
     'Personal access to dedicated Kali Linux virtual target subnets',
     'Guidance directly from active EC-Council Certified Instructors and Red Teamers',
     'Official Industrial Training Certificate, Project Viva Assistance & Letter of Recommendation',
-    'Direct interview referrals to 40+ cyber hiring partners across Tamil Nadu & Bengaluru'
+    'Direct interview referrals to 40+ corporate hiring partners across Tamil Nadu & Bengaluru'
   ]
 };
 
+// ----------------------------------------------------
+// FAQ DATA
+// ----------------------------------------------------
 export const FAQ_DATA = {
   enterprise: [
     {
       q: 'How does Hackup Technology ensure zero production downtime during VAPT?',
-      a: 'We conduct all penetration testing in accordance with strict Rules of Engagement (RoE). Our team uses throttled, production-safe exploit payloads, coordinates testing windows (including out-of-hours/maintenance windows), and performs non-destructive proofs-of-concept for denial-of-service vectors.'
+      a: 'We conduct all penetration testing in accordance with strict Rules of Engagement (RoE). Our team uses throttled, production-safe exploit payloads, coordinates testing windows (including out-of-hours/maintenance windows), and performs non-destructive proofs-of-concept.'
     },
     {
       q: 'Are your VAPT certificates accepted by regulatory bodies like RBI, SEBI, and ISO auditors?',
@@ -975,3 +1571,244 @@ export const FAQ_DATA = {
     }
   ]
 };
+
+// ----------------------------------------------------
+// SEO METADATA MAPPING (Title < 60 chars, Meta < 160 chars)
+// ----------------------------------------------------
+export const SEO_METADATA_MAP: Record<string, { title: string; description: string; canonical: string; primaryKeyword: string }> = {
+  '/': {
+    title: 'Cyber Security Company in Coimbatore | Hackup Technology',
+    description: 'Premier cyber security company in Coimbatore. Patented AI firewall, VAPT audits, 24/7 SOC, digital forensics & official EC-Council training center.',
+    canonical: 'https://hackuptechnology.com/',
+    primaryKeyword: 'cyber security company in Coimbatore'
+  },
+  '/services': {
+    title: 'Cybersecurity Services Coimbatore India | Hackup Tech',
+    description: 'Enterprise cybersecurity services Coimbatore India: VAPT, 24/7 SOC, ISO 27001 GRC consulting, Red Teaming, IoT security & AI defense solutions.',
+    canonical: 'https://hackuptechnology.com/services',
+    primaryKeyword: 'cybersecurity services Coimbatore India'
+  },
+  '/services/penetration-testing-vapt': {
+    title: 'VAPT Services India | Penetration Testing Coimbatore',
+    description: 'Top-tier VAPT services India. Zero-downtime penetration testing for web, mobile, APIs and networks with official Safe-to-Host certification.',
+    canonical: 'https://hackuptechnology.com/services/penetration-testing-vapt',
+    primaryKeyword: 'VAPT services India'
+  },
+  '/services/vulnerability-management-security-audit': {
+    title: 'Vulnerability Assessment & Security Audit | Hackup',
+    description: 'Continuous vulnerability assessment and enterprise security audit services. Asset discovery, CVE prioritization, and continuous posture management.',
+    canonical: 'https://hackuptechnology.com/services/vulnerability-management-security-audit',
+    primaryKeyword: 'vulnerability assessment'
+  },
+  '/services/soc-managed-security': {
+    title: 'Managed Security Services India | 24/7 SOC Operations',
+    description: '24/7 managed security services India. Turnkey Wazuh & Splunk SIEM deployment, real-time threat hunting, and rapid incident response triage.',
+    canonical: 'https://hackuptechnology.com/services/soc-managed-security',
+    primaryKeyword: 'managed security services India'
+  },
+  '/services/grc-compliance-consulting': {
+    title: 'ISO 27001 and GRC Consulting India | DPDP Act Audit',
+    description: 'ISO 27001 and GRC consulting India. Guaranteed audit readiness for SOC 2 Type II, Indian DPDP Act 2023, and RBI regulatory frameworks.',
+    canonical: 'https://hackuptechnology.com/services/grc-compliance-consulting',
+    primaryKeyword: 'ISO 27001 and GRC consulting India'
+  },
+  '/services/red-team-blue-team': {
+    title: 'Red Team Assessment & Adversary Simulation | Hackup',
+    description: 'Elite red team assessment and purple team operations in India. Realistic adversary simulation, EDR evasion, and defensive resilience training.',
+    canonical: 'https://hackuptechnology.com/services/red-team-blue-team',
+    primaryKeyword: 'red team assessment'
+  },
+  '/services/iot-ot-security': {
+    title: 'IoT Security Assessment & SCADA Testing | Hackup',
+    description: 'IoT security assessment, firmware reverse engineering, and industrial OT/SCADA penetration testing adhering to IEC 62443 standards.',
+    canonical: 'https://hackuptechnology.com/services/iot-ot-security',
+    primaryKeyword: 'IoT security assessment'
+  },
+  '/services/digital-forensics-cybercrime-investigation': {
+    title: 'Digital Forensics Coimbatore | Section 65B DFIR Triage',
+    description: 'Digital forensics Coimbatore. 24/7 emergency ransomware triage, memory analysis & Section 65B court evidence dossiers for cybercrime cells.',
+    canonical: 'https://hackuptechnology.com/services/digital-forensics-cybercrime-investigation',
+    primaryKeyword: 'digital forensics Coimbatore'
+  },
+  '/services/ai-security': {
+    title: 'AI Security Consulting India | Patented LLM Defense',
+    description: 'AI security consulting India. Patented AI firewall, LLM red teaming, prompt injection defense, and RAG vector database protection.',
+    canonical: 'https://hackuptechnology.com/services/ai-security',
+    primaryKeyword: 'AI security consulting India'
+  },
+  '/courses': {
+    title: 'Best Cyber Security Course in Coimbatore | Hackup',
+    description: 'Best cyber security course in Coimbatore. Official EC-Council Accredited Training Center for CEH v13, CCSE, ECDE, ECES & industrial internships.',
+    canonical: 'https://hackuptechnology.com/courses',
+    primaryKeyword: 'best cyber security course in Coimbatore'
+  },
+  '/courses/certified-ethical-hacker-ceh': {
+    title: 'CEH Training in Coimbatore | EC-Council CEH v13 ATC',
+    description: 'Official CEH training in Coimbatore at Hackup Technology. EC-Council accredited training partner, practical labs, Aspen access & exam vouchers.',
+    canonical: 'https://hackuptechnology.com/courses/certified-ethical-hacker-ceh',
+    primaryKeyword: 'CEH training in Coimbatore'
+  },
+  '/courses/cloud-security-engineer-ccse': {
+    title: 'Cloud Security Course Coimbatore | EC-Council CCSE',
+    description: 'EC-Council certified cloud security course (CCSE). Multi-cloud defense across AWS, Azure, GCP, container security, and Kubernetes hardening.',
+    canonical: 'https://hackuptechnology.com/courses/cloud-security-engineer-ccse',
+    primaryKeyword: 'cloud security course'
+  },
+  '/courses/devsecops-engineer-ecde': {
+    title: 'DevSecOps Training Coimbatore | EC-Council ECDE Labs',
+    description: 'Hands-on DevSecOps training with EC-Council ECDE curriculum. Shift security left with automated SAST, DAST, SCA in GitHub Actions & CI/CD.',
+    canonical: 'https://hackuptechnology.com/courses/devsecops-engineer-ecde',
+    primaryKeyword: 'DevSecOps training'
+  },
+  '/courses/encryption-specialist-eces': {
+    title: 'Encryption Specialist Course | EC-Council ECES Program',
+    description: 'Certified encryption specialist course (ECES). Master applied cryptography, PKI, digital signatures, and DPDP Act data protection standards.',
+    canonical: 'https://hackuptechnology.com/courses/encryption-specialist-eces',
+    primaryKeyword: 'encryption specialist course'
+  },
+  '/courses/cyber-security-internship': {
+    title: 'Cybersecurity Internship in Coimbatore | 1/3/6 Months',
+    description: 'Premier cybersecurity internship in Coimbatore. Hands-on practical cyber range labs, live VAPT projects, certificate & placement assistance.',
+    canonical: 'https://hackuptechnology.com/courses/cyber-security-internship',
+    primaryKeyword: 'cybersecurity internship in Coimbatore'
+  },
+  '/institutions-workshops': {
+    title: 'Ethical Hacking Workshop for Colleges | 54+ Partners',
+    description: 'Ethical hacking workshop for colleges across Tamil Nadu. Campus Cyber Range Center of Excellence (CoE), FDPs, and curriculum modernization.',
+    canonical: 'https://hackuptechnology.com/institutions-workshops',
+    primaryKeyword: 'ethical hacking workshop for colleges'
+  },
+  '/portfolio': {
+    title: 'Cybersecurity Case Studies & Portfolio | Hackup Tech',
+    description: 'Explore Hackup Technology’s proven cybersecurity portfolio: BFSI core audits, police cybercrime triage, and hospital zero-trust defense.',
+    canonical: 'https://hackuptechnology.com/portfolio',
+    primaryKeyword: 'cybersecurity company India'
+  },
+  '/about-us': {
+    title: 'About Us | Hackup Technology Coimbatore Leadership',
+    description: 'Learn about Hackup Technology: CEO Dinesh Paranthagan, 10 years experience, TANCCAO Sec. Gen., 2 patents, 54 colleges & 7 MNC partners.',
+    canonical: 'https://hackuptechnology.com/about-us',
+    primaryKeyword: 'cybersecurity company in Coimbatore'
+  },
+  '/gallery': {
+    title: 'Cyber Range & Event Gallery | Hackup Technology',
+    description: 'Visual gallery of Hackup Technology’s Coimbatore Cyber Range, DEFCON Coimbatore 2026 meetups, campus hackathons, and police workshops.',
+    canonical: 'https://hackuptechnology.com/gallery',
+    primaryKeyword: 'cybersecurity training institute in Tamil Nadu'
+  },
+  '/blog': {
+    title: 'Cybersecurity Insights & Threat Research | Hackup Blog',
+    description: 'Authoritative cybersecurity research from Hackup Technology: VAPT guides, DPDP Act compliance, AI firewalls, and red team strategies.',
+    canonical: 'https://hackuptechnology.com/blog',
+    primaryKeyword: 'cybersecurity company India'
+  },
+  '/contact': {
+    title: 'Contact Hackup Technology | Coimbatore HQ & Phone',
+    description: 'Contact Hackup Technology in Ganapathy, Coimbatore. Phone: +91 93620 12339 / +91 96262 15976. 24/7 cyber incident consultation.',
+    canonical: 'https://hackuptechnology.com/contact',
+    primaryKeyword: 'cyber security company in Coimbatore'
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | Hackup Technology Pvt Ltd',
+    description: 'Hackup Technology Privacy Policy. Learn how we safeguard your personal data in full compliance with the Indian DPDP Act 2023.',
+    canonical: 'https://hackuptechnology.com/privacy-policy',
+    primaryKeyword: 'DPDP Act compliance'
+  },
+  '/terms': {
+    title: 'Terms of Service | Hackup Technology Pvt Ltd',
+    description: 'Hackup Technology Terms of Service governing enterprise cybersecurity services, training programs, and NDA obligations.',
+    canonical: 'https://hackuptechnology.com/terms',
+    primaryKeyword: 'cybersecurity company India'
+  }
+};
+
+export const COIMBATORE_INTERNSHIP_DETAILS = INTERNSHIP_DETAILS;
+
+export const DEFCON_EVENTS: DefconEvent[] = [
+  {
+    id: 'defcon-cbe-2026-01',
+    title: 'Adversarial AI & LLM Red Teaming Workshop',
+    date: 'March 28, 2026',
+    time: '10:00 AM - 4:00 PM IST',
+    venue: 'Hackup Cyber Range Lab, Ganapathy, Coimbatore',
+    speaker: 'Dr. Dinesh Paranthagan & Red Team Taskforce',
+    speakerRole: 'Founder & CEO, Hackup Technology',
+    status: 'UPCOMING',
+    rsvpCount: 142,
+    ctfPool: '₹50,000 Cash Pool',
+    topics: ['Prompt Injections & Jailbreaks', 'RAG Vector Poisoning', 'Model Inversion Attacks', 'Hands-on CTF']
+  },
+  {
+    id: 'defcon-cbe-2025-12',
+    title: 'Active Directory Kerberos Warfare & EDR Evasion',
+    date: 'December 14, 2025',
+    time: '10:30 AM - 3:30 PM IST',
+    venue: 'Coimbatore Tech Innovation Hub',
+    speaker: 'S. Vignesh, OSCP',
+    speakerRole: 'Lead Offensive Security Engineer',
+    status: 'COMPLETED',
+    rsvpCount: 185,
+    ctfPool: '₹35,000 Cash Pool',
+    topics: ['Kerberoasting & AS-REP Roasting', 'BloodHound Forest Mapping', 'Unhooking NTDLL', 'Live Pivot Range']
+  }
+];
+
+export const TESTIMONIALS_DATA: TestimonialItem[] = [
+  {
+    id: 'test-1',
+    category: 'enterprise',
+    name: 'Karthik Subramanian',
+    role: 'Lead Security Architect',
+    organization: 'Fintech Payment Corridors',
+    location: 'Chennai / Coimbatore',
+    avatarText: 'KS',
+    quote: 'Hackup Technology conducted an exhaustive VAPT audit on our core payments API. Their team identified 3 critical authorization vulnerabilities that other commercial scanners completely missed. The Safe-to-Host report was accepted immediately by our banking partners.',
+    verifiedBadge: 'Verified Enterprise Client',
+    outcomeMetric: '100% RBI Compliance & 0 Downtime',
+    skillsOrServices: ['API Penetration Testing', 'RBI CS Framework', 'Safe-to-Host Cert'],
+    rating: 5
+  },
+  {
+    id: 'test-2',
+    category: 'enterprise',
+    name: 'Arun Kumar M.',
+    role: 'VP of Technology',
+    organization: 'Hospital Network & Healthcare IT',
+    location: 'Coimbatore',
+    avatarText: 'AK',
+    quote: 'We engaged Hackup for ISO 27001 and DPDP Act compliance. Their team guided us through every policy draft, technical control hardening, and mock audit. We passed our certification audit with zero non-conformities!',
+    verifiedBadge: 'Healthcare IT Leader',
+    outcomeMetric: 'ISO 27001:2022 Certified First Attempt',
+    skillsOrServices: ['ISO 27001 Consulting', 'DPDP Act Audit', 'Zero-Trust Cloud'],
+    rating: 5
+  },
+  {
+    id: 'test-3',
+    category: 'alumni',
+    name: 'Priyanka Venkatesh',
+    role: 'Cyber Security Analyst',
+    organization: 'Global Tech MNC (Bengaluru)',
+    location: 'Coimbatore / Bengaluru',
+    avatarText: 'PV',
+    quote: 'The EC-Council CEH v13 training with Dinesh Sir gave me 100% practical lab experience. I cleared my CEH exam on the first attempt and got placed with a top MNC in Bengaluru within 30 days.',
+    verifiedBadge: 'CEH v13 Alumna',
+    outcomeMetric: 'Placed at ₹9.5 LPA Cyber Role',
+    skillsOrServices: ['CEH v13', 'Penetration Testing', 'Burp Suite Pro'],
+    rating: 5
+  },
+  {
+    id: 'test-4',
+    category: 'alumni',
+    name: 'Vigneshwaran P.',
+    role: 'SOC Analyst L2',
+    organization: 'Defense Security Operations',
+    location: 'Coimbatore',
+    avatarText: 'VP',
+    quote: 'The 6-month industrial internship at Hackup’s Coimbatore cyber range was transformative. Working with live Wazuh SIEM rules, Wireshark packet captures, and memory forensics gave me practical confidence that no college textbook could match.',
+    verifiedBadge: 'Hackup Academy Intern',
+    outcomeMetric: 'SOC L2 Analyst Placement',
+    skillsOrServices: ['Wazuh SIEM', 'Threat Hunting', 'Incident Playbooks'],
+    rating: 5
+  }
+];
+

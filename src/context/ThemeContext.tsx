@@ -11,26 +11,22 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    const saved = localStorage.getItem('hackup-theme');
-    if (saved === 'dark' || saved === 'light') return saved;
-    return 'dark'; // Default luxury dark mode
-  });
+  const theme: Theme = 'light';
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove('dark', 'light');
-    root.classList.add(theme);
-    root.setAttribute('data-theme', theme);
-    localStorage.setItem('hackup-theme', theme);
-  }, [theme]);
+    root.classList.remove('dark');
+    root.classList.add('light');
+    root.setAttribute('data-theme', 'light');
+    localStorage.setItem('hackup-theme', 'light');
+  }, []);
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    // Theme locked to light mode per specification
   };
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
+  const setTheme = (_newTheme: Theme) => {
+    // Theme locked to light mode per specification
   };
 
   return (

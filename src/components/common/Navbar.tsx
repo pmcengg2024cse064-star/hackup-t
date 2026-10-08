@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, 
   X, 
-  ArrowUpRight,
-  Building2,
+  ShieldCheck, 
+  Sparkles, 
+  Phone, 
+  Mail, 
+  MapPin, 
+  ChevronDown, 
+  ArrowRight,
+  ShieldAlert,
+  Search,
+  Server,
+  FileCheck2,
+  Flame,
+  Cpu,
+  FileSearch,
   GraduationCap,
-  Terminal,
-  Users,
-  Compass,
-  Building,
+  Briefcase,
+  BookOpen,
   Award,
-  Sun,
-  Moon,
-  ShieldCheck,
-  Phone,
-  Mail,
-  MapPin,
-  Sparkles,
-  Download,
-  FileText
+  Layers,
+  Lock
 } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
+import { ENTERPRISE_SERVICES, ACADEMY_COURSES, COMPANY_FACTS } from '../../data/cyberData';
 
 export type TabType = 'overview' | 'enterprise' | 'academy' | 'cyber-range' | 'internship' | 'community' | 'about';
 
@@ -34,13 +37,12 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({
   onRequestConsultation,
-  onRequestAudit,
-  onBookDemo
 }) => {
-  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<'services' | 'courses' | null>(null);
   const location = useLocation();
+  const megaMenuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,100 +52,112 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isEnterprise = location.pathname.startsWith('/enterprise');
-  const isAcademy = location.pathname.startsWith('/academy') || location.pathname.startsWith('/cyber-range') || location.pathname.startsWith('/internship');
+  // Close menus on route change
+  useEffect(() => {
+    setActiveMegaMenu(null);
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
-  const sharedLinks = [
-    { path: '/about', label: 'About & Leadership', icon: Building },
-    { path: '/founder-patents', label: 'Patents & R&D', icon: Award, badge: 'IP' },
-    { path: '/institutional-reach', label: 'Institutional Reach', icon: Building2, badge: '54+' },
-    { path: '/community', label: 'DEFCON Chapter', icon: Users },
-  ];
+  const handleMouseEnter = (menu: 'services' | 'courses') => {
+    if (megaMenuTimeoutRef.current) clearTimeout(megaMenuTimeoutRef.current);
+    setActiveMegaMenu(menu);
+  };
+
+  const handleMouseLeave = () => {
+    megaMenuTimeoutRef.current = setTimeout(() => {
+      setActiveMegaMenu(null);
+    }, 200);
+  };
+
+  const serviceIcons: Record<string, any> = {
+    'penetration-testing-vapt': ShieldAlert,
+    'vulnerability-management-security-audit': Search,
+    'soc-managed-security': Server,
+    'grc-compliance-consulting': FileCheck2,
+    'red-team-blue-team': Flame,
+    'iot-ot-security': Cpu,
+    'digital-forensics-cybercrime-investigation': FileSearch,
+    'ai-security': Sparkles
+  };
 
   return (
     <>
-      {/* 1. TOP UNPINNED TRUST BAR (Scrolls away naturally; NOT fixed on scroll) */}
-      <div className="w-full bg-[#050408] dark:bg-[#050408] bg-slate-900 border-b border-white/10 py-1.5 px-4 sm:px-6 lg:px-8 text-[10px] sm:text-[11px] font-mono text-slate-300">
+      {/* 1. TOP UNPINNED TRUST BAR */}
+      <div className="w-full bg-slate-100/95 border-b border-slate-200 py-1.5 px-4 sm:px-6 lg:px-8 text-[10px] sm:text-[11px] font-mono text-slate-700 shadow-2xs">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           
           <div className="flex items-center space-x-2 sm:space-x-3 overflow-x-auto scrollbar-none py-0.5">
-            <span className="inline-flex items-center space-x-1.5 text-[#B38728] dark:text-[#D4AF37] font-bold shrink-0">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>EC-Council Accredited Training Partner</span>
+            <span className="inline-flex items-center space-x-1.5 text-amber-800 font-bold shrink-0">
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
+              <span>EC-Council Accredited Training Center</span>
             </span>
-            <span className="text-slate-600 hidden sm:inline">|</span>
-            <span className="text-slate-200 font-semibold shrink-0">
-              TANCCAO Affiliated
+            <span className="text-slate-300 hidden sm:inline">|</span>
+            <span className="text-slate-900 font-bold shrink-0">
+              TANCCAO Secretariat
             </span>
-            <span className="text-slate-600 hidden md:inline">|</span>
-            <span className="text-slate-400 hidden md:inline shrink-0">
-              ISO 9001:2015 Center • TN Cyber Cell Advisor
+            <span className="text-slate-300 hidden md:inline">|</span>
+            <span className="text-slate-600 hidden md:inline shrink-0 font-medium">
+              2 Cyber Patents &bull; 3,398 Google Reviews (4.9★) &bull; TN Cyber Cell Advisor
             </span>
           </div>
 
-          <div className="hidden sm:flex items-center space-x-2 text-[10px] text-amber-400">
-            <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+          <div className="hidden sm:flex items-center space-x-2 text-[10px] text-amber-800 font-semibold">
+            <Sparkles className="w-3 h-3 text-amber-700" />
             <span>HQ &amp; Cyber Range: Ganapathy, Coimbatore</span>
           </div>
 
         </div>
       </div>
 
-      {/* 2. STICKY HEADER: Keeps Contact Bar & Main Navigation Bar Pinned When Scrolling */}
-      <header className="sticky top-0 z-50 w-full font-sans shadow-xl">
+      {/* 2. STICKY HEADER */}
+      <header className="sticky top-0 z-50 w-full font-sans shadow-md">
         
         {/* FIXED CONTACT BAR ON SCROLL & AT TOP */}
-        <div className={`w-full transition-all duration-300 ${
-          isEnterprise
-            ? 'bg-[#0E0C06]/98 dark:bg-[#0A0802]/98 border-b border-amber-500/20 text-amber-200'
-            : isAcademy
-            ? 'bg-[#180407]/98 dark:bg-[#120204]/98 border-b border-rose-500/20 text-rose-200'
-            : 'bg-[#070A0F]/98 dark:bg-[#070A0F]/98 border-b border-white/10 text-slate-300'
-        } py-1.5 px-4 sm:px-6 lg:px-8 text-[11px] font-mono backdrop-blur-md`}>
+        <div className="w-full bg-white/95 border-b border-slate-200 py-1.5 px-4 sm:px-6 lg:px-8 text-[11px] font-mono text-slate-700 shadow-xs backdrop-blur-md">
           <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-4">
             
-            <div className="flex items-center space-x-3 text-slate-300">
+            <div className="flex items-center space-x-3 text-slate-700">
               <span className="hidden sm:inline-flex items-center space-x-1">
-                <MapPin className="w-3 h-3 text-[#D4AF37]" />
-                <span className="font-sans font-medium text-slate-200">Ganapathy, Coimbatore</span>
+                <MapPin className="w-3 h-3 text-amber-700" />
+                <span className="font-sans font-semibold text-slate-800">Ganapathy, Coimbatore</span>
               </span>
-              <span className="text-slate-700 hidden sm:inline">|</span>
-              <span className="inline-flex items-center space-x-1.5 text-red-400 font-semibold text-[10px] uppercase tracking-wider">
+              <span className="text-slate-300 hidden sm:inline">|</span>
+              <span className="inline-flex items-center space-x-1.5 text-red-700 font-bold text-[10px] uppercase tracking-wider">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
                 </span>
                 <span>Active 24/7 Incident Hotline</span>
               </span>
             </div>
 
-            <div className="flex items-center space-x-3 sm:space-x-4 shrink-0">
+            <div className="flex items-center space-x-3 sm:space-x-4 shrink-0 font-semibold">
               <a 
-                href="tel:+919362012339" 
-                className="hover:text-white transition-colors flex items-center space-x-1 text-slate-200 hover:text-[#D4AF37] font-semibold"
+                href={`tel:${COMPANY_FACTS.phones[0].replace(/\s+/g, '')}`} 
+                className="transition-colors flex items-center space-x-1 text-amber-800 hover:text-amber-950 font-bold"
               >
-                <Phone className="w-3 h-3 text-[#D4AF37]" />
-                <span>+91 93620 12339</span>
+                <Phone className="w-3 h-3 text-amber-700" />
+                <span>{COMPANY_FACTS.phones[0]}</span>
               </a>
 
-              <span className="text-slate-700 hidden md:inline">|</span>
+              <span className="text-slate-300 hidden md:inline">|</span>
 
               <a 
-                href="tel:+919626215976" 
-                className="hover:text-white transition-colors hidden md:flex items-center space-x-1 text-slate-300 hover:text-[#D4AF37]"
+                href={`tel:${COMPANY_FACTS.phones[1].replace(/\s+/g, '')}`} 
+                className="transition-colors hidden md:flex items-center space-x-1 text-amber-800 hover:text-amber-950 font-semibold"
               >
-                <Phone className="w-3 h-3 text-[#D4AF37]" />
-                <span>+91 96262 15976</span>
+                <Phone className="w-3 h-3 text-amber-700" />
+                <span>{COMPANY_FACTS.phones[1]}</span>
               </a>
 
-              <span className="text-slate-700 hidden lg:inline">|</span>
+              <span className="text-slate-300 hidden lg:inline">|</span>
 
               <a 
-                href="mailto:info@hackuptechnology.com" 
-                className="hover:text-white transition-colors hidden lg:flex items-center space-x-1 text-slate-300 hover:text-[#D4AF37]"
+                href={`mailto:${COMPANY_FACTS.emails[0]}`} 
+                className="transition-colors hidden lg:flex items-center space-x-1 text-slate-700 hover:text-amber-800 font-medium"
               >
-                <Mail className="w-3 h-3 text-[#D4AF37]" />
-                <span>info@hackuptechnology.com</span>
+                <Mail className="w-3 h-3 text-amber-700" />
+                <span>{COMPANY_FACTS.emails[0]}</span>
               </a>
             </div>
 
@@ -153,286 +167,403 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* MAIN NAVIGATION BAR */}
         <div
           className={`w-full transition-all duration-300 ${
-            isEnterprise
-              ? 'bg-white/95 dark:bg-[#141414]/95 border-b border-amber-300 dark:border-amber-500/25 backdrop-blur-xl shadow-xl'
-              : isAcademy
-              ? 'bg-white/95 dark:bg-[#2A060C]/95 border-b border-rose-300 dark:border-rose-900/50 backdrop-blur-xl shadow-xl'
-              : isScrolled
-              ? 'bg-white/95 dark:bg-[#080711]/95 border-b border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-xl'
-              : 'bg-white/90 dark:bg-[#0A0E17]/90 border-b border-slate-200 dark:border-white/5 backdrop-blur-lg'
+            isScrolled
+              ? 'bg-white/95 border-b border-slate-200 backdrop-blur-xl shadow-lg'
+              : 'bg-white/90 border-b border-slate-200 backdrop-blur-lg'
           }`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-20">
               
-              {/* Brand Logo Emblem */}
+              {/* Brand Logo */}
               <div className="flex items-center space-x-3 shrink-0">
                 <Link
                   to="/"
                   className="flex items-center space-x-3 group text-left cursor-pointer"
                 >
-                  <div className="relative flex items-center justify-center w-11 h-11 rounded-2xl overflow-hidden shadow-xl shadow-black/50 border border-white/20 group-hover:border-[#D4AF37] transition-all bg-[#080711]">
+                  <div className="relative flex items-center justify-center w-11 h-11 rounded-xl overflow-hidden shadow-md border border-slate-200 group-hover:border-[#9E721D] transition-all bg-white p-1">
                     <img
                       src="/images/hackup_logo.png"
-                      alt="Hackup Technology Official Shield"
-                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-300"
+                      alt="Hackup Technology Official Logo"
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
 
                   <div>
                     <div className="flex items-center space-x-1.5">
-                      <span className="font-serif-header font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 dark:text-white group-hover:text-[#9E721D] dark:group-hover:text-[#D4AF37] transition-colors">
+                      <span className="font-serif-header font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 group-hover:text-[#9E721D] transition-colors">
                         HACKUP
                       </span>
-                      <span className="font-serif-header font-bold text-sm sm:text-base tracking-widest text-[#9E721D] dark:text-[#D4AF37]">
+                      <span className="font-serif-header font-bold text-sm sm:text-base tracking-widest text-[#9E721D]">
                         TECHNOLOGY
                       </span>
                     </div>
-                    <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500 dark:text-slate-400 -mt-0.5 font-bold">
-                      CORPORATE CYBER DEFENSE &amp; ACADEMY
+                    <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500 -mt-0.5 font-bold">
+                      CYBER DEFENSE &bull; ACADEMY &bull; R&amp;D
                     </div>
                   </div>
                 </Link>
               </div>
 
-              {/* PRIMARY AUDIENCE SWITCHER SEGMENTED CONTROL PILL WITH SMOOTH SLIDING TRANSITION */}
-              <div className="hidden md:flex relative items-center p-1 rounded-full bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-white/10 shadow-inner">
+              {/* TARGET DESKTOP NAVIGATION ITEMS */}
+              <nav className="hidden lg:flex items-center space-x-1 font-mono text-xs font-semibold text-slate-700">
+                
+                {/* 1. Home */}
                 <NavLink
-                  to="/enterprise"
+                  to="/"
+                  end
                   className={({ isActive }) =>
-                    `relative z-10 flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-colors duration-300 cursor-pointer ${
-                      isActive || isEnterprise
-                        ? 'text-slate-950 font-extrabold'
-                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    `px-3 py-2 rounded-lg transition-colors ${
+                      isActive ? 'text-[#9E721D] font-bold bg-amber-50' : 'hover:text-slate-950 hover:bg-slate-100'
                     }`
                   }
                 >
-                  <Building2 className="w-3.5 h-3.5 relative z-10" />
-                  <span className="relative z-10">Enterprise Solutions</span>
-                  {(isEnterprise || (!isEnterprise && !isAcademy && location.pathname === '/enterprise')) && (
-                    <motion.div
-                      layoutId="active-audience-pill"
-                      className="absolute inset-0 rounded-full btn-gold-filled shadow-lg shadow-[#D4AF37]/35 -z-10"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
+                  Home
                 </NavLink>
 
+                {/* 2. Services Mega Menu */}
+                <div 
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnter('services')}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <NavLink
+                    to="/services"
+                    className={({ isActive }) =>
+                      `px-3 py-2 rounded-lg transition-colors inline-flex items-center space-x-1 ${
+                        isActive || location.pathname.startsWith('/services')
+                          ? 'text-[#9E721D] font-bold bg-amber-50'
+                          : 'hover:text-slate-950 hover:bg-slate-100'
+                      }`
+                    }
+                  >
+                    <span>Services</span>
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeMegaMenu === 'services' ? 'rotate-180 text-[#9E721D]' : ''}`} />
+                  </NavLink>
+
+                  {/* Mega Menu Dropdown for Services (White & Gold styling preserved) */}
+                  <AnimatePresence>
+                    {activeMegaMenu === 'services' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[720px] rounded-2xl bg-white border-2 border-amber-300 shadow-2xl p-6 z-50"
+                      >
+                        <div className="flex items-center justify-between border-b border-amber-100 pb-3 mb-4">
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+                            <span className="font-serif-header font-bold text-slate-900 text-sm">
+                              Enterprise Cybersecurity Services
+                            </span>
+                          </div>
+                          <Link
+                            to="/services"
+                            className="text-xs font-mono font-bold text-[#9E721D] hover:underline flex items-center space-x-1"
+                          >
+                            <span>Explore All Services</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+
+                        {/* 8 Services Grid */}
+                        <div className="grid grid-cols-2 gap-3">
+                          {ENTERPRISE_SERVICES.map((srv) => {
+                            const IconComponent = serviceIcons[srv.id] || ShieldAlert;
+                            return (
+                              <Link
+                                key={srv.id}
+                                to={`/services/${srv.id}`}
+                                className="p-3 rounded-xl hover:bg-amber-50/70 border border-transparent hover:border-amber-200 transition-all flex items-start space-x-3 group"
+                              >
+                                <div className="w-8 h-8 rounded-lg bg-amber-100 border border-amber-300 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
+                                  <IconComponent className="w-4 h-4 text-amber-800" />
+                                </div>
+                                <div className="space-y-0.5">
+                                  <div className="font-semibold text-xs text-slate-900 group-hover:text-[#9E721D] transition-colors leading-snug">
+                                    {srv.shortTitle}
+                                  </div>
+                                  <div className="font-sans text-[11px] text-slate-500 line-clamp-1">
+                                    {srv.tagline}
+                                  </div>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* 3. Courses Mega Menu */}
+                <div 
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnter('courses')}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <NavLink
+                    to="/courses"
+                    className={({ isActive }) =>
+                      `px-3 py-2 rounded-lg transition-colors inline-flex items-center space-x-1 ${
+                        isActive || location.pathname.startsWith('/courses')
+                          ? 'text-[#881337] font-bold bg-rose-50'
+                          : 'hover:text-slate-950 hover:bg-slate-100'
+                      }`
+                    }
+                  >
+                    <span>Courses</span>
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeMegaMenu === 'courses' ? 'rotate-180 text-[#881337]' : ''}`} />
+                  </NavLink>
+
+                  {/* Mega Menu Dropdown for Courses (Burgundy styling preserved) */}
+                  <AnimatePresence>
+                    {activeMegaMenu === 'courses' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[680px] rounded-2xl bg-white border-2 border-rose-300 shadow-2xl p-6 z-50"
+                      >
+                        <div className="flex items-center justify-between border-b border-rose-100 pb-3 mb-4">
+                          <div className="flex items-center space-x-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-pulse" />
+                            <span className="font-serif-header font-bold text-slate-900 text-sm">
+                              EC-Council Accredited Training &amp; Internships
+                            </span>
+                          </div>
+                          <Link
+                            to="/courses"
+                            className="text-xs font-mono font-bold text-rose-800 hover:underline flex items-center space-x-1"
+                          >
+                            <span>View All Courses</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+
+                        {/* 5 Courses List */}
+                        <div className="grid grid-cols-1 gap-2.5">
+                          {ACADEMY_COURSES.map((course) => (
+                            <Link
+                              key={course.id}
+                              to={`/courses/${course.id}`}
+                              className="p-3 rounded-xl hover:bg-rose-50/70 border border-transparent hover:border-rose-200 transition-all flex items-center justify-between group"
+                            >
+                              <div className="flex items-center space-x-3">
+                                <div className="w-8 h-8 rounded-lg bg-rose-100 border border-rose-300 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                  <GraduationCap className="w-4 h-4 text-rose-800" />
+                                </div>
+                                <div>
+                                  <div className="font-semibold text-xs text-slate-900 group-hover:text-rose-900 transition-colors">
+                                    {course.title}
+                                  </div>
+                                  <div className="font-sans text-[11px] text-slate-500">
+                                    {course.duration} &bull; {course.mode}
+                                  </div>
+                                </div>
+                              </div>
+                              <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-200">
+                                {course.badge}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* 4. Portfolio */}
                 <NavLink
-                  to="/academy"
+                  to="/portfolio"
                   className={({ isActive }) =>
-                    `relative z-10 flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-colors duration-300 cursor-pointer ${
-                      (isActive || isAcademy) && !isEnterprise
-                        ? 'text-white font-extrabold'
-                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    `px-3 py-2 rounded-lg transition-colors ${
+                      isActive ? 'text-[#9E721D] font-bold bg-amber-50' : 'hover:text-slate-950 hover:bg-slate-100'
                     }`
                   }
                 >
-                  <GraduationCap className="w-3.5 h-3.5 relative z-10" />
-                  <span className="relative z-10">Hackup Academy</span>
-                  {((isAcademy || location.pathname === '/academy') && !isEnterprise) && (
-                    <motion.div
-                      layoutId="active-audience-pill"
-                      className="absolute inset-0 rounded-full btn-burgundy-filled border border-rose-400/40 shadow-lg shadow-[#881337]/50 -z-10"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
+                  Portfolio
                 </NavLink>
-              </div>
 
-            {/* SHARED MENU (DESKTOP) */}
-            <nav className="hidden xl:flex items-center space-x-1 text-xs font-mono">
-              {sharedLinks.map((item) => (
+                {/* 5. About Us */}
                 <NavLink
-                  key={item.path}
-                  to={item.path}
+                  to="/about-us"
                   className={({ isActive }) =>
-                    `px-3 py-1.5 rounded-lg transition-colors flex items-center space-x-1.5 ${
-                      isActive
-                        ? 'text-[#9E721D] dark:text-[#D4AF37] font-bold bg-amber-50 dark:bg-white/5'
-                        : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 font-semibold'
+                    `px-3 py-2 rounded-lg transition-colors ${
+                      isActive ? 'text-[#9E721D] font-bold bg-amber-50' : 'hover:text-slate-950 hover:bg-slate-100'
                     }`
                   }
                 >
-                  <span>{item.label}</span>
-                  {item.badge && (
-                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-500/20 text-[#9E721D] dark:text-[#D4AF37] font-bold border border-amber-300 dark:border-amber-500/30">
-                      {item.badge}
-                    </span>
-                  )}
+                  About Us
                 </NavLink>
-              ))}
-            </nav>
 
-            {/* DYNAMIC AUDIENCE-AWARE CTA BUTTON */}
-            <div className="hidden lg:flex items-center space-x-3">
-              
-              {/* Theme Switcher */}
-              <button
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:scale-105 transition-all cursor-pointer shadow-sm"
-              >
-                {theme === 'dark' ? <Sun className="w-4 h-4 text-[#D4AF37]" /> : <Moon className="w-4 h-4 text-amber-600" />}
-              </button>
+                {/* 6. Blog */}
+                <NavLink
+                  to="/blog"
+                  className={({ isActive }) =>
+                    `px-3 py-2 rounded-lg transition-colors ${
+                      isActive ? 'text-[#9E721D] font-bold bg-amber-50' : 'hover:text-slate-950 hover:bg-slate-100'
+                    }`
+                  }
+                >
+                  Blog
+                </NavLink>
 
-              {/* Dynamic Button depending on current route */}
-              {isEnterprise ? (
+                {/* 7. Contact */}
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `px-3 py-2 rounded-lg transition-colors ${
+                      isActive ? 'text-[#9E721D] font-bold bg-amber-50' : 'hover:text-slate-950 hover:bg-slate-100'
+                    }`
+                  }
+                >
+                  Contact
+                </NavLink>
+
+              </nav>
+
+              {/* TARGET CTA BUTTON: "Book Your Cyber Consultation" */}
+              <div className="hidden lg:flex items-center space-x-3">
                 <button
-                  onClick={() => {
-                    if (onRequestAudit) onRequestAudit('Full-Stack VAPT & Cloud Audit');
-                    else onRequestConsultation();
-                  }}
+                  onClick={() => onRequestConsultation('Executive Cyber Consultation')}
                   className="btn-gold-filled px-5 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-xl cursor-pointer hover:scale-102"
                 >
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>Request VAPT Audit</span>
+                  <ShieldCheck className="w-4 h-4 text-slate-950" />
+                  <span>Book Your Cyber Consultation</span>
                 </button>
-              ) : isAcademy ? (
+              </div>
+
+              {/* Mobile Hamburger Menu Toggle */}
+              <div className="flex lg:hidden items-center space-x-2">
                 <button
-                  onClick={() => {
-                    if (onBookDemo) onBookDemo('Certified Ethical Hacker (CEH v13)');
-                    else onRequestConsultation();
-                  }}
-                  className="btn-burgundy-filled px-5 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-xl cursor-pointer hover:scale-102 text-white"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-950 cursor-pointer shadow-sm"
+                  aria-label="Toggle navigation menu"
                 >
-                  <Download className="w-4 h-4 text-white" />
-                  <span>Download Syllabus</span>
+                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                 </button>
-              ) : (
-                <div className="flex items-center space-x-2">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        {/* MOBILE DRAWER */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden w-full bg-white border-b border-slate-200 shadow-xl overflow-hidden font-mono text-xs"
+            >
+              <div className="px-5 py-4 space-y-3 max-h-[80vh] overflow-y-auto">
+                <Link
+                  to="/"
+                  className="block py-2 font-bold text-slate-900 border-b border-slate-100"
+                >
+                  Home
+                </Link>
+
+                {/* Services Section in Mobile */}
+                <div className="space-y-1 py-1 border-b border-slate-100">
+                  <div className="font-bold text-[#9E721D] uppercase text-[11px] flex items-center justify-between">
+                    <span>Services</span>
+                    <Link to="/services" className="text-[10px] underline font-normal text-slate-500">View All</Link>
+                  </div>
+                  <div className="grid grid-cols-1 gap-1 pl-2 pt-1 font-sans text-xs">
+                    {ENTERPRISE_SERVICES.map((s) => (
+                      <Link
+                        key={s.id}
+                        to={`/services/${s.id}`}
+                        className="py-1 text-slate-700 hover:text-amber-800"
+                      >
+                        &bull; {s.shortTitle}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Courses Section in Mobile */}
+                <div className="space-y-1 py-1 border-b border-slate-100">
+                  <div className="font-bold text-[#881337] uppercase text-[11px] flex items-center justify-between">
+                    <span>Courses &amp; Training</span>
+                    <Link to="/courses" className="text-[10px] underline font-normal text-slate-500">View All</Link>
+                  </div>
+                  <div className="grid grid-cols-1 gap-1 pl-2 pt-1 font-sans text-xs">
+                    {ACADEMY_COURSES.map((c) => (
+                      <Link
+                        key={c.id}
+                        to={`/courses/${c.id}`}
+                        className="py-1 text-slate-700 hover:text-rose-800"
+                      >
+                        &bull; {c.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                <Link
+                  to="/institutions-workshops"
+                  className="block py-2 font-semibold text-slate-700 border-b border-slate-100"
+                >
+                  Institutions &amp; Workshops (54+ Colleges)
+                </Link>
+
+                <Link
+                  to="/portfolio"
+                  className="block py-2 font-semibold text-slate-700 border-b border-slate-100"
+                >
+                  Portfolio &amp; Case Studies
+                </Link>
+
+                <Link
+                  to="/about-us"
+                  className="block py-2 font-semibold text-slate-700 border-b border-slate-100"
+                >
+                  About Us &amp; Leadership
+                </Link>
+
+                <Link
+                  to="/gallery"
+                  className="block py-2 font-semibold text-slate-700 border-b border-slate-100"
+                >
+                  Cyber Range Gallery
+                </Link>
+
+                <Link
+                  to="/blog"
+                  className="block py-2 font-semibold text-slate-700 border-b border-slate-100"
+                >
+                  Blog &amp; Cyber Research
+                </Link>
+
+                <Link
+                  to="/contact"
+                  className="block py-2 font-semibold text-slate-700 border-b border-slate-100"
+                >
+                  Contact Coimbatore HQ
+                </Link>
+
+                <div className="pt-2">
                   <button
                     onClick={() => {
-                      if (onRequestAudit) onRequestAudit('Enterprise VAPT');
-                      else onRequestConsultation();
+                      setMobileMenuOpen(false);
+                      onRequestConsultation();
                     }}
-                    className="btn-gold-filled px-3.5 py-2 rounded-xl text-xs font-mono font-bold cursor-pointer"
+                    className="w-full btn-gold-filled py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider text-center"
                   >
-                    Enterprise VAPT
-                  </button>
-                  <button
-                    onClick={() => {
-                      if (onBookDemo) onBookDemo('EC-Council Training');
-                      else onRequestConsultation();
-                    }}
-                    className="btn-burgundy-filled px-3.5 py-2 rounded-xl text-xs font-mono font-bold cursor-pointer text-white"
-                  >
-                    Academy
+                    Book Your Cyber Consultation
                   </button>
                 </div>
-              )}
-
-            </div>
-
-            {/* Mobile Hamburger Menu Toggle */}
-            <div className="flex lg:hidden items-center space-x-2">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300"
-              >
-                {theme === 'dark' ? <Sun className="w-4 h-4 text-[#D4AF37]" /> : <Moon className="w-4 h-4 text-amber-600" />}
-              </button>
-              
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white cursor-pointer"
-                aria-label="Toggle navigation menu"
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      {/* MOBILE DRAWER */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0A0E17]/98 backdrop-blur-2xl border-b border-white/10 px-4 pt-4 pb-6 space-y-4 shadow-2xl animate-fadeIn">
-          
-          <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest px-1 font-bold">
-            Select Audience Hub:
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <NavLink
-              to="/enterprise"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-3 rounded-xl text-xs font-mono font-bold flex items-center space-x-2 border transition-all ${
-                  isActive
-                    ? 'bg-[#D4AF37] text-slate-950 border-amber-300 shadow-md'
-                    : 'bg-[#141414] text-amber-200 border-amber-500/30'
-                }`
-              }
-            >
-              <Building2 className="w-4 h-4 text-[#D4AF37]" />
-              <span>Enterprise B2B</span>
-            </NavLink>
-
-            <NavLink
-              to="/academy"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-3 rounded-xl text-xs font-mono font-bold flex items-center space-x-2 border transition-all ${
-                  isActive
-                    ? 'bg-[#881337] text-white border-rose-400 shadow-md'
-                    : 'bg-[#180508] text-rose-200 border-rose-900/40'
-                }`
-              }
-            >
-              <GraduationCap className="w-4 h-4 text-rose-400" />
-              <span>Academy B2C</span>
-            </NavLink>
-          </div>
-
-          <div className="pt-2 border-t border-white/10 space-y-1">
-            <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest px-1 font-bold">
-              General Navigation:
-            </div>
-            {sharedLinks.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-lg text-xs font-mono text-slate-300 hover:text-white hover:bg-white/5 flex items-center justify-between"
-              >
-                <span>{item.label}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-slate-500" />
-              </NavLink>
-            ))}
-          </div>
-
-          <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                if (onRequestAudit) onRequestAudit('Enterprise VAPT Audit');
-                else onRequestConsultation();
-              }}
-              className="btn-gold-filled w-full py-3 rounded-xl font-mono text-xs font-bold uppercase flex items-center justify-center space-x-2"
-            >
-              <ShieldCheck className="w-4 h-4" />
-              <span>Request VAPT Audit</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                if (onBookDemo) onBookDemo('EC-Council Training');
-                else onRequestConsultation();
-              }}
-              className="btn-burgundy-filled w-full py-3 rounded-xl font-mono text-xs font-bold uppercase flex items-center justify-center space-x-2 shadow-lg"
-            >
-              <Download className="w-4 h-4 text-white" />
-              <span>Download Syllabus / Enroll</span>
-            </button>
-          </div>
-
-        </div>
-      )}
-
-    </header>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
     </>
   );
 };

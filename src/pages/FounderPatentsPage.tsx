@@ -32,18 +32,18 @@ export const FounderPatentsPage: React.FC<FounderPatentsPageProps> = ({
       
       {/* Hero Header */}
       <section className="relative pt-12 pb-8 overflow-hidden text-center space-y-4 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#111C30] border border-amber-500/40 shadow-xl backdrop-blur-xl">
-          <Award className="w-4 h-4 text-[#D4AF37]" />
-          <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37]">
+        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-300 shadow-sm">
+          <Award className="w-4 h-4 text-amber-700" />
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-900 font-bold">
             EXECUTIVE LEADERSHIP &amp; PROPRIETARY IP
           </span>
         </div>
 
-        <h1 className="font-serif-header font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#F8FAFC] tracking-tight leading-[1.15]">
-          Pioneering National Cyber Defense &amp; <span className="text-gold-pure">Patented Innovation</span>
+        <h1 className="font-serif-header font-extrabold text-3xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-[1.15]">
+          Pioneering National Cyber Defense &amp; <span className="text-amber-800">Patented Innovation</span>
         </h1>
 
-        <p className="font-sans text-sm sm:text-base text-slate-300 max-w-3xl mx-auto leading-relaxed">
+        <p className="font-sans text-sm sm:text-base text-slate-600 max-w-3xl mx-auto leading-relaxed">
           Led by Founder &amp; CEO Dr. Dinesh Paranthagan (M.C.A., Ph.D.), Hackup Technology bridges real-world offensive penetration testing, state police cybercrime consulting, and proprietary patented cybersecurity architectures.
         </p>
 
@@ -61,10 +61,10 @@ export const FounderPatentsPage: React.FC<FounderPatentsPageProps> = ({
             href="https://linkedin.com/in/dinesh-paranthagan"
             target="_blank"
             rel="noreferrer"
-            className="px-7 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#111C30] text-[#D4AF37] border border-amber-500/40 hover:bg-[#1A2844] transition-all flex items-center space-x-2"
+            className="px-7 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider bg-white text-slate-800 border border-slate-300 hover:bg-slate-50 transition-all flex items-center space-x-2 shadow-sm"
           >
             <span>LinkedIn Profile</span>
-            <ExternalLink className="w-4 h-4" />
+            <ExternalLink className="w-4 h-4 text-slate-600" />
           </a>
         </div>
       </section>
@@ -77,53 +77,53 @@ export const FounderPatentsPage: React.FC<FounderPatentsPageProps> = ({
 
       {/* Law Enforcement & State Cyber Cell Affiliations Deep-Dive */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl bg-[#0B1220] border-2 border-amber-500/30 p-8 sm:p-12 space-y-8 shadow-2xl">
+        <div className="rounded-3xl bg-white border-2 border-amber-400/50 p-8 sm:p-12 space-y-8 shadow-xl">
           
           <div className="text-center max-w-3xl mx-auto space-y-2">
-            <span className="font-mono text-xs uppercase font-bold text-[#D4AF37] tracking-widest">
+            <span className="font-mono text-xs uppercase font-bold text-amber-800 tracking-widest">
               STATE &amp; NATIONAL CYBERCRIME IMPACT
             </span>
-            <h3 className="font-serif-header font-bold text-2xl sm:text-3xl text-white">
+            <h3 className="font-serif-header font-bold text-2xl sm:text-3xl text-slate-900">
               Law Enforcement &amp; Government Intelligence Support
             </h3>
-            <p className="font-sans text-xs sm:text-sm text-slate-400">
+            <p className="font-sans text-xs sm:text-sm text-slate-600">
               Dr. Dinesh Paranthagan and the Hackup Technology technical unit regularly collaborate with law enforcement agencies on high-stakes investigations.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3 font-sans">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-[#D4AF37]">
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 font-sans">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-800">
                 <Scale className="w-5 h-5" />
               </div>
-              <h4 className="font-serif-header font-bold text-base text-white">
+              <h4 className="font-serif-header font-bold text-base text-slate-900">
                 TN Police Cyber Crime Consultant
               </h4>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Technical consultation on complex financial cyber frauds, crypto wallet tracking, ransomware source tracing, and preserving legally compliant Section 65B forensic reports.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3 font-sans">
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 font-sans">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center text-cyan-700">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h4 className="font-serif-header font-bold text-base text-white">
+              <h4 className="font-serif-header font-bold text-base text-slate-900">
                 Secretary General – TANCCAO
               </h4>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Spearheading the Tamil Nadu Cyber Crime Action Organization (TANCCAO) to coordinate threat alerts across industries, banks, and academic institutions.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3 font-sans">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 font-sans">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center text-emerald-700">
                 <GraduationCap className="w-5 h-5" />
               </div>
-              <h4 className="font-serif-header font-bold text-base text-white">
+              <h4 className="font-serif-header font-bold text-base text-slate-900">
                 Smart India Hackathon (SIH) Mentor
               </h4>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Appointed National Mentor guiding university engineering teams on national-grade cyber defense and automated threat classification prototypes for government ministries.
               </p>
             </div>

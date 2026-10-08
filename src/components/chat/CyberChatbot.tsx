@@ -237,7 +237,7 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
               setIsOpen((prev) => !prev);
               setIsMinimized(false);
             }}
-            className="group flex items-center space-x-2.5 px-3.5 py-3 rounded-2xl bg-[#0F081D] dark:bg-[#0F081D] light:bg-white border border-[#D4AF37]/50 text-white shadow-2xl hover:border-[#D4AF37] hover:shadow-[#D4AF37]/25 transition-all cursor-pointer backdrop-blur-xl"
+            className="group flex items-center space-x-2.5 px-3.5 py-3 rounded-2xl bg-white border border-[#D4AF37]/60 text-slate-900 shadow-xl hover:border-[#D4AF37] hover:shadow-2xl transition-all cursor-pointer backdrop-blur-xl"
             aria-label="Open Hackup AI Cyber Assistant"
           >
             <div className="relative flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-[#881337] via-[#B38728] to-[#D4AF37] p-0.5 shadow-md">
@@ -245,12 +245,12 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
             </div>
             
             <div className="hidden sm:block text-left">
-              <div className="text-xs font-mono font-bold text-slate-100 group-hover:text-[#D4AF37] transition-colors flex items-center space-x-1.5">
+              <div className="text-xs font-mono font-bold text-slate-900 group-hover:text-[#9E721D] transition-colors flex items-center space-x-1.5">
                 <span>Hackup AI</span>
-                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                <Sparkles className="w-3 h-3 text-[#9E721D]" />
               </div>
-              <div className="text-[9px] font-mono text-emerald-400 font-semibold flex items-center space-x-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="text-[9px] font-mono text-emerald-600 font-bold flex items-center space-x-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Online • 24/7 Advisor</span>
               </div>
             </div>
@@ -271,21 +271,21 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
             }}
             exit={{ opacity: 0, y: 25, scale: 0.95 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className={`fixed bottom-22 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[410px] max-w-[420px] rounded-3xl bg-white dark:bg-[#0F081D] border-2 border-slate-200 dark:border-[#D4AF37]/40 shadow-2xl z-50 flex flex-col overflow-hidden backdrop-blur-2xl transition-all ${
+            className={`fixed bottom-22 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[410px] max-w-[420px] rounded-3xl bg-white border-2 border-slate-200 shadow-2xl z-50 flex flex-col overflow-hidden backdrop-blur-2xl transition-all ${
               isMinimized ? 'h-auto' : 'h-[560px]'
             }`}
           >
             
             {/* Header */}
-            <div className="bg-gradient-to-r from-slate-900 via-[#180A28] to-slate-900 border-b border-white/10 p-4 text-white flex items-center justify-between shrink-0">
+            <div className="bg-slate-900 border-b border-slate-800 p-4 text-white flex items-center justify-between shrink-0 shadow-md">
               <div className="flex items-center space-x-3">
-                <div className="relative flex items-center justify-center w-10 h-10 rounded-2xl bg-gradient-to-br from-[#881337] to-[#D4AF37] p-0.5 shadow-md">
+                <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-slate-200 p-0.5 shadow-md">
                   <img
                     src="/images/hackup_logo.png"
-                    alt="Hackup Shield"
-                    className="w-full h-full object-cover rounded-[14px]"
+                    alt="Hackup Technology Logo"
+                    className="w-full h-full object-contain rounded-lg"
                   />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0F081D]" />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" />
                 </div>
 
                 <div>
@@ -330,7 +330,7 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
             {!isMinimized && (
               <>
                 {/* Messages Scroll Area */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 dark:bg-[#08040F]/90 text-xs font-sans">
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 text-xs font-sans">
                   
                   {messages.map((msg) => {
                     const isBot = msg.sender === 'bot';
@@ -339,7 +339,7 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
                         key={msg.id}
                         className={`flex flex-col ${isBot ? 'items-start' : 'items-end'} space-y-1.5`}
                       >
-                        <div className="flex items-center space-x-1.5 text-[10px] font-mono text-slate-500 dark:text-slate-400 px-1">
+                        <div className="flex items-center space-x-1.5 text-[10px] font-mono text-slate-500 px-1">
                           <span>{isBot ? 'Aegis AI' : 'You'}</span>
                           <span>&bull;</span>
                           <span>{msg.timestamp}</span>
@@ -348,7 +348,7 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
                         <div
                           className={`max-w-[85%] rounded-2xl px-4 py-3 leading-relaxed whitespace-pre-wrap ${
                             isBot
-                              ? 'bg-white dark:bg-[#1A0E2E] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-purple-900/40 shadow-sm'
+                              ? 'bg-white text-slate-800 border border-slate-200 shadow-sm'
                               : 'btn-gold-filled text-slate-950 font-medium shadow-md'
                           }`}
                         >
@@ -362,7 +362,7 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
                               <button
                                 key={idx}
                                 onClick={() => handleActionClick(act)}
-                                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#2A1648] hover:bg-amber-50 dark:hover:bg-[#3B1F66] text-[#9E721D] dark:text-[#D4AF37] border border-amber-500/40 font-mono text-[11px] font-bold shadow-sm transition-all cursor-pointer"
+                                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-amber-50 text-[#9E721D] border border-amber-300 font-mono text-[11px] font-bold shadow-sm transition-all cursor-pointer"
                               >
                                 <span>{act.label}</span>
                                 <ExternalLink className="w-3 h-3 ml-0.5" />
@@ -376,7 +376,7 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
 
                   {/* Typing Indicator */}
                   {isTyping && (
-                    <div className="flex items-center space-x-2 p-3 rounded-2xl bg-white dark:bg-[#1A0E2E] border border-slate-200 dark:border-purple-900/40 w-fit">
+                    <div className="flex items-center space-x-2 p-3 rounded-2xl bg-white border border-slate-200 w-fit">
                       <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-bounce" style={{ animationDelay: '0ms' }} />
                       <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-bounce" style={{ animationDelay: '150ms' }} />
                       <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -387,12 +387,12 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
                 </div>
 
                 {/* Quick Suggestion Chips */}
-                <div className="px-3 py-2 bg-slate-100 dark:bg-[#0D0719] border-t border-slate-200 dark:border-white/5 overflow-x-auto scrollbar-none flex gap-1.5 shrink-0">
+                <div className="px-3 py-2 bg-slate-100 border-t border-slate-200 overflow-x-auto scrollbar-none flex gap-1.5 shrink-0">
                   {INITIAL_PROMPTS.map((prompt, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleSendMessage(prompt.query)}
-                      className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white dark:bg-[#1F103A] hover:bg-amber-100/70 dark:hover:bg-[#341B60] text-[10px] font-mono text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white border border-slate-200 dark:border-white/10 transition-colors shrink-0 cursor-pointer shadow-2xs"
+                      className="whitespace-nowrap px-2.5 py-1 rounded-full bg-white hover:bg-amber-100 text-[10px] font-mono text-slate-700 hover:text-slate-950 border border-slate-200 transition-colors shrink-0 cursor-pointer shadow-2xs font-medium"
                     >
                       {prompt.label}
                     </button>
@@ -405,14 +405,14 @@ export const CyberChatbot: React.FC<CyberChatbotProps> = ({
                     e.preventDefault();
                     handleSendMessage();
                   }}
-                  className="p-3 bg-white dark:bg-[#0F081D] border-t border-slate-200 dark:border-white/10 flex items-center space-x-2 shrink-0"
+                  className="p-3 bg-white border-t border-slate-200 flex items-center space-x-2 shrink-0"
                 >
                   <input
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     placeholder="Ask about VAPT, CEH v13, internships..."
-                    className="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-white/10 text-xs font-sans text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-[#D4AF37] transition-all"
+                    className="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-sans text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#D4AF37] transition-all"
                   />
 
                   <button

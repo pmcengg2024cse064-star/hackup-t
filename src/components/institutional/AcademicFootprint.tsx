@@ -46,20 +46,20 @@ export const AcademicFootprint: React.FC<AcademicFootprintProps> = ({
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#111C30]/90 border border-amber-500/30 shadow-lg">
-            <GraduationCap className="w-4 h-4 text-[#D4AF37]" />
-            <span className="font-mono text-xs uppercase font-bold tracking-widest text-[#D4AF37]">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-300 shadow-sm">
+            <GraduationCap className="w-4 h-4 text-amber-700" />
+            <span className="font-mono text-xs uppercase font-bold tracking-widest text-amber-900">
               VERIFIED INSTITUTIONAL FOOTPRINT • 54+ HIGHER EDUCATION PARTNERS
             </span>
           </div>
 
-          <h2 className="font-serif-header font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#F8FAFC] light:text-[#0F172A] tracking-tight leading-[1.15]">
-            Empowering Tamil Nadu's <span className="text-gold-pure">Colleges &amp; Universities</span>
+          <h2 className="font-serif-header font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-[1.15]">
+            Empowering Tamil Nadu's <span className="text-amber-800">Colleges &amp; Universities</span>
           </h2>
 
           <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mt-2 mb-3" />
 
-          <p className="font-sans text-sm sm:text-base text-slate-400 light:text-slate-600 leading-relaxed">
+          <p className="font-sans text-sm sm:text-base text-slate-600 leading-relaxed">
             Hackup Technology serves as the official cyber range and curriculum training partner for over 54 premier universities, engineering institutes, and autonomous colleges across South India.
           </p>
         </div>
@@ -75,8 +75,8 @@ export const AcademicFootprint: React.FC<AcademicFootprintProps> = ({
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-bold tracking-wider transition-all cursor-pointer ${
                   selectedCategory === cat
-                    ? 'bg-[#D4AF37] text-slate-950 shadow-md font-bold'
-                    : 'bg-[#111C30]/80 light:bg-slate-100 text-slate-300 light:text-slate-700 hover:text-white border border-slate-800 light:border-slate-300'
+                    ? 'bg-amber-500 text-slate-950 shadow-md font-bold'
+                    : 'bg-white text-slate-700 hover:text-slate-900 border border-slate-300 hover:bg-slate-50'
                 }`}
               >
                 {cat}
@@ -92,7 +92,7 @@ export const AcademicFootprint: React.FC<AcademicFootprintProps> = ({
               placeholder="Search college, city, or track..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9.5 pr-4 py-2 rounded-xl bg-[#111C30]/90 light:bg-white border border-slate-800 light:border-slate-300 text-xs font-mono text-white light:text-slate-900 focus:border-[#D4AF37] focus:outline-none"
+              className="w-full pl-9.5 pr-4 py-2 rounded-xl bg-white border border-slate-300 text-xs font-mono text-slate-900 placeholder:text-slate-400 focus:border-amber-500 focus:outline-none shadow-sm"
             />
           </div>
 
@@ -103,38 +103,38 @@ export const AcademicFootprint: React.FC<AcademicFootprintProps> = ({
           {filteredInstitutions.map((inst, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-2xl bg-[#0B1220]/90 dark:bg-[#0B1220]/90 light:bg-white border border-slate-800/80 light:border-slate-200 hover:border-amber-500/50 flex flex-col justify-between space-y-3 transition-all duration-300 shadow-md group hover:-translate-y-0.5"
+              className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-amber-400 flex flex-col justify-between space-y-3 transition-all duration-300 shadow-sm group hover:-translate-y-0.5"
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-[#D4AF37] border border-amber-500/30">
+                  <span className="font-mono text-[9px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-900 border border-amber-300">
                     {inst.badge}
                   </span>
-                  <div className="flex items-center space-x-1 text-[11px] font-mono text-slate-400">
-                    <MapPin className="w-3 h-3 text-[#D4AF37]" />
+                  <div className="flex items-center space-x-1 text-[11px] font-mono text-slate-500">
+                    <MapPin className="w-3 h-3 text-amber-700" />
                     <span>{inst.location}</span>
                   </div>
                 </div>
 
-                <h4 className="font-serif-header font-bold text-sm sm:text-base text-slate-100 light:text-slate-900 group-hover:text-[#D4AF37] transition-colors leading-snug">
+                <h4 className="font-serif-header font-bold text-sm sm:text-base text-slate-900 group-hover:text-amber-800 transition-colors leading-snug">
                   {inst.name}
                 </h4>
 
-                <p className="font-sans text-xs text-slate-400 light:text-slate-600 leading-relaxed font-medium">
-                  <span className="text-[#D4AF37] font-semibold">Program: </span>
+                <p className="font-sans text-xs text-slate-600 leading-relaxed font-medium">
+                  <span className="text-amber-800 font-semibold">Program: </span>
                   {inst.engagement}
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-slate-800/60 light:border-slate-200 flex items-center justify-between text-[11px] font-mono">
-                <span className="text-emerald-400 flex items-center gap-1 font-semibold">
+              <div className="pt-2 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono">
+                <span className="text-emerald-700 flex items-center gap-1 font-semibold">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   Verified MoU &amp; ATC Labs
                 </span>
 
                 <button
                   onClick={() => onPartnerInquiry && onPartnerInquiry(inst.name)}
-                  className="text-[#D4AF37] hover:underline cursor-pointer flex items-center gap-1 font-bold"
+                  className="text-amber-800 hover:underline cursor-pointer flex items-center gap-1 font-bold"
                 >
                   <span>Inquire</span>
                   <ExternalLink className="w-3 h-3" />
@@ -145,11 +145,11 @@ export const AcademicFootprint: React.FC<AcademicFootprintProps> = ({
         </div>
 
         {/* Partner CTA Box */}
-        <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#111C30] via-[#0B1220] to-[#111C30] border border-amber-500/30 text-center space-y-4 shadow-xl">
-          <h3 className="font-serif-header font-bold text-xl sm:text-2xl text-white">
+        <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-50/70 via-white to-amber-50/70 border border-amber-300 text-center space-y-4 shadow-xl">
+          <h3 className="font-serif-header font-bold text-xl sm:text-2xl text-slate-900">
             Looking to Establish an EC-Council Cyber Range / CoE at Your Institution?
           </h3>
-          <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-sans text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Hackup Technology sets up turn-key on-campus Cyber Ranges, provides accredited industrial training, curriculum modernization (BOS), and faculty development programs across South India.
           </p>
           <div className="pt-2">

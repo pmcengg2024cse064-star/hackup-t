@@ -38,14 +38,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Main Headline (High-Contrast Luxury Serif) & Sub-headline */}
         <div className="text-center max-w-4xl mx-auto space-y-4">
-          <h1 className="font-serif-header font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide text-[#F1F5F9] leading-[1.2]">
+          <h1 className="font-serif-header font-bold text-3xl sm:text-4xl lg:text-5xl tracking-wide text-slate-900 leading-[1.2]">
             Premier Cybersecurity &amp; Tech Advisory:{' '}
-            <span className="text-gold-pure block mt-2">
+            <span className="text-amber-800 block mt-2">
               Securing Your Enterprise, Training Your Talent.
             </span>
           </h1>
 
-          <p className="font-sans text-sm sm:text-base text-[#94A3B8] max-w-2xl mx-auto leading-relaxed">
+          <p className="font-sans text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Trusted Partners in Digital Excellence. Delivering high-assurance penetration testing and elite EC-Council certified cyber workforce development.
           </p>
         </div>
@@ -66,11 +66,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </span>
               </div>
 
-              <h2 className="font-serif-header font-bold text-2xl sm:text-3xl text-[#F1F5F9] tracking-wide mb-3">
+              <h2 className="font-serif-header font-bold text-2xl sm:text-3xl text-slate-900 tracking-wide mb-3">
                 Enterprise Solutions
               </h2>
 
-              <p className="font-sans text-xs sm:text-sm text-[#94A3B8] leading-relaxed mb-6">
+              <p className="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
                 Comprehensive offensive security assessments and compliance frameworks defending critical corporate infrastructure with zero downtime.
               </p>
 
@@ -82,9 +82,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   'Red Teaming & Adversary Simulation',
                   'Digital Forensics & Incident Triage (DFIR)',
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-center space-x-3 text-xs sm:text-sm font-sans text-[#E2E8F0]">
-                    <div className="w-5 h-5 rounded-full bg-[#C4A77D]/15 border border-[#C4A77D]/40 flex items-center justify-center shrink-0">
-                      <Check className="w-3 h-3 text-[#C4A77D]" />
+                  <div key={idx} className="flex items-center space-x-3 text-xs sm:text-sm font-sans text-slate-800 font-medium">
+                    <div className="w-5 h-5 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center shrink-0">
+                      <Check className="w-3 h-3 text-amber-800" />
                     </div>
                     <span>{item}</span>
                   </div>
@@ -109,19 +109,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div>
               {/* Gold Graduation Cap / Shield Icon */}
               <div className="flex items-center justify-between mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-slate-900/90 border border-[#C4A77D]/40 p-3.5 flex items-center justify-center text-[#C4A77D] shadow-lg group-hover:scale-105 transition-transform">
+                <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-300 p-3.5 flex items-center justify-center text-amber-800 shadow-md group-hover:scale-105 transition-transform">
                   <GraduationCap className="w-7 h-7" />
                 </div>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#C4A77D] bg-slate-900/80 px-3 py-1 rounded-full border border-[#C4A77D]/30">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-amber-900 bg-amber-100/80 px-3 py-1 rounded-full border border-amber-300">
                   EC-COUNCIL ATC
                 </span>
               </div>
 
-              <h2 className="font-serif-header font-bold text-2xl sm:text-3xl text-[#F1F5F9] tracking-wide mb-3">
+              <h2 className="font-serif-header font-bold text-2xl sm:text-3xl text-slate-900 tracking-wide mb-3">
                 Hackup Academy
               </h2>
 
-              <p className="font-sans text-xs sm:text-sm text-[#94A3B8] leading-relaxed mb-6">
+              <p className="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
                 Global EC-Council accredited training, live cyber range attack-defense simulations, and Coimbatore industrial internship programs.
               </p>
 
@@ -133,9 +133,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   'DevSecOps & Multi-Cloud Defense',
                   '1/3/6-Month College Industrial Internships',
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-center space-x-3 text-xs sm:text-sm font-sans text-[#E2E8F0]">
-                    <div className="w-5 h-5 rounded-full bg-[#C4A77D]/15 border border-[#C4A77D]/40 flex items-center justify-center shrink-0">
-                      <Check className="w-3 h-3 text-[#C4A77D]" />
+                  <div key={idx} className="flex items-center space-x-3 text-xs sm:text-sm font-sans text-slate-800 font-medium">
+                    <div className="w-5 h-5 rounded-full bg-rose-100 border border-rose-300 flex items-center justify-center shrink-0">
+                      <Check className="w-3 h-3 text-[#6B1D2F]" />
                     </div>
                     <span>{item}</span>
                   </div>
@@ -158,35 +158,35 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Trust Bar (Centered Elegant Icons & Numbers) */}
-        <div className="mt-14 max-w-4xl mx-auto pt-8 border-t border-[#C4A77D]/20">
+        <div className="mt-14 max-w-4xl mx-auto pt-8 border-t border-slate-200">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
             
             <div className="flex flex-col items-center space-y-1">
-              <div className="flex items-center space-x-2 text-[#C4A77D]">
-                <ShieldCheck className="w-5 h-5" />
-                <span className="font-serif-header font-bold text-2xl text-[#F1F5F9]">50+</span>
+              <div className="flex items-center space-x-2 text-amber-800">
+                <ShieldCheck className="w-5 h-5 text-amber-700" />
+                <span className="font-serif-header font-bold text-2xl text-slate-900">50+</span>
               </div>
-              <span className="font-mono text-[11px] uppercase tracking-widest text-[#94A3B8]">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-slate-600 font-semibold">
                 Corporate Partners
               </span>
             </div>
 
             <div className="flex flex-col items-center space-y-1">
-              <div className="flex items-center space-x-2 text-[#C4A77D]">
-                <Users className="w-5 h-5" />
-                <span className="font-serif-header font-bold text-2xl text-[#F1F5F9]">1,000+</span>
+              <div className="flex items-center space-x-2 text-amber-800">
+                <Users className="w-5 h-5 text-amber-700" />
+                <span className="font-serif-header font-bold text-2xl text-slate-900">1,000+</span>
               </div>
-              <span className="font-mono text-[11px] uppercase tracking-widest text-[#94A3B8]">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-slate-600 font-semibold">
                 Certified Alumni
               </span>
             </div>
 
             <div className="flex flex-col items-center space-y-1">
-              <div className="flex items-center space-x-2 text-[#C4A77D]">
-                <Terminal className="w-5 h-5" />
-                <span className="font-serif-header font-bold text-2xl text-[#F1F5F9]">100%</span>
+              <div className="flex items-center space-x-2 text-amber-800">
+                <Terminal className="w-5 h-5 text-amber-700" />
+                <span className="font-serif-header font-bold text-2xl text-slate-900">100%</span>
               </div>
-              <span className="font-mono text-[11px] uppercase tracking-widest text-[#94A3B8]">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-slate-600 font-semibold">
                 Practical Labs
               </span>
             </div>

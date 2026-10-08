@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { CanvasBackground } from './components/common/CanvasBackground';
 import { Navbar } from './components/common/Navbar';
@@ -8,19 +8,26 @@ import { BackToTop } from './components/common/BackToTop';
 import { CyberChatbot } from './components/chat/CyberChatbot';
 import { Footer } from './components/footer/Footer';
 
-// Pages
+// Restructured Target Pages
 import { HomePage } from './pages/HomePage';
-import { EnterprisePage } from './pages/EnterprisePage';
+import { ServicesPage } from './pages/ServicesPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
-import { AcademyPage } from './pages/AcademyPage';
+import { CoursesPage } from './pages/CoursesPage';
 import { CourseDetailPage } from './pages/CourseDetailPage';
-import { CyberRangePage } from './pages/CyberRangePage';
-import { InternshipPage } from './pages/InternshipPage';
-import { CommunityPage } from './pages/CommunityPage';
-import { EstimatorPage } from './pages/EstimatorPage';
-import { AboutPage } from './pages/AboutPage';
+import { InstitutionsWorkshopsPage } from './pages/InstitutionsWorkshopsPage';
+import { PortfolioPage } from './pages/PortfolioPage';
+import { AboutUsPage } from './pages/AboutUsPage';
+import { GalleryPage } from './pages/GalleryPage';
+import { BlogPage } from './pages/BlogPage';
+import { BlogPostPage } from './pages/BlogPostPage';
+import { ContactPage } from './pages/ContactPage';
+import { LegalPage } from './pages/LegalPage';
+
+// Additional Logically Retained Pages
 import { FounderPatentsPage } from './pages/FounderPatentsPage';
-import { InstitutionalReachPage } from './pages/InstitutionalReachPage';
+import { CommunityPage } from './pages/CommunityPage';
+import { CyberRangePage } from './pages/CyberRangePage';
+import { EstimatorPage } from './pages/EstimatorPage';
 
 // Modals & Drawers
 import { B2BAuditModal } from './components/modals/B2BAuditModal';
@@ -28,6 +35,17 @@ import { B2CDemoModal } from './components/modals/B2CDemoModal';
 import { CourseSyllabusDrawer } from './components/modals/CourseSyllabusDrawer';
 import { ResponsibleDisclosureModal } from './components/modals/ResponsibleDisclosureModal';
 import { AcademyCourse } from './data/cyberData';
+
+// Dynamic Redirect Helper for Nested Legacy Routes
+const LegacyServiceRedirect: React.FC = () => {
+  const { serviceId } = useParams<{ serviceId: string }>();
+  return <Navigate to={`/services/${serviceId || ''}`} replace />;
+};
+
+const LegacyCourseRedirect: React.FC = () => {
+  const { courseId } = useParams<{ courseId: string }>();
+  return <Navigate to={`/courses/${courseId || ''}`} replace />;
+};
 
 export function App() {
   // Modal & Drawer States
@@ -62,30 +80,28 @@ export function App() {
     setSyllabusDrawerOpen(true);
   };
 
-  const handleEnrollCustomTrack = (trackDetails: any) => {
-    setSelectedCourseTitle(trackDetails.recommendedTrack);
-    setB2cDemoModalOpen(true);
-  };
-
   return (
     <ThemeProvider>
       <Router>
         <ScrollToTop />
         
-        <div className="relative min-h-screen bg-slate-50 dark:bg-[#080711] text-slate-900 dark:text-slate-300 selection:bg-amber-500/25 selection:text-white luxury-grid-bg transition-colors duration-300">
+        <div className="relative min-h-screen bg-slate-50 text-slate-900 selection:bg-amber-500/25 selection:text-slate-950 luxury-grid-bg">
           
           {/* Interactive Particle Mesh */}
           <CanvasBackground />
 
-          {/* Sticky Luxury Navbar with Custom Logo & Theme Switcher */}
+          {/* Sticky Luxury Navbar with Restructured IA & Mega Menus */}
           <Navbar
-            onRequestConsultation={() => handleOpenAuditModal()}
-            onRequestAudit={() => handleOpenAuditModal('Full-Stack VAPT')}
+            onRequestConsultation={() => handleOpenAuditModal('Executive Cyber Consultation')}
+            onRequestAudit={() => handleOpenAuditModal('Full-Stack VAPT Audit')}
+            onBookDemo={handleOpenDemoModal}
           />
 
           {/* Main Content Area Rendering SPA Route Pages */}
           <main className="relative z-10 min-h-[70vh]">
             <Routes>
+              
+              {/* 1. Home */}
               <Route
                 path="/"
                 element={
@@ -96,18 +112,17 @@ export function App() {
                 }
               />
 
+              {/* 2. Services Overview & 8 Dedicated Service Pages */}
               <Route
-                path="/enterprise"
+                path="/services"
                 element={
-                  <EnterprisePage
+                  <ServicesPage
                     onRequestAudit={handleOpenAuditModal}
-                    onRequestAuditWithScope={handleOpenAuditWithScope}
                   />
                 }
               />
-
               <Route
-                path="/enterprise/services/:serviceId"
+                path="/services/:slug"
                 element={
                   <ServiceDetailPage
                     onRequestAudit={handleOpenAuditModal}
@@ -115,19 +130,18 @@ export function App() {
                 }
               />
 
+              {/* 3. Courses Overview & 5 Dedicated Course Pages */}
               <Route
-                path="/academy"
+                path="/courses"
                 element={
-                  <AcademyPage
+                  <CoursesPage
+                    onBookDemo={handleOpenDemoModal}
                     onDownloadSyllabus={handleOpenDemoModal}
-                    onApplyInternship={() => handleOpenDemoModal('Coimbatore 1/3/6-Month Industrial Internship')}
-                    onEnrollCustomTrack={handleEnrollCustomTrack}
                   />
                 }
               />
-
               <Route
-                path="/academy/courses/:courseId"
+                path="/courses/:slug"
                 element={
                   <CourseDetailPage
                     onBookDemo={handleOpenDemoModal}
@@ -135,6 +149,70 @@ export function App() {
                 }
               />
 
+              {/* 4. Institutions & Workshops */}
+              <Route
+                path="/institutions-workshops"
+                element={
+                  <InstitutionsWorkshopsPage
+                    onRequestConsultation={handleOpenAuditModal}
+                  />
+                }
+              />
+
+              {/* 5. Portfolio */}
+              <Route
+                path="/portfolio"
+                element={
+                  <PortfolioPage
+                    onRequestAudit={handleOpenAuditModal}
+                  />
+                }
+              />
+
+              {/* 6. About Us */}
+              <Route
+                path="/about-us"
+                element={
+                  <AboutUsPage
+                    onRequestConsultation={handleOpenAuditModal}
+                    onRequestAudit={handleOpenAuditModal}
+                  />
+                }
+              />
+
+              {/* 7. Gallery */}
+              <Route
+                path="/gallery"
+                element={<GalleryPage />}
+              />
+
+              {/* 8. Blog Directory & Article Reader */}
+              <Route
+                path="/blog"
+                element={<BlogPage />}
+              />
+              <Route
+                path="/blog/:slug"
+                element={<BlogPostPage />}
+              />
+
+              {/* 9. Contact */}
+              <Route
+                path="/contact"
+                element={<ContactPage />}
+              />
+
+              {/* 10. Legal: Privacy Policy & Terms */}
+              <Route
+                path="/privacy-policy"
+                element={<LegalPage />}
+              />
+              <Route
+                path="/terms"
+                element={<LegalPage />}
+              />
+
+              {/* Additional Retained Pages */}
               <Route
                 path="/founder-patents"
                 element={
@@ -144,26 +222,6 @@ export function App() {
                   />
                 }
               />
-
-              <Route
-                path="/patents"
-                element={
-                  <FounderPatentsPage
-                    onRequestAudit={handleOpenAuditModal}
-                    onBookExecutiveAdvisory={() => handleOpenAuditModal('Executive Advisory with Dinesh Paranthagan')}
-                  />
-                }
-              />
-
-              <Route
-                path="/institutional-reach"
-                element={
-                  <InstitutionalReachPage
-                    onRequestConsultation={() => handleOpenDemoModal('Campus Center of Excellence (CoE)')}
-                  />
-                }
-              />
-
               <Route
                 path="/cyber-range"
                 element={
@@ -172,16 +230,6 @@ export function App() {
                   />
                 }
               />
-
-              <Route
-                path="/internship"
-                element={
-                  <InternshipPage
-                    onApply={() => handleOpenDemoModal('Coimbatore 1/3/6-Month Industrial Internship')}
-                  />
-                }
-              />
-
               <Route
                 path="/community"
                 element={
@@ -190,39 +238,30 @@ export function App() {
                   />
                 }
               />
-
-              <Route
-                path="/defcon"
-                element={
-                  <CommunityPage
-                    onGetInvolved={(title) => handleOpenDemoModal(title)}
-                  />
-                }
-              />
-
               <Route
                 path="/estimate"
                 element={
                   <EstimatorPage
                     onRequestAuditWithScope={handleOpenAuditWithScope}
-                    onEnrollCustomTrack={handleEnrollCustomTrack}
+                    onEnrollCustomTrack={(track) => handleOpenDemoModal(track.recommendedTrack)}
                   />
                 }
               />
 
-              <Route
-                path="/about"
-                element={
-                  <AboutPage
-                    onOpenDisclosure={() => setDisclosureModalOpen(true)}
-                    onRequestConsultation={() => handleOpenAuditModal('Executive Consultation')}
-                    onRequestAudit={(title) => handleOpenAuditModal(title || 'Enterprise Security Audit')}
-                    onBookAcademicDemo={(subject) => handleOpenDemoModal(subject || 'Academic & Admissions Tie-up')}
-                  />
-                }
-              />
+              {/* ---------------------------------------------------- */}
+              {/* 301 CLIENT REDIRECT MAP FROM OLD ROUTES TO NEW ROUTES */}
+              {/* ---------------------------------------------------- */}
+              <Route path="/enterprise" element={<Navigate to="/services" replace />} />
+              <Route path="/enterprise/services/:serviceId" element={<LegacyServiceRedirect />} />
+              <Route path="/academy" element={<Navigate to="/courses" replace />} />
+              <Route path="/academy/courses/:courseId" element={<LegacyCourseRedirect />} />
+              <Route path="/about" element={<Navigate to="/about-us" replace />} />
+              <Route path="/institutional-reach" element={<Navigate to="/institutions-workshops" replace />} />
+              <Route path="/internship" element={<Navigate to="/courses/cyber-security-internship" replace />} />
+              <Route path="/defcon" element={<Navigate to="/community" replace />} />
+              <Route path="/patents" element={<Navigate to="/founder-patents" replace />} />
 
-              {/* Fallback route */}
+              {/* Fallback Wildcard Route */}
               <Route
                 path="*"
                 element={
@@ -237,7 +276,7 @@ export function App() {
 
           {/* Luxury Minimalist Footer */}
           <Footer
-            onRequestConsultation={() => handleOpenAuditModal()}
+            onRequestConsultation={() => handleOpenAuditModal('General Consultation')}
             onOpenDisclosure={() => setDisclosureModalOpen(true)}
           />
 

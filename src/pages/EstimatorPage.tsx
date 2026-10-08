@@ -17,18 +17,18 @@ export const EstimatorPage: React.FC<EstimatorPageProps> = ({
       
       {/* Estimator Hero */}
       <section className="relative pt-12 pb-8 overflow-hidden text-center space-y-4 max-w-4xl mx-auto px-4">
-        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1A0D30] border border-[#C4A77D]/40 shadow-xl backdrop-blur-xl">
-          <Calculator className="w-4 h-4 text-[#C4A77D]" />
-          <span className="font-mono text-xs uppercase tracking-widest text-[#C4A77D]">
+        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-300 shadow-sm">
+          <Calculator className="w-4 h-4 text-amber-700" />
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-900 font-bold">
             INSTANT SCOPE &amp; CAREER ROADMAP GENERATOR
           </span>
         </div>
 
-        <h1 className="font-serif-header font-bold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight">
-          Interactive <span className="text-gold-pure">Configurator</span>
+        <h1 className="font-serif-header font-bold text-3xl sm:text-5xl lg:text-6xl text-slate-900 leading-tight">
+          Interactive <span className="text-amber-800">Configurator</span>
         </h1>
 
-        <p className="font-sans text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        <p className="font-sans text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
           Calculate your enterprise VAPT turnaround timelines and regulatory scope, or generate a tailored 3-stage cybersecurity career roadmap based on your current experience.
         </p>
       </section>

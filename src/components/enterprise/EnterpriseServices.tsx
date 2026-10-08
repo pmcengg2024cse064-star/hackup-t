@@ -74,22 +74,22 @@ export const EnterpriseServices: React.FC<EnterpriseServicesProps> = ({ onReques
   ];
 
   return (
-    <section id="services" className="relative py-24 bg-slate-50 dark:bg-[#070A0F]/90 border-t border-slate-200 dark:border-[#C4A77D]/15">
+    <section id="services" className="relative py-24 bg-slate-50 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Title (Center-Aligned Serif Header) */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="font-mono text-xs uppercase tracking-widest text-[#9E721D] dark:text-[#C4A77D] font-bold">
+          <div className="font-mono text-xs uppercase tracking-widest text-[#9E721D] font-bold">
             HIGH-ASSURANCE CYBER DEFENSE
           </div>
 
-          <h2 className="font-serif-header font-bold text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-[#F1F5F9] tracking-wider">
+          <h2 className="font-serif-header font-bold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-wider">
             SERVICES
           </h2>
 
           <div className="w-16 h-[2px] bg-[#B38728] mx-auto mt-3 mb-4" />
 
-          <p className="font-sans text-sm sm:text-base text-slate-700 dark:text-[#94A3B8] leading-relaxed font-normal">
+          <p className="font-sans text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
             Engineered by active red team practitioners. Protecting critical enterprise infrastructure through surgical manual exploit analysis.
           </p>
         </div>
@@ -101,37 +101,37 @@ export const EnterpriseServices: React.FC<EnterpriseServicesProps> = ({ onReques
             return (
               <div
                 key={service.id}
-                className="bg-white dark:bg-slate-900/90 rounded-3xl p-7 flex flex-col justify-between group transition-all duration-300 relative overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-[#B38728] dark:hover:border-[#D4AF37] shadow-lg hover:-translate-y-1"
+                className="bg-white rounded-3xl p-7 flex flex-col justify-between group transition-all duration-300 relative overflow-hidden border border-slate-200 hover:border-[#B38728] shadow-lg hover:-translate-y-1"
               >
                 <div>
                   {/* Top Icon & Badge */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-slate-950/90 border border-amber-300 dark:border-[#C4A77D]/30 p-2.5 flex items-center justify-center text-[#9E721D] dark:text-[#C4A77D] shadow-md group-hover:border-[#B38728] group-hover:scale-105 transition-all">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-300 p-2.5 flex items-center justify-center text-[#9E721D] shadow-md group-hover:border-[#B38728] group-hover:scale-105 transition-all">
                       <Icon className="w-6 h-6" />
                     </div>
 
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-[#9E721D] dark:text-[#C4A77D] bg-amber-50 dark:bg-slate-950/80 px-2.5 py-1 rounded-full border border-amber-300 dark:border-[#C4A77D]/25 font-bold">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-[#9E721D] bg-amber-50 px-2.5 py-1 rounded-full border border-amber-300 font-bold">
                       {service.badge}
                     </span>
                   </div>
 
-                  <h3 className="font-serif-header font-bold text-lg text-slate-900 dark:text-[#F1F5F9] tracking-wide group-hover:text-[#9E721D] dark:group-hover:text-[#C4A77D] transition-colors leading-snug">
+                  <h3 className="font-serif-header font-bold text-lg text-slate-900 tracking-wide group-hover:text-[#9E721D] transition-colors leading-snug">
                     {service.title}
                   </h3>
 
-                  <div className="font-mono text-xs text-[#9E721D] dark:text-[#C4A77D]/90 mt-1 mb-3 font-semibold">
+                  <div className="font-mono text-xs text-[#9E721D] mt-1 mb-3 font-semibold">
                     {service.subtitle}
                   </div>
 
-                  <p className="font-sans text-xs sm:text-sm text-slate-600 dark:text-[#94A3B8] leading-relaxed mb-6 font-normal">
+                  <p className="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed mb-6 font-normal">
                     {service.description}
                   </p>
 
                   {/* Deliverables */}
-                  <div className="space-y-2 mb-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                  <div className="space-y-2 mb-6 pt-4 border-t border-slate-100">
                     {service.deliverables.map((deliv, i) => (
-                      <div key={i} className="flex items-center space-x-2 text-xs text-slate-800 dark:text-[#E2E8F0] font-medium">
-                        <Check className="w-3.5 h-3.5 text-[#B38728] dark:text-[#C4A77D] shrink-0" />
+                      <div key={i} className="flex items-center space-x-2 text-xs text-slate-800 font-medium">
+                        <Check className="w-3.5 h-3.5 text-[#B38728] shrink-0" />
                         <span>{deliv}</span>
                       </div>
                     ))}
@@ -139,10 +139,10 @@ export const EnterpriseServices: React.FC<EnterpriseServicesProps> = ({ onReques
                 </div>
 
                 {/* Bottom Action CTA */}
-                <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                <div className="pt-4 border-t border-slate-100">
                   <button
                     onClick={() => onRequestAudit(service.title)}
-                    className="w-full py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider text-[#9E721D] dark:text-[#C4A77D] hover:text-slate-950 bg-amber-50/60 dark:bg-slate-900/80 hover:bg-[#D4AF37] dark:hover:bg-[#D4AF37] border border-amber-300 dark:border-[#C4A77D]/40 transition-all flex items-center justify-center space-x-2 cursor-pointer shadow-sm"
+                    className="w-full py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider text-[#9E721D] hover:text-slate-950 bg-amber-50/60 hover:bg-[#D4AF37] border border-amber-300 transition-all flex items-center justify-center space-x-2 cursor-pointer shadow-sm"
                   >
                     <span>Configure Scope</span>
                     <ArrowRight className="w-3.5 h-3.5" />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
   ArrowLeft, 
@@ -6,57 +6,122 @@ import {
   AlertTriangle, 
   FileCheck2, 
   Layers, 
-  Sparkles,
-  ArrowRight
+  Sparkles, 
+  ArrowRight,
+  ShieldCheck,
+  ChevronDown,
+  Phone,
+  Send,
+  Building2,
+  GraduationCap,
+  Clock,
+  CheckCircle2,
+  BookOpen
 } from 'lucide-react';
-import { ENTERPRISE_SERVICES } from '../data/cyberData';
+import { ENTERPRISE_SERVICES, ACADEMY_COURSES, BLOG_POSTS, SEO_METADATA_MAP, COMPANY_FACTS } from '../data/cyberData';
+import { SEOHead } from '../components/common/SEOHead';
 
 interface ServiceDetailPageProps {
   onRequestAudit: (serviceTitle?: string) => void;
 }
 
 export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ onRequestAudit }) => {
-  const { serviceId } = useParams<{ serviceId: string }>();
+  const { slug, serviceId } = useParams<{ slug?: string; serviceId?: string }>();
+  const currentId = slug || serviceId;
 
-  const service = ENTERPRISE_SERVICES.find((s) => s.id === serviceId);
+  // Legacy route ID resolver
+  const legacyMap: Record<string, string> = {
+    'vapt': 'penetration-testing-vapt',
+    'pam-identity': 'vulnerability-management-security-audit',
+    'soc-deployment': 'soc-managed-security',
+    'dfir': 'digital-forensics-cybercrime-investigation',
+    'cloud-devsecops': 'vulnerability-management-security-audit',
+    'compliance-readiness': 'grc-compliance-consulting'
+  };
 
-  if (!service) {
-    return (
-      <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-6">
-        <h2 className="font-serif-header font-bold text-3xl text-white">Service Not Found</h2>
-        <p className="text-slate-400">The requested cybersecurity service does not exist.</p>
-        <Link to="/enterprise" className="btn-gold-filled inline-flex items-center space-x-2 px-6 py-3 rounded-xl text-xs font-mono font-bold">
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Enterprise Services</span>
-        </Link>
-      </div>
-    );
-  }
+  const resolvedId = currentId && legacyMap[currentId] ? legacyMap[currentId] : currentId;
+  const service = ENTERPRISE_SERVICES.find((s) => s.id === resolvedId) || ENTERPRISE_SERVICES[0];
+
+  // Accordion state
+  const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
+
+  // Consultation form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    scope: ''
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  // Related course lookup
+  const relatedCourse = ACADEMY_COURSES.find((c) => c.id === service.relatedCourseSlug);
+
+  // Related services lookup
+  const relatedServices = ENTERPRISE_SERVICES.filter((s) => 
+    service.relatedServiceSlugs?.includes(s.id) && s.id !== service.id
+  ).slice(0, 2);
+
+  // Related blog lookup
+  const relatedBlog = BLOG_POSTS.find((b) => b.slug === service.relatedBlogSlug);
+
+  const seoData = SEO_METADATA_MAP[`/services/${service.id}`] || {
+    title: `${service.title} | Hackup Technology`,
+    description: service.description.slice(0, 155),
+    canonical: `https://hackuptechnology.com/services/${service.id}`,
+    primaryKeyword: service.shortTitle
+  };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12 animate-fadeIn">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16 animate-fadeIn font-sans text-slate-900">
       
-      {/* Top Breadcrumb */}
-      <div className="flex items-center space-x-2 font-mono text-xs text-slate-500 dark:text-slate-400">
-        <Link to="/" className="hover:text-[#9E721D] dark:hover:text-[#D4AF37] transition-colors">Home</Link>
-        <span>/</span>
-        <Link to="/enterprise" className="hover:text-[#9E721D] dark:hover:text-[#D4AF37] transition-colors">Enterprise</Link>
-        <span>/</span>
-        <span className="text-[#9E721D] dark:text-[#D4AF37] font-semibold">{service.shortTitle}</span>
-      </div>
+      {/* 1. SEO HEAD & JSON-LD SCHEMAS */}
+      <SEOHead
+        title={seoData.title}
+        description={seoData.description}
+        canonical={seoData.canonical}
+        primaryKeyword={seoData.primaryKeyword}
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Services', url: '/services' },
+          { name: service.shortTitle, url: `/services/${service.id}` }
+        ]}
+        type="service"
+        serviceData={{
+          name: service.title,
+          description: service.description
+        }}
+        faqData={service.faqs}
+      />
 
-      {/* Main Service Header with Image Banner */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-amber-300 dark:border-amber-500/30 shadow-xl">
+      {/* 2. BREADCRUMB */}
+      <nav aria-label="Breadcrumb" className="flex items-center space-x-2 font-mono text-xs text-slate-500">
+        <Link to="/" className="hover:text-[#9E721D] transition-colors">Home</Link>
+        <span>/</span>
+        <Link to="/services" className="hover:text-[#9E721D] transition-colors">Services</Link>
+        <span>/</span>
+        <span className="text-[#9E721D] font-bold">{service.shortTitle}</span>
+      </nav>
+
+      {/* 3. HERO WITH CONSULTATION BUTTON */}
+      <div className="bg-white rounded-3xl overflow-hidden border-2 border-amber-300 shadow-xl">
         {service.imageUrl && (
-          <div className="h-64 sm:h-80 w-full overflow-hidden bg-slate-950 relative">
+          <div className="h-64 sm:h-80 w-full overflow-hidden bg-slate-950 relative image-banner-dark">
             <img
               src={service.imageUrl}
               alt={service.title}
-              className="w-full h-full object-cover opacity-85"
+              className="w-full h-full object-cover opacity-80"
+              loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent pointer-events-none" />
             
-            <div className="absolute top-6 left-6 flex items-center space-x-3">
+            <div className="absolute top-6 left-6 flex items-center space-x-3 z-10">
               <span className="font-mono text-xs uppercase font-bold tracking-widest text-amber-300 bg-amber-950/90 px-3.5 py-1.5 rounded-full border border-amber-500/40 backdrop-blur-md">
                 {service.badge}
               </span>
@@ -65,11 +130,14 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ onRequestA
               </span>
             </div>
 
-            <div className="absolute bottom-6 left-6 right-6">
-              <h1 className="font-serif-header font-bold text-2xl sm:text-4xl text-white tracking-wide leading-tight">
+            <div className="absolute bottom-6 left-6 right-6 z-10 dark-overlay-content">
+              <h1 
+                className="font-serif-header font-bold text-2xl sm:text-4xl text-white tracking-wide leading-tight drop-shadow-md"
+                style={{ color: '#FFFFFF' }}
+              >
                 {service.title}
               </h1>
-              <p className="font-mono text-xs sm:text-sm text-amber-300 mt-2 font-semibold">
+              <p className="font-mono text-xs sm:text-sm text-amber-300 mt-2 font-semibold drop-shadow">
                 {service.tagline}
               </p>
             </div>
@@ -77,104 +145,308 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ onRequestA
         )}
 
         <div className="p-6 sm:p-10 space-y-8">
-          <p className="font-sans text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed max-w-4xl font-normal">
+          <p className="font-sans text-sm sm:text-base text-slate-700 leading-relaxed max-w-4xl font-normal">
             {service.description}
           </p>
 
-          {/* Key Deliverables & Testing Specs Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            {/* Deliverables Box */}
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950/90 border border-slate-200 dark:border-slate-800 space-y-4">
-              <div className="flex items-center space-x-2 text-[#9E721D] dark:text-[#D4AF37] font-mono text-xs uppercase font-bold tracking-wider">
-                <FileCheck2 className="w-4 h-4 text-[#B38728] dark:text-[#D4AF37]" />
-                <span>Executive &amp; Technical Deliverables</span>
-              </div>
-              <div className="space-y-3">
-                {service.keyDeliverables.map((deliv, idx) => (
-                  <div key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium">
-                    <div className="w-5 h-5 rounded-full bg-amber-100 dark:bg-amber-500/20 border border-amber-300 dark:border-amber-500/40 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 text-[#9E721D] dark:text-amber-400" />
-                    </div>
-                    <span>{deliv}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Technical Specs Box */}
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950/90 border border-slate-200 dark:border-slate-800 space-y-4">
-              <div className="flex items-center space-x-2 text-[#9E721D] dark:text-[#D4AF37] font-mono text-xs uppercase font-bold tracking-wider">
-                <Layers className="w-4 h-4 text-[#B38728] dark:text-[#D4AF37]" />
-                <span>Technical Specifications &amp; Standards</span>
-              </div>
-              <div className="space-y-3">
-                {service.specs.map((spec, idx) => (
-                  <div key={idx} className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs">
-                    <span className="font-mono text-slate-500 dark:text-slate-400 block mb-0.5 font-medium">{spec.key}:</span>
-                    <span className="font-sans font-semibold text-slate-900 dark:text-white">{spec.val}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+            <button
+              onClick={() => onRequestAudit(service.title)}
+              className="w-full sm:w-auto btn-gold-filled px-8 py-3.5 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-xl hover:scale-102 cursor-pointer"
+            >
+              <ShieldCheck className="w-4 h-4 text-slate-950" />
+              <span>Book Your Cyber Consultation</span>
+              <ArrowRight className="w-4 h-4 text-slate-950" />
+            </button>
+            <span className="font-mono text-xs text-slate-500">
+              Zero Production Downtime &bull; 100% NDA Protected
+            </span>
           </div>
+        </div>
+      </div>
 
-          {/* Sample Real-World Findings Detected by Hackup */}
-          <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2 text-[#9E721D] dark:text-amber-400 font-mono text-xs uppercase font-bold tracking-wider">
-                <AlertTriangle className="w-4 h-4" />
-                <span>Sample Real-World Vulnerabilities Uncovered</span>
-              </div>
-              <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 font-semibold">CVSS 3.1 &amp; 4.0 Standard</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {service.sampleFindings.map((finding, idx) => (
-                <div key={idx} className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
-                      finding.severity === 'CRITICAL' ? 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400 border border-red-300 dark:border-red-500/40' : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-400 border border-amber-300 dark:border-amber-500/40'
-                    }`}>
-                      {finding.severity}
-                    </span>
-                    <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400 font-bold">{finding.cve}</span>
-                  </div>
-                  <div className="text-xs text-slate-800 dark:text-slate-200 font-sans leading-snug font-medium">
-                    {finding.vuln}
-                  </div>
+      {/* 4. WHO IT IS FOR & WHAT IS INCLUDED */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* Who It Is For */}
+        <div className="p-8 rounded-3xl bg-white border border-amber-200 shadow-md space-y-4">
+          <div className="flex items-center space-x-2 text-amber-800 font-mono text-xs uppercase font-bold tracking-wider">
+            <Building2 className="w-4 h-4 text-amber-600" />
+            <span>Target Organizations &bull; Who It Is For</span>
+          </div>
+          <h2 className="font-serif-header font-bold text-xl text-slate-900">
+            Engineered For High-Stakes Environments
+          </h2>
+          <ul className="space-y-3 pt-2">
+            {service.whoIsItFor?.map((item, idx) => (
+              <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-slate-700">
+                <div className="w-5 h-5 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3 h-3 text-amber-800" />
                 </div>
-              ))}
-            </div>
-          </div>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          {/* Compliance Frameworks Mapped */}
-          <div className="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-500/30">
-            <div>
-              <span className="font-mono text-xs text-[#9E721D] dark:text-amber-300 font-bold uppercase block mb-1">
-                Audit &amp; Regulatory Compliance Coverage:
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {service.complianceCoverage.map((comp, i) => (
-                  <span key={i} className="text-xs font-mono bg-white dark:bg-slate-950 px-2.5 py-1 rounded-md text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 font-semibold shadow-sm">
-                    {comp}
-                  </span>
-                ))}
+        {/* What Is Included */}
+        <div className="p-8 rounded-3xl bg-white border border-amber-200 shadow-md space-y-4">
+          <div className="flex items-center space-x-2 text-amber-800 font-mono text-xs uppercase font-bold tracking-wider">
+            <Layers className="w-4 h-4 text-amber-600" />
+            <span>Scope Of Work &bull; What Is Included</span>
+          </div>
+          <h2 className="font-serif-header font-bold text-xl text-slate-900">
+            Comprehensive Verification Spectrum
+          </h2>
+          <ul className="space-y-3 pt-2">
+            {service.whatIsIncluded?.map((item, idx) => (
+              <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-slate-700">
+                <div className="w-5 h-5 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3 h-3 text-amber-800" />
+                </div>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </div>
+
+      {/* 5. METHODOLOGY (5-STAGE EXECUTION FLOW) */}
+      <div className="space-y-6">
+        <div className="text-center space-y-2 max-w-2xl mx-auto">
+          <span className="font-mono text-xs text-amber-800 font-bold uppercase tracking-widest">
+            RIGOROUS AUDITING FLOW
+          </span>
+          <h2 className="font-serif-header font-bold text-2xl sm:text-3xl text-slate-900">
+            Testing &amp; Execution Methodology
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          {service.methodology?.map((step, idx) => (
+            <div key={idx} className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+              <span className="font-mono text-xs text-amber-800 font-bold block">{step.step}</span>
+              <h3 className="font-serif-header font-bold text-sm text-slate-900">{step.title}</h3>
+              <p className="font-sans text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 6. DELIVERABLES */}
+      <div className="p-8 rounded-3xl bg-slate-900 text-white shadow-xl space-y-6 dark-surface">
+        <div className="flex items-center space-x-2 text-amber-400 font-mono text-xs uppercase font-bold tracking-wider">
+          <FileCheck2 className="w-4 h-4 text-amber-400" />
+          <span>Executive &amp; Technical Deliverables</span>
+        </div>
+        <h2 
+          className="font-serif-header font-bold text-2xl text-white drop-shadow-md"
+          style={{ color: '#FFFFFF' }}
+        >
+          What Your Organization Receives
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          {service.deliverables?.map((deliv, idx) => (
+            <div key={idx} className="p-4 rounded-xl bg-slate-800/80 border border-slate-700 flex items-start space-x-3 text-xs sm:text-sm text-slate-200">
+              <div className="w-5 h-5 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center shrink-0 mt-0.5">
+                <Check className="w-3 h-3 text-amber-400" />
               </div>
+              <span>{deliv}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 7. FAQ ACCORDION */}
+      <div className="space-y-6 max-w-4xl mx-auto">
+        <div className="text-center space-y-2">
+          <span className="font-mono text-xs text-amber-800 font-bold uppercase tracking-widest">
+            TRANSPARENCY &amp; COMPLIANCE
+          </span>
+          <h2 className="font-serif-header font-bold text-2xl sm:text-3xl text-slate-900">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div className="space-y-3">
+          {service.faqs?.map((faq, idx) => (
+            <div
+              key={idx}
+              className="rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-sm"
+            >
+              <button
+                onClick={() => setOpenFaqIdx(openFaqIdx === idx ? null : idx)}
+                className="w-full p-5 text-left flex items-center justify-between font-serif-header font-bold text-sm sm:text-base text-slate-900 hover:text-amber-800 transition-colors cursor-pointer"
+              >
+                <span>{faq.q}</span>
+                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${openFaqIdx === idx ? 'rotate-180 text-amber-600' : ''}`} />
+              </button>
+              {openFaqIdx === idx && (
+                <div className="px-5 pb-5 font-sans text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 8. RELATED SERVICES & RELATED COURSE */}
+      <div className="space-y-6 pt-4 border-t border-slate-200">
+        <h2 className="font-serif-header font-bold text-2xl text-slate-900">
+          Related Solutions &amp; Academic Upskilling
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Related Course Card (Burgundy styling) */}
+          {relatedCourse && (
+            <div className="rounded-3xl bg-white border-2 border-rose-300 p-6 flex flex-col justify-between shadow-md">
+              <div className="space-y-3">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-100 text-rose-800">
+                  Accredited Course Track
+                </span>
+                <h3 className="font-serif-header font-bold text-base text-slate-900">
+                  {relatedCourse.title}
+                </h3>
+                <p className="font-sans text-xs text-slate-600 line-clamp-3">
+                  {relatedCourse.description}
+                </p>
+              </div>
+              <div className="pt-4">
+                <Link
+                  to={`/courses/${relatedCourse.id}`}
+                  className="btn-burgundy-filled w-full py-2 rounded-xl text-xs font-mono font-bold text-center block text-white"
+                >
+                  Explore Course Track &rarr;
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* Related Services Cards (White & Gold styling) */}
+          {relatedServices.map((rel) => (
+            <div key={rel.id} className="rounded-3xl bg-white border-2 border-amber-300 p-6 flex flex-col justify-between shadow-md">
+              <div className="space-y-3">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-100 text-amber-800">
+                  Complementary Service
+                </span>
+                <h3 className="font-serif-header font-bold text-base text-slate-900">
+                  {rel.shortTitle}
+                </h3>
+                <p className="font-sans text-xs text-slate-600 line-clamp-3">
+                  {rel.description}
+                </p>
+              </div>
+              <div className="pt-4">
+                <Link
+                  to={`/services/${rel.id}`}
+                  className="btn-gold-filled w-full py-2 rounded-xl text-xs font-mono font-bold text-center block"
+                >
+                  View Service &rarr;
+                </Link>
+              </div>
+            </div>
+          ))}
+
+        </div>
+      </div>
+
+      {/* 9. CONSULTATION FORM */}
+      <div className="p-8 sm:p-12 rounded-3xl bg-amber-50/70 border-2 border-amber-300 shadow-xl max-w-3xl mx-auto space-y-6">
+        <div className="text-center space-y-2">
+          <span className="font-mono text-xs text-amber-800 font-bold uppercase tracking-widest">
+            DIRECT TECHNICAL SCOPING
+          </span>
+          <h2 className="font-serif-header font-bold text-2xl sm:text-3xl text-slate-900">
+            Request Scope &amp; NDA Consultation for {service.shortTitle}
+          </h2>
+          <p className="font-sans text-xs text-slate-600">
+            Speak directly with our senior security consultants under strict mutual non-disclosure.
+          </p>
+        </div>
+
+        {submitted ? (
+          <div className="p-6 rounded-2xl bg-white border border-emerald-300 text-center space-y-2">
+            <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto" />
+            <h4 className="font-serif-header font-bold text-lg text-slate-900">Scoping Request Received</h4>
+            <p className="font-sans text-xs text-slate-600">
+              Our lead consultant in Ganapathy, Coimbatore will contact you within 2 hours.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleFormSubmit} className="space-y-4 font-sans text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="font-mono text-[11px] font-bold text-slate-700">Full Name *</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="e.g. Dinesh Kumar"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-amber-500 outline-none bg-white mt-1"
+                />
+              </div>
+              <div>
+                <label className="font-mono text-[11px] font-bold text-slate-700">Work Email *</label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="e.g. dinesh@company.com"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-amber-500 outline-none bg-white mt-1"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="font-mono text-[11px] font-bold text-slate-700">Phone Number *</label>
+                <input
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  placeholder="+91 93620 12339"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-amber-500 outline-none bg-white mt-1"
+                />
+              </div>
+              <div>
+                <label className="font-mono text-[11px] font-bold text-slate-700">Company Name</label>
+                <input
+                  type="text"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  placeholder="Organization or Entity"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-amber-500 outline-none bg-white mt-1"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="font-mono text-[11px] font-bold text-slate-700">Target Scope &amp; Asset Details</label>
+              <textarea
+                rows={3}
+                value={formData.scope}
+                onChange={(e) => setFormData({ ...formData, scope: e.target.value })}
+                placeholder={`Provide any specific target domains, IPs, compliance deadlines for ${service.shortTitle}...`}
+                className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-amber-500 outline-none bg-white mt-1"
+              />
             </div>
 
             <button
-              onClick={() => onRequestAudit(service.title)}
-              className="btn-gold-filled px-6 py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider shadow-lg flex items-center space-x-2 cursor-pointer shrink-0"
+              type="submit"
+              className="btn-gold-filled w-full py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg"
             >
-              <Sparkles className="w-4 h-4" />
-              <span>Configure Audit Scope</span>
-              <ArrowRight className="w-4 h-4" />
+              <Send className="w-3.5 h-3.5 text-slate-950" />
+              <span>Submit Scoping Request</span>
             </button>
-          </div>
-
-        </div>
+          </form>
+        )}
       </div>
 
     </div>

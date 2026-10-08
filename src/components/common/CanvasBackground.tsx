@@ -53,10 +53,10 @@ export const CanvasBackground: React.FC = () => {
     window.addEventListener('mousemove', handleMouseMove);
     document.body.addEventListener('mouseleave', handleMouseLeave);
 
-    // Subtle Luxury Gold & Platinum particles
+    // Subtle Luxury Gold & Warm Slate particles tuned for light mode
     const particleCount = Math.min(Math.floor((width * height) / 22000), 55);
     const particles: Particle[] = [];
-    const colors = ['#C4A77D', '#E2E8F0', '#94A3B8', '#D4AF37'];
+    const colors = ['#B38728', '#D4AF37', '#94A3B8', '#9E721D', '#C4A77D'];
 
     for (let i = 0; i < particleCount; i++) {
       const baseRadius = Math.random() * 1.2 + 0.8;
@@ -75,8 +75,6 @@ export const CanvasBackground: React.FC = () => {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      const isLight = document.documentElement.classList.contains('light');
-
       // Draw subtle warm ambient cursor glow
       if (mouseRef.current.isHovering) {
         const gradient = ctx.createRadialGradient(
@@ -87,15 +85,9 @@ export const CanvasBackground: React.FC = () => {
           mouseRef.current.y,
           320
         );
-        if (isLight) {
-          gradient.addColorStop(0, 'rgba(196, 167, 125, 0.08)');
-          gradient.addColorStop(0.5, 'rgba(241, 245, 249, 0.04)');
-          gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        } else {
-          gradient.addColorStop(0, 'rgba(196, 167, 125, 0.05)');
-          gradient.addColorStop(0.5, 'rgba(11, 18, 32, 0.02)');
-          gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        }
+        gradient.addColorStop(0, 'rgba(196, 167, 125, 0.09)');
+        gradient.addColorStop(0.5, 'rgba(241, 245, 249, 0.04)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, width, height);
       }

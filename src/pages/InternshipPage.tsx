@@ -52,25 +52,28 @@ export const InternshipPage: React.FC<InternshipPageProps> = ({ onApply }) => {
 
       {/* Visual Banner */}
       <div className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-rose-300 dark:border-rose-900/40 shadow-xl">
-        <div className="h-64 sm:h-96 w-full overflow-hidden bg-slate-950 relative">
+        <div className="h-64 sm:h-96 w-full overflow-hidden bg-slate-950 relative image-banner-dark">
           <img
             src="/images/academy_internship.jpg"
             alt="Coimbatore Cybersecurity Apprenticeship Lab"
             className="w-full h-full object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent pointer-events-none" />
           
-          <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10 dark-overlay-content">
             <div>
-              <span className="text-xs font-mono font-bold text-rose-200 uppercase tracking-wider bg-rose-950/90 px-3 py-1 rounded-full border border-rose-600/50">
+              <span className="text-xs font-mono font-bold text-rose-200 uppercase tracking-wider bg-rose-950/90 px-3 py-1 rounded-full border border-rose-600/50 drop-shadow">
                 GANAPATHY CAMPUS LABS
               </span>
-              <h2 className="font-serif-header font-bold text-xl sm:text-3xl text-white mt-2">
+              <h2 
+                className="font-serif-header font-bold text-xl sm:text-3xl text-white mt-2 drop-shadow-md"
+                style={{ color: '#FFFFFF' }}
+              >
                 Real Red Team Shadowing &amp; Live Client Scopes
               </h2>
             </div>
             <div className="flex items-center space-x-2 text-xs font-mono text-slate-200 bg-slate-950/90 px-3 py-1.5 rounded-xl border border-slate-700">
-              <MapPin className="w-4 h-4 text-[#881337] dark:text-rose-400" />
+              <MapPin className="w-4 h-4 text-rose-400" />
               <span>Ganapathy, Coimbatore</span>
             </div>
           </div>

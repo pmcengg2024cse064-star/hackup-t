@@ -17,20 +17,20 @@ export const TechMarquee: React.FC = () => {
   ];
 
   return (
-    <div className="relative py-6 bg-slate-100/80 dark:bg-[#070A0F]/60 border-y border-slate-200 dark:border-slate-800/60 overflow-hidden backdrop-blur-md">
+    <div className="relative py-6 bg-slate-100/80 border-y border-slate-200 overflow-hidden backdrop-blur-md">
       <div className="animate-marquee-infinite space-x-6 items-center flex">
         {[...techItems, ...techItems, ...techItems].map((item, idx) => {
           const Icon = item.icon;
           return (
             <div
               key={`${item.name}-${idx}`}
-              className={`flex items-center space-x-3 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border ${item.border} shadow-sm shrink-0 hover:border-[#B38728] transition-all group`}
+              className={`flex items-center space-x-3 px-4 py-2.5 rounded-xl bg-white border ${item.border} shadow-sm shrink-0 hover:border-[#B38728] transition-all group`}
             >
-              <div className="p-1.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+              <div className="p-1.5 rounded-lg bg-slate-50 border border-slate-200">
                 <Icon className={`w-4 h-4 ${item.color} group-hover:scale-110 transition-transform`} />
               </div>
               <div className="flex flex-col text-left">
-                <span className="font-display font-semibold text-xs text-slate-800 dark:text-slate-200 group-hover:text-[#B38728] transition-colors">
+                <span className="font-display font-semibold text-xs text-slate-800 group-hover:text-[#B38728] transition-colors">
                   {item.name}
                 </span>
                 <span className="font-mono text-[10px] text-slate-500 tracking-wider">
