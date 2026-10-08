@@ -60,7 +60,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   ];
 
   return (
-    <div className="space-y-16 animate-fadeIn pb-20 overflow-hidden font-sans text-white">
+    <div className="space-y-16 animate-fadeIn pb-20 overflow-hidden font-sans text-slate-900 dark:text-white">
       
       {/* 1. HERO SECTION: COMPANY NAME "HACKUP TECHNOLOGY" WITH ANIMATED GRAPHICS */}
       <section className="relative pt-10 sm:pt-16 pb-12 overflow-hidden">
@@ -78,11 +78,11 @@ export const HomePage: React.FC<HomePageProps> = ({
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#111C30]/80 border border-amber-500/30 shadow-2xl backdrop-blur-xl"
+              className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/90 dark:bg-[#111C30]/80 border border-slate-300 dark:border-amber-500/30 shadow-2xl backdrop-blur-xl"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
-              <span className="font-mono text-[11px] sm:text-xs uppercase font-bold tracking-widest text-slate-200">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+              <ShieldCheck className="w-4 h-4 text-[#B38728] dark:text-[#D4AF37]" />
+              <span className="font-mono text-[11px] sm:text-xs uppercase font-bold tracking-widest text-slate-800 dark:text-slate-200">
                 OFFICIAL EC-COUNCIL ATC &bull; TANCCAO SECRETARIAT &bull; COIMBATORE HQ
               </span>
             </motion.div>
@@ -172,7 +172,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="font-sans text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed pt-2"
+                className="font-sans text-base sm:text-lg lg:text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed pt-2"
               >
                 South India's premier cybersecurity enterprise. Defending mission-critical digital assets while engineering the next generation of certified national cyber defenders.
               </motion.p>
@@ -185,16 +185,16 @@ export const HomePage: React.FC<HomePageProps> = ({
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex flex-wrap items-center justify-center gap-2 pt-1 font-mono text-[11px]"
             >
-              <span className="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300">
+              <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-300">
                 &bull; 2 Issued Cyber Patents
               </span>
-              <span className="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300">
+              <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-300">
                 &bull; Tamil Nadu Police Consultant
               </span>
-              <span className="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300">
+              <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-300">
                 &bull; 54+ Partner Universities
               </span>
-              <span className="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300">
+              <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-300">
                 &bull; 100% Practical Cyber Range
               </span>
             </motion.div>

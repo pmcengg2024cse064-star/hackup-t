@@ -5,6 +5,7 @@ import { CanvasBackground } from './components/common/CanvasBackground';
 import { Navbar } from './components/common/Navbar';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { BackToTop } from './components/common/BackToTop';
+import { CyberChatbot } from './components/chat/CyberChatbot';
 import { Footer } from './components/footer/Footer';
 
 // Pages
@@ -71,7 +72,7 @@ export function App() {
       <Router>
         <ScrollToTop />
         
-        <div className="relative min-h-screen bg-[#080711] dark:bg-[#080711] light:bg-[#F8FAFC] text-slate-300 dark:text-slate-300 light:text-slate-800 selection:bg-amber-500/25 selection:text-white luxury-grid-bg transition-colors duration-300">
+        <div className="relative min-h-screen bg-slate-50 dark:bg-[#080711] text-slate-900 dark:text-slate-300 selection:bg-amber-500/25 selection:text-white luxury-grid-bg transition-colors duration-300">
           
           {/* Interactive Particle Mesh */}
           <CanvasBackground />
@@ -238,6 +239,12 @@ export function App() {
           <Footer
             onRequestConsultation={() => handleOpenAuditModal()}
             onOpenDisclosure={() => setDisclosureModalOpen(true)}
+          />
+
+          {/* Floating AI Cyber Assistant Chatbot */}
+          <CyberChatbot
+            onOpenAudit={handleOpenAuditModal}
+            onBookDemo={handleOpenDemoModal}
           />
 
           {/* Floating Scroll Progress & Back To Top Control */}

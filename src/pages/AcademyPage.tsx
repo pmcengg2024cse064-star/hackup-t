@@ -21,6 +21,7 @@ import { InternshipSpotlight } from '../components/academy/InternshipSpotlight';
 import { CyberRangeVisualizer } from '../components/academy/CyberRangeVisualizer';
 import { AcademicFootprint } from '../components/institutional/AcademicFootprint';
 import { FaqSection } from '../components/faq/FaqSection';
+import { AcademyBackgroundMesh } from '../components/academy/AcademyBackgroundMesh';
 
 interface AcademyPageProps {
   onDownloadSyllabus: (courseTitle: string) => void;
@@ -52,8 +53,11 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
   const currentCourses = filterCourses();
 
   return (
-    <div className="space-y-20 animate-fadeIn pb-24 font-sans text-white bg-[#0D0204]">
+    <div className="relative space-y-20 animate-fadeIn pb-24 font-sans text-slate-900 dark:text-white bg-slate-50/60 dark:bg-[#0D0204] overflow-hidden">
       
+      {/* Dynamic Animated Ambient Mesh */}
+      <AcademyBackgroundMesh />
+
       {/* 1. ACADEMY HERO (VELVET BURGUNDY THEME) */}
       <section className="relative pt-10 sm:pt-16 pb-16 overflow-hidden">
         
@@ -71,14 +75,14 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
               </span>
             </div>
 
-            <h1 className="font-serif-header font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.12]">
+            <h1 className="font-serif-header font-extrabold text-3xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white tracking-tight leading-[1.12]">
               Launch Your Cybersecurity Career on{' '}
-              <span className="text-rose-300 block mt-2">
+              <span className="text-rose-700 dark:text-rose-300 block mt-2">
                 Live Attack Ranges.
               </span>
             </h1>
 
-            <p className="font-sans text-base sm:text-lg text-[#E2C4C9] max-w-3xl mx-auto leading-relaxed">
+            <p className="font-sans text-base sm:text-lg text-slate-700 dark:text-[#E2C4C9] max-w-3xl mx-auto leading-relaxed">
               Master weaponized attack-defense simulations in our Coimbatore Cyber Range. Zero-PPT guarantee, official Aspen courseware, and direct placement referrals with 40+ hiring partners.
             </p>
 
@@ -93,7 +97,7 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
               ].map((badge, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 rounded-full bg-[#3D0811] border border-rose-400/30 text-[11px] font-mono text-rose-200 font-semibold"
+                  className="px-3 py-1 rounded-full bg-rose-100/80 dark:bg-[#3D0811] border border-rose-300 dark:border-rose-400/30 text-[11px] font-mono text-rose-900 dark:text-rose-200 font-semibold shadow-sm"
                 >
                   &bull; {badge}
                 </span>
@@ -129,12 +133,12 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-[#3E0812]/90 border border-rose-300/20 text-center space-y-1 shadow-lg"
+                className="p-5 rounded-2xl bg-white dark:bg-[#3E0812]/90 border border-slate-200 dark:border-rose-300/20 text-center space-y-1 shadow-lg"
               >
-                <div className="font-serif-header font-bold text-sm text-white">
+                <div className="font-serif-header font-bold text-sm text-slate-900 dark:text-white">
                   {item.title}
                 </div>
-                <div className="text-xs text-[#E2C4C9]">
+                <div className="text-xs text-slate-600 dark:text-[#E2C4C9]">
                   {item.desc}
                 </div>
               </div>
@@ -148,19 +152,19 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
       <section id="courses" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-28">
         
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-          <div className="font-mono text-xs uppercase font-bold tracking-widest text-rose-300">
+          <div className="font-mono text-xs uppercase font-bold tracking-widest text-rose-700 dark:text-rose-300">
             OFFICIAL ACCREDITED CURRICULUM
           </div>
-          <h2 className="font-serif-header font-bold text-3xl sm:text-4xl lg:text-5xl text-white">
+          <h2 className="font-serif-header font-bold text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white">
             EC-Council Certification Catalog
           </h2>
-          <div className="w-16 h-[2px] bg-rose-400 mx-auto mt-2 mb-3" />
-          <p className="font-sans text-xs sm:text-sm text-[#E2C4C9]">
+          <div className="w-16 h-[2px] bg-rose-500 mx-auto mt-2 mb-3" />
+          <p className="font-sans text-xs sm:text-sm text-slate-700 dark:text-[#E2C4C9]">
             Select a specialized track to view syllabus modules, practical lab scenarios, and career outcomes.
           </p>
 
           {/* Segmented Control Tabs */}
-          <div className="inline-flex p-1.5 rounded-full bg-[#2E070D] border border-rose-400/40 gap-1 mt-4">
+          <div className="inline-flex p-1.5 rounded-full bg-slate-200/80 dark:bg-[#2E070D] border border-slate-300 dark:border-rose-400/40 gap-1 mt-4">
             {(['All', 'Offensive', 'Defensive', 'Specialist'] as const).map((tab) => (
               <button
                 key={tab}
@@ -168,7 +172,7 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
                 className={`px-5 py-2 rounded-full font-mono text-xs font-bold uppercase transition-all cursor-pointer ${
                   selectedTab === tab
                     ? 'bg-[#881337] text-white shadow-md'
-                    : 'text-rose-200 hover:text-white'
+                    : 'text-slate-700 dark:text-rose-200 hover:text-slate-950 dark:hover:text-white'
                 }`}
               >
                 {tab === 'All' ? 'All Tracks' : tab}
@@ -182,36 +186,36 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
           {currentCourses.map((course) => (
             <div
               key={course.id}
-              className="rounded-3xl bg-[#4A0A13]/90 border border-rose-300/25 hover:border-rose-300 p-7 flex flex-col justify-between space-y-6 shadow-2xl transition-all duration-300 relative group overflow-hidden"
+              className="rounded-3xl bg-white dark:bg-[#4A0A13]/90 border border-slate-200 dark:border-rose-300/25 hover:border-rose-400 dark:hover:border-rose-300 p-7 flex flex-col justify-between space-y-6 shadow-xl dark:shadow-2xl transition-all duration-300 relative group overflow-hidden"
             >
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-rose-300/50 to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-rose-400/60 to-transparent" />
 
               <div className="space-y-4">
                 
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-[10px] font-bold text-rose-300 uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-950 text-rose-200 border border-rose-400/40">
+                  <span className="font-mono text-[10px] font-bold text-rose-800 dark:text-rose-300 uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950 border border-rose-300 dark:border-rose-400/40">
                     {course.category}
                   </span>
-                  <span className="text-[10px] font-mono font-bold text-rose-200">
+                  <span className="text-[10px] font-mono font-bold text-slate-600 dark:text-rose-200">
                     {course.level}
                   </span>
                 </div>
 
-                <h3 className="font-serif-header font-bold text-xl text-white group-hover:text-rose-200 transition-colors leading-snug">
+                <h3 className="font-serif-header font-bold text-xl text-slate-900 dark:text-white group-hover:text-rose-700 dark:group-hover:text-rose-200 transition-colors leading-snug">
                   {course.title}
                 </h3>
 
-                <p className="font-sans text-xs sm:text-sm text-[#E2C4C9] leading-relaxed">
+                <p className="font-sans text-xs sm:text-sm text-slate-700 dark:text-[#E2C4C9] leading-relaxed">
                   {course.description}
                 </p>
 
                 {/* Practical Metric Pill */}
-                <div className="p-3 rounded-2xl bg-black/40 border border-rose-900/60 font-mono text-xs flex items-center justify-between">
-                  <div className="flex items-center space-x-1.5 font-bold text-rose-100">
-                    <Clock className="w-3.5 h-3.5 text-rose-300" />
+                <div className="p-3 rounded-2xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-rose-900/60 font-mono text-xs flex items-center justify-between">
+                  <div className="flex items-center space-x-1.5 font-bold text-slate-800 dark:text-rose-100">
+                    <Clock className="w-3.5 h-3.5 text-rose-600 dark:text-rose-300" />
                     <span>{course.duration}</span>
                   </div>
-                  <div className="flex items-center space-x-1.5 font-bold text-rose-300">
+                  <div className="flex items-center space-x-1.5 font-bold text-slate-800 dark:text-rose-300">
                     <Terminal className="w-3.5 h-3.5" />
                     <span>{course.practicalLabHours}</span>
                   </div>
@@ -220,8 +224,8 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
                 {/* Highlights */}
                 <div className="space-y-1.5 pt-1">
                   {course.highlights.slice(0, 3).map((hl, idx) => (
-                    <div key={idx} className="flex items-start space-x-2 text-xs text-rose-100">
-                      <Check className="w-3.5 h-3.5 text-rose-300 shrink-0 mt-0.5" />
+                    <div key={idx} className="flex items-start space-x-2 text-xs text-slate-700 dark:text-rose-100">
+                      <Check className="w-3.5 h-3.5 text-rose-600 dark:text-rose-300 shrink-0 mt-0.5" />
                       <span className="truncate">{hl}</span>
                     </div>
                   ))}
@@ -230,10 +234,10 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({
               </div>
 
               {/* Bottom Actions */}
-              <div className="pt-4 border-t border-rose-900/60 space-y-2">
+              <div className="pt-4 border-t border-slate-200 dark:border-rose-900/60 space-y-2">
                 <Link
                   to={`/academy/courses/${course.id}`}
-                  className="w-full py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider bg-white hover:bg-rose-50 text-[#5B0E1B] flex items-center justify-center space-x-2 shadow-md transition-all"
+                  className="w-full py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider bg-rose-50 dark:bg-white hover:bg-rose-100 dark:hover:bg-rose-50 text-[#5B0E1B] flex items-center justify-center space-x-2 shadow-sm transition-all"
                 >
                   <BookOpen className="w-3.5 h-3.5 text-[#5B0E1B]" />
                   <span>View Full Modules</span>

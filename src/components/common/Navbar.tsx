@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { 
   Menu, 
   X, 
@@ -60,124 +61,184 @@ export const Navbar: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full font-sans">
-      
-      {/* 1. TOP TRUST BAR */}
-      <div className="bg-[#050408] text-slate-300 border-b border-white/10 py-1.5 px-4 sm:px-6 lg:px-8 text-[10px] sm:text-[11px] font-mono">
+    <>
+      {/* 1. TOP UNPINNED TRUST BAR (Scrolls away naturally; NOT fixed on scroll) */}
+      <div className="w-full bg-[#050408] dark:bg-[#050408] bg-slate-900 border-b border-white/10 py-1.5 px-4 sm:px-6 lg:px-8 text-[10px] sm:text-[11px] font-mono text-slate-300">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           
           <div className="flex items-center space-x-2 sm:space-x-3 overflow-x-auto scrollbar-none py-0.5">
-            <span className="inline-flex items-center space-x-1.5 text-[#D4AF37] font-bold shrink-0">
-              <ShieldCheck className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center space-x-1.5 text-[#B38728] dark:text-[#D4AF37] font-bold shrink-0">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" />
               <span>EC-Council Accredited Training Partner</span>
             </span>
-            <span className="text-slate-700 hidden sm:inline">|</span>
-            <span className="text-slate-300 font-semibold shrink-0">
+            <span className="text-slate-600 hidden sm:inline">|</span>
+            <span className="text-slate-200 font-semibold shrink-0">
               TANCCAO Affiliated
+            </span>
+            <span className="text-slate-600 hidden md:inline">|</span>
+            <span className="text-slate-400 hidden md:inline shrink-0">
+              ISO 9001:2015 Center • TN Cyber Cell Advisor
             </span>
           </div>
 
-          <div className="flex items-center space-x-3 sm:space-x-4 shrink-0 text-slate-400">
-            <span className="hidden md:inline-flex items-center space-x-1">
-              <MapPin className="w-3 h-3 text-[#D4AF37]" />
-              <span>Ganapathy, Coimbatore</span>
-            </span>
-            <span className="text-slate-700 hidden md:inline">|</span>
-            <a 
-              href="tel:+919362012339" 
-              className="hover:text-white transition-colors flex items-center space-x-1 text-slate-300"
-            >
-              <Phone className="w-3 h-3 text-[#D4AF37]" />
-              <span>+91 93620 12339</span>
-            </a>
-            <span className="text-slate-700 hidden lg:inline">|</span>
-            <a 
-              href="mailto:info@hackuptechnology.com" 
-              className="hover:text-white transition-colors hidden lg:flex items-center space-x-1"
-            >
-              <Mail className="w-3 h-3 text-[#D4AF37]" />
-              <span>info@hackuptechnology.com</span>
-            </a>
+          <div className="hidden sm:flex items-center space-x-2 text-[10px] text-amber-400">
+            <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+            <span>HQ &amp; Cyber Range: Ganapathy, Coimbatore</span>
           </div>
 
         </div>
       </div>
 
-      {/* 2. STICKY MAIN NAVIGATION BAR */}
-      <div
-        className={`w-full transition-all duration-300 ${
+      {/* 2. STICKY HEADER: Keeps Contact Bar & Main Navigation Bar Pinned When Scrolling */}
+      <header className="sticky top-0 z-50 w-full font-sans shadow-xl">
+        
+        {/* FIXED CONTACT BAR ON SCROLL & AT TOP */}
+        <div className={`w-full transition-all duration-300 ${
           isEnterprise
-            ? 'bg-white/95 dark:bg-[#141414]/95 border-b border-amber-300 dark:border-amber-500/25 backdrop-blur-xl shadow-xl'
+            ? 'bg-[#0E0C06]/98 dark:bg-[#0A0802]/98 border-b border-amber-500/20 text-amber-200'
             : isAcademy
-            ? 'bg-white/95 dark:bg-[#2A060C]/95 border-b border-rose-300 dark:border-rose-900/50 backdrop-blur-xl shadow-xl'
-            : isScrolled
-            ? 'bg-white/95 dark:bg-[#080711]/95 border-b border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-xl'
-            : 'bg-white/90 dark:bg-[#0A0E17]/90 border-b border-slate-200 dark:border-white/5 backdrop-blur-lg'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+            ? 'bg-[#180407]/98 dark:bg-[#120204]/98 border-b border-rose-500/20 text-rose-200'
+            : 'bg-[#070A0F]/98 dark:bg-[#070A0F]/98 border-b border-white/10 text-slate-300'
+        } py-1.5 px-4 sm:px-6 lg:px-8 text-[11px] font-mono backdrop-blur-md`}>
+          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1 gap-x-4">
             
-            {/* Brand Logo Emblem */}
-            <div className="flex items-center space-x-3 shrink-0">
-              <Link
-                to="/"
-                className="flex items-center space-x-3 group text-left cursor-pointer"
-              >
-                <div className="relative flex items-center justify-center w-11 h-11 rounded-2xl overflow-hidden shadow-xl shadow-black/50 border border-white/20 group-hover:border-[#D4AF37] transition-all bg-[#080711]">
-                  <img
-                    src="/images/hackup_logo.png"
-                    alt="Hackup Technology Official Shield"
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-300"
-                  />
-                </div>
-
-                <div>
-                  <div className="flex items-center space-x-1.5">
-                    <span className="font-serif-header font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 dark:text-white group-hover:text-[#9E721D] dark:group-hover:text-[#D4AF37] transition-colors">
-                      HACKUP
-                    </span>
-                    <span className="font-serif-header font-bold text-sm sm:text-base tracking-widest text-[#9E721D] dark:text-[#D4AF37]">
-                      TECHNOLOGY
-                    </span>
-                  </div>
-                  <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500 dark:text-slate-400 -mt-0.5 font-bold">
-                    CORPORATE CYBER DEFENSE &amp; ACADEMY
-                  </div>
-                </div>
-              </Link>
+            <div className="flex items-center space-x-3 text-slate-300">
+              <span className="hidden sm:inline-flex items-center space-x-1">
+                <MapPin className="w-3 h-3 text-[#D4AF37]" />
+                <span className="font-sans font-medium text-slate-200">Ganapathy, Coimbatore</span>
+              </span>
+              <span className="text-slate-700 hidden sm:inline">|</span>
+              <span className="inline-flex items-center space-x-1.5 text-red-400 font-semibold text-[10px] uppercase tracking-wider">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+                <span>Active 24/7 Incident Hotline</span>
+              </span>
             </div>
 
-            {/* PRIMARY AUDIENCE SWITCHER SEGMENTED CONTROL PILL */}
-            <div className="hidden md:flex items-center p-1 rounded-full bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-white/10 shadow-inner">
-              <NavLink
-                to="/enterprise"
-                className={({ isActive }) =>
-                  `flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-all cursor-pointer ${
-                    isActive || isEnterprise
-                      ? 'btn-gold-filled text-slate-950 shadow-lg shadow-[#D4AF37]/30'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/5'
-                  }`
-                }
+            <div className="flex items-center space-x-3 sm:space-x-4 shrink-0">
+              <a 
+                href="tel:+919362012339" 
+                className="hover:text-white transition-colors flex items-center space-x-1 text-slate-200 hover:text-[#D4AF37] font-semibold"
               >
-                <Building2 className="w-3.5 h-3.5" />
-                <span>Enterprise Solutions</span>
-              </NavLink>
+                <Phone className="w-3 h-3 text-[#D4AF37]" />
+                <span>+91 93620 12339</span>
+              </a>
 
-              <NavLink
-                to="/academy"
-                className={({ isActive }) =>
-                  `flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-all cursor-pointer ${
-                    (isActive || isAcademy) && !isEnterprise
-                      ? 'btn-burgundy-filled text-white border border-rose-400/40 shadow-lg shadow-[#881337]/50'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/5'
-                  }`
-                }
+              <span className="text-slate-700 hidden md:inline">|</span>
+
+              <a 
+                href="tel:+919626215976" 
+                className="hover:text-white transition-colors hidden md:flex items-center space-x-1 text-slate-300 hover:text-[#D4AF37]"
               >
-                <GraduationCap className="w-3.5 h-3.5" />
-                <span>Hackup Academy</span>
-              </NavLink>
+                <Phone className="w-3 h-3 text-[#D4AF37]" />
+                <span>+91 96262 15976</span>
+              </a>
+
+              <span className="text-slate-700 hidden lg:inline">|</span>
+
+              <a 
+                href="mailto:info@hackuptechnology.com" 
+                className="hover:text-white transition-colors hidden lg:flex items-center space-x-1 text-slate-300 hover:text-[#D4AF37]"
+              >
+                <Mail className="w-3 h-3 text-[#D4AF37]" />
+                <span>info@hackuptechnology.com</span>
+              </a>
             </div>
+
+          </div>
+        </div>
+
+        {/* MAIN NAVIGATION BAR */}
+        <div
+          className={`w-full transition-all duration-300 ${
+            isEnterprise
+              ? 'bg-white/95 dark:bg-[#141414]/95 border-b border-amber-300 dark:border-amber-500/25 backdrop-blur-xl shadow-xl'
+              : isAcademy
+              ? 'bg-white/95 dark:bg-[#2A060C]/95 border-b border-rose-300 dark:border-rose-900/50 backdrop-blur-xl shadow-xl'
+              : isScrolled
+              ? 'bg-white/95 dark:bg-[#080711]/95 border-b border-slate-200 dark:border-white/10 backdrop-blur-xl shadow-xl'
+              : 'bg-white/90 dark:bg-[#0A0E17]/90 border-b border-slate-200 dark:border-white/5 backdrop-blur-lg'
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-20">
+              
+              {/* Brand Logo Emblem */}
+              <div className="flex items-center space-x-3 shrink-0">
+                <Link
+                  to="/"
+                  className="flex items-center space-x-3 group text-left cursor-pointer"
+                >
+                  <div className="relative flex items-center justify-center w-11 h-11 rounded-2xl overflow-hidden shadow-xl shadow-black/50 border border-white/20 group-hover:border-[#D4AF37] transition-all bg-[#080711]">
+                    <img
+                      src="/images/hackup_logo.png"
+                      alt="Hackup Technology Official Shield"
+                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-300"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex items-center space-x-1.5">
+                      <span className="font-serif-header font-extrabold text-lg sm:text-xl tracking-wider text-slate-900 dark:text-white group-hover:text-[#9E721D] dark:group-hover:text-[#D4AF37] transition-colors">
+                        HACKUP
+                      </span>
+                      <span className="font-serif-header font-bold text-sm sm:text-base tracking-widest text-[#9E721D] dark:text-[#D4AF37]">
+                        TECHNOLOGY
+                      </span>
+                    </div>
+                    <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500 dark:text-slate-400 -mt-0.5 font-bold">
+                      CORPORATE CYBER DEFENSE &amp; ACADEMY
+                    </div>
+                  </div>
+                </Link>
+              </div>
+
+              {/* PRIMARY AUDIENCE SWITCHER SEGMENTED CONTROL PILL WITH SMOOTH SLIDING TRANSITION */}
+              <div className="hidden md:flex relative items-center p-1 rounded-full bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-white/10 shadow-inner">
+                <NavLink
+                  to="/enterprise"
+                  className={({ isActive }) =>
+                    `relative z-10 flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-colors duration-300 cursor-pointer ${
+                      isActive || isEnterprise
+                        ? 'text-slate-950 font-extrabold'
+                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`
+                  }
+                >
+                  <Building2 className="w-3.5 h-3.5 relative z-10" />
+                  <span className="relative z-10">Enterprise Solutions</span>
+                  {(isEnterprise || (!isEnterprise && !isAcademy && location.pathname === '/enterprise')) && (
+                    <motion.div
+                      layoutId="active-audience-pill"
+                      className="absolute inset-0 rounded-full btn-gold-filled shadow-lg shadow-[#D4AF37]/35 -z-10"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                </NavLink>
+
+                <NavLink
+                  to="/academy"
+                  className={({ isActive }) =>
+                    `relative z-10 flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-colors duration-300 cursor-pointer ${
+                      (isActive || isAcademy) && !isEnterprise
+                        ? 'text-white font-extrabold'
+                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`
+                  }
+                >
+                  <GraduationCap className="w-3.5 h-3.5 relative z-10" />
+                  <span className="relative z-10">Hackup Academy</span>
+                  {((isAcademy || location.pathname === '/academy') && !isEnterprise) && (
+                    <motion.div
+                      layoutId="active-audience-pill"
+                      className="absolute inset-0 rounded-full btn-burgundy-filled border border-rose-400/40 shadow-lg shadow-[#881337]/50 -z-10"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                </NavLink>
+              </div>
 
             {/* SHARED MENU (DESKTOP) */}
             <nav className="hidden xl:flex items-center space-x-1 text-xs font-mono">
@@ -372,5 +433,6 @@ export const Navbar: React.FC<NavbarProps> = ({
       )}
 
     </header>
+    </>
   );
 };

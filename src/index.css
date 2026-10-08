@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
+
 @layer base {
   :root {
     --color-obsidian-violet: #08040F;
@@ -493,6 +496,7 @@ html.light footer {
 }
 
 /* High-Contrast Text Colors in Light Mode */
+/* High-Contrast Text Colors in Light Mode */
 html.light h1,
 html.light h2,
 html.light h3,
@@ -507,24 +511,27 @@ html.light li,
 html.light td,
 html.light th,
 html.light label {
-  color: #334155;
+  color: #1E293B;
 }
 
-/* Preserve White Text on Explicit Dark/Colored Action Buttons in Light Mode */
+/* Preserve Text on Explicit Action Buttons in Light Mode */
 html.light button.btn-gold-filled,
 html.light a.btn-gold-filled,
 html.light .btn-gold-filled {
   color: #08040F !important;
 }
 
-html.light button[class*="bg-\[\#5B0E1B\]"],
-html.light a[class*="bg-\[\#5B0E1B\]"],
-html.light button[class*="bg-\[\#7A1426\]"],
-html.light a[class*="bg-\[\#7A1426\]"],
-html.light button[class*="bg-\[\#450A12\]"],
-html.light a[class*="bg-\[\#450A12\]"],
-html.light button[class*="bg-\[\#881337\]"],
-html.light a[class*="bg-\[\#881337\]"],
+html.light button.btn-burgundy-filled,
+html.light a.btn-burgundy-filled,
+html.light .btn-burgundy-filled,
+html.light button[class*="bg-[#5B0E1B]"],
+html.light a[class*="bg-[#5B0E1B]"],
+html.light button[class*="bg-[#7A1426]"],
+html.light a[class*="bg-[#7A1426]"],
+html.light button[class*="bg-[#450A12]"],
+html.light a[class*="bg-[#450A12]"],
+html.light button[class*="bg-[#881337]"],
+html.light a[class*="bg-[#881337]"],
 html.light button.bg-slate-950,
 html.light a.bg-slate-950,
 html.light button.bg-black,
@@ -532,11 +539,12 @@ html.light a.bg-black {
   color: #FFFFFF !important;
 }
 
-html.light [class*="text-[#F8FAFC]"],
-html.light [class*="text-[#F1F5F9]"],
-html.light [class*="text-slate-100"]:not(button):not(a),
-html.light [class*="text-slate-200"]:not(button):not(a),
-html.light [class*="text-white"]:not(button):not(a):not(button *):not(a *) {
+/* Text overrides in Light Mode: ensure high contrast slate/charcoal */
+html.light [class*="text-[#F8FAFC]"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *),
+html.light [class*="text-[#F1F5F9]"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *),
+html.light [class*="text-slate-100"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *),
+html.light [class*="text-slate-200"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *),
+html.light [class*="text-white"]:not(.btn-burgundy-filled *):not([class*="bg-[#881337]"] *):not(.bg-slate-950 *):not(.btn-gold-filled *) {
   color: #0F172A !important;
 }
 
@@ -548,15 +556,58 @@ html.light [class*="text-slate-400"] {
 }
 
 html.light [class*="text-slate-500"] {
-  color: #64748B !important;
+  color: #475569 !important;
+}
+
+/* High-contrast palette adaptations for Rose/Burgundy in Light Mode */
+html.light [class*="text-[#E2C4C9]"] {
+  color: #4C0519 !important;
+}
+
+html.light [class*="text-rose-100"] {
+  color: #881337 !important;
+}
+
+html.light [class*="text-rose-200"] {
+  color: #9F1239 !important;
+}
+
+html.light [class*="text-rose-300"] {
+  color: #BE123C !important;
+}
+
+/* High-contrast palette adaptations for Amber/Gold in Light Mode */
+html.light [class*="text-amber-100"],
+html.light [class*="text-amber-200"] {
+  color: #78350F !important;
+}
+
+html.light [class*="text-amber-300"] {
+  color: #92400E !important;
+}
+
+/* Deep Dark Surfaces -> Clean Card Surfaces in Light Mode */
+html.light [class*="bg-[#0D0204]"],
+html.light [class*="bg-[#180407]"],
+html.light [class*="bg-[#3D0811]"],
+html.light [class*="bg-[#4A0A13]"] {
+  background-color: #FFFFFF !important;
+  border-color: #FECDD3 !important;
 }
 
 /* Borders in Light Mode */
 html.light [class*="border-slate-800"],
 html.light [class*="border-slate-900"],
+html.light [class*="border-slate-700"],
 html.light [class*="border-white/10"],
 html.light [class*="border-white/5"] {
   border-color: #E2E8F0 !important;
+}
+
+html.light [class*="border-rose-900"],
+html.light [class*="border-rose-950"],
+html.light [class*="border-rose-800"] {
+  border-color: #FDA4AF !important;
 }
 
 html.light [class*="border-amber-500/20"],

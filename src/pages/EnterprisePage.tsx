@@ -57,7 +57,7 @@ export const EnterprisePage: React.FC<EnterprisePageProps> = ({
   const currentEst = calculateEstimate();
 
   return (
-    <div className="space-y-20 animate-fadeIn pb-24 font-sans text-slate-100 bg-[#080808]">
+    <div className="space-y-20 animate-fadeIn pb-24 font-sans text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-[#080808]">
       
       {/* 1. EXECUTIVE HERO (RICH WHITE & GOLD THEME) */}
       <section className="relative pt-10 sm:pt-16 pb-16 overflow-hidden">
